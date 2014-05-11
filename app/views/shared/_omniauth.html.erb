@@ -1,0 +1,8 @@
+<div class="panel-body" style="border-top: 1px solid #ccc;">
+  <%= message ||= 'Or sign in with one of the following:' %>
+  <div class="social-box">
+    <a href="<%= user_omniauth_authorize_path(:twitter) %>"><%=  image_tag 'twitter_lg.png',  size: '45x45' %></a>
+    <a href="<%= user_omniauth_authorize_path(:facebook) %>"><%= image_tag 'facebook_lg.png', size: '45x45' %></a>
+    <a href="<%= user_omniauth_authorize_path(:facebook) %>"><%= image_tag 'gplus_lg.png',    size: '45x45' %></a>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="container" style="max-width: 420px;">
+
+  <div class="panel panel-default">
+
+    <div class="panel-heading">
+      <h4>Edit Details</h4>
+    </div>
+
+    <%= render 'shared/form_errors', resource: resource %>
+
+    <div class="panel-body ">
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+
+        <div class="form-group">
+          <%= f.label :email, class: 'control-label' %>
+          <%= f.email_field :email, class: 'form-control input-sm' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password, class: 'control-label' %>
+          <%= f.password_field :password, class: 'form-control input-sm' %>
+          <span class="help-block">leave blank if you don't want to change it</span>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password_confirmation, class: 'control-label' %>
+          <%= f.password_field :password_confirmation, class: 'form-control input-sm' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.submit value: 'Update', class: 'btn btn-primary btn-block btn-bottom' %>
+        </div>
+
+      <% end %>
+
+    </div>
+
+    <% if resource.identities.present? %>
+      <div class="panel-body">
+        Linked accounts: <br>
+        <div class="social-box">
+          <% resource.identities.each do |identity| %>
+            <%= image_tag "#{identity.provider}_lg.png", size: '45x45' %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <%= render 'shared/omniauth', message: 'Available login providers (click to add):' %>
+
+  </div>
+
+</div>

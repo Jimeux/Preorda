@@ -1,0 +1,43 @@
+<div class="container" style="max-width: 390px;">
+
+  <div class="panel panel-default">
+
+    <div class="panel-heading">
+      <h4>Login</h4>
+    </div>
+
+    <div class="panel-body">
+
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+        <!--= render 'shared/form_errors', resource: resource-->
+
+        <div class="form-group">
+          <%= f.label :email, class: 'control-label' %>
+          <%= f.email_field :email, class: 'form-control input-sm' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password, class: 'control-label' %>
+          <%= f.password_field :password, class: 'form-control input-sm' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.check_box :remember_me %> <%= f.label :remember_me, class: 'control-label' %>
+          <%= link_to 'Forgot password?', new_password_path(resource_name), class: 'pull-right' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.submit value: 'Login', class: 'btn btn-primary btn-block' %>
+          <%= link_to 'Register', new_user_registration_path, class: 'btn btn-default btn-block btn-bottom' %>
+        </div>
+
+      <% end %>
+
+    </div>
+
+    <%= render 'shared/omniauth' %>
+
+  </div>
+
+</div>

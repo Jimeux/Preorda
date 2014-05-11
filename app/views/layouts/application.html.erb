@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+  <title>LaunchBro</title>
+  <meta charset='utf-8' content='text/html' http-equiv='Content-Type'>
+  <meta content='LaunchBro description.' name='Description'>
+  <meta content='width=device-width, initial-scale=1.0' name='viewport'>
+  <meta content='IE=edge' http-equiv='X-UA-Compatible'>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <!-- TODO: Hook these up with javascript_include_tags -->
+  <!--[if lt IE 9]>
+    <script data-turbolinks-track="true" src="/assets/html5shiv.js"></script>
+    <script data-turbolinks-track="true" src="/assets/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="<%= root_path %>">LaunchBro</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+
+        <% if user_signed_in? %>
+          <li><a href="<%= edit_user_registration_path %>">Account</a></li>
+          <li>
+            <%= form_tag destroy_user_session_path, method: :delete do %>
+              <%= submit_tag 'Log out', class: '' %>
+            <% end %>
+          </li>
+        <% else %>
+          <li><a href="<%= new_user_registration_path %>">Register</a></li>
+          <li><a href="<%= new_user_session_path %>">Login</a></li>
+        <% end %>
+
+        <!--<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>-->
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<% if notice %>
+  <div class="alert alert-success alert-dismissable site-wide">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <%= notice %>
+  </div>
+<% elsif alert %>
+  <div class="alert alert-danger alert-dismissable site-wide">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <%= alert %>
+  </div>
+<% end %>
+
+<form class="navbar-form navbar-right" role="search" style="margin: 0;">
+  <div class="input-group">
+    <input type="text" style="border-radius:18px 0 0 18px;border-right: 0;" class="form-control" placeholder="Search">
+    <span type="submit" style="background-color: white;border-radius:0 18px 18px 0;box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075);border-left:0;" class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+  </div>
+</form>
+
+<%= yield %>
+
+</body>
+</html>

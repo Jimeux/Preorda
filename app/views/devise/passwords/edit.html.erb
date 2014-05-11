@@ -1,0 +1,40 @@
+<div class="container" style="max-width: 400px;">
+
+  <div class="panel panel-default">
+
+    <div class="panel-heading">
+      <h4>Set New Password</h4>
+    </div>
+
+    <%= render 'shared/form_errors', resource: resource %>
+
+    <div class="panel-body">
+
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+
+        <%= f.hidden_field :reset_password_token %>
+
+        <div class="form-group">
+          <%= f.label :password, class: 'control-label' %>
+          <%= f.password_field :password, class: 'form-control input-sm', autofocus: true %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password_confirmation, class: 'control-label' %>
+          <%= f.password_field :password_confirmation, class: 'form-control input-sm', autofocus: true %>
+        </div>
+
+        <div class="form-group">
+          <%= f.submit value: 'Change Password', class: 'btn btn-primary btn-block' %>
+
+          <%= link_to 'Register', new_user_registration_path, class: 'btn btn-default btn-block half-width', style: 'margin-right:5px;' %>
+          <%= link_to 'Login', new_user_session_path, class: 'btn btn-default btn-block half-width', style: 'margin-right:-5px;' %>
+        </div>
+
+      <% end %>
+
+    </div>
+
+  </div>
+
+</div>

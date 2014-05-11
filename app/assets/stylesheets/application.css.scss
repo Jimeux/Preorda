@@ -1,0 +1,66 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import url(http://fonts.googleapis.com/css?family=Rock+Salt);
+
+$navbar-inverse-bg:          #434343;
+$navbar-inverse-brand-color: white;
+$navbar-height:              42px;
+$body-bg:                    #f4f4f4;
+
+$panel-default-heading-bg:   #fff;
+$panel-default-border:       #cccccc;
+
+$border-radius-base:        0;
+
+/* TODO: Follow the steps on the bootstrap-sass GitHub page to remove
+*  unused components when the time comes. */
+@import "bootstrap";
+
+body {
+  padding-top: $navbar-height + 15px;
+  font-family: 'trebuchet ms', verdana, arial;
+}
+
+.panel-heading { border-bottom: 0 }
+.panel-body, .alert-form {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid $panel-default-border;
+}
+
+.navbar {
+  opacity:      .95;
+  //box-shadow:   0 3px 5px rgba(0,0,0,0.1);
+}
+.navbar-brand { font-family: 'Rock Salt', cursive; }
+.navbar form input {
+  background-color: $navbar-inverse-bg;
+  border: 0;
+  color: $navbar-inverse-color;
+  padding: 10px 15px;
+}
+
+.social-box { margin-top: 10px; }
+.control-label { font-weight: normal; }
+.btn-bottom { margin-bottom: -12px; }
+.site-wide { margin-top: -15px; }
+input.form-control { border-radius: $border-radius-base; }
+
+.half-width {
+  float: left;
+  width: 49%;
+}
