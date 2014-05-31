@@ -48,9 +48,9 @@ group :development do
 end
 
 group :test do
-  #gem 'simplecov', :require => false  # Test coverage
   gem 'factory_girl_rails'
   gem 'launchy'
+  #gem 'simplecov', :require => false  # Test coverage
 end
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes

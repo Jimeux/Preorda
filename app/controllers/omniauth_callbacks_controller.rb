@@ -1,5 +1,7 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
+  # Make it clear that a new account will be created
+
   def twitter  ; callback end
   def facebook ; callback end
 

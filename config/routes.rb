@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     end
   end
 
-  root 'users#index'
+  root 'items#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
