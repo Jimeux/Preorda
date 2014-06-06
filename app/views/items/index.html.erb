@@ -5,16 +5,17 @@
     <div class="col-sm-6">
 
       <div class="panel panel-default">
+
         <div class="panel-heading">
           <div class="pull-right" style="margin-top: 10px;margin-right: 5px;"><a href="#">View all</a></div>
-          <h4>Coming Soon for <%= category.first.platform %></h4>
-
+            <h4>Coming Soon for <%= category.first %></h4>
         </div>
+
         <div class="panel-body">
 
           <div class="row">
 
-            <% category.each do |item| %>
+            <% category.last.each do |item| %>
 
               <div class="product col-sm-6 col-md-4">
 
@@ -28,8 +29,9 @@
 
                 <div>
                   <% if item.release_date %>
-                    <span style="color: forestgreen"><%= distance_of_time_in_words_to_now(item.release_date).gsub('about', '') %>
-                      left</span>
+                    <span style="color: forestgreen">
+                      <%= distance_of_time_in_words_to_now(item.release_date).gsub('about', '') %> left
+                    </span>
                   <% else %>
                     TBA
                   <% end %>

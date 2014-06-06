@@ -14,36 +14,15 @@ namespace :graze do
 
   desc 'Get games from Amazon'
   task amazon_games: :environment do
-
-    # Fetch Store ID
-    Store.all.each { |store| puts "#{store.name}\t\t#{store.id}" }
-    id = STDIN.gets.strip
-    store = Store.find_by(id: id)
-    raise '*** Invalid store! ***' unless store
-
-    # Fetch Department ID
-    Department.all.each { |dept| puts "#{dept.name}\t\t#{dept.id}" }
-    id = STDIN.gets.strip
-    dept = Department.find_by(id: id)
-    raise '*** Invalid department! ***' unless dept
-
-    # Specify appropriate scraper class
-    if store.name.downcase == 'amazon'
-      grazer = AmazonGameGrazer if dept.name.downcase == 'games'
-      grazer = AmazonDVDGrazer  if dept.name.downcase == 'dvd'
-      grazer = AmazonDVDGrazer  if dept.name.downcase == 'blu-ray'
-    end
-
-    # Start scraping
-    raise 'No grazer found' unless grazer
+    grazer = AmazonGameGrazer
+    store  = Store.find_by(name: 'Amazon')
+    dept   = Department.find_by(name: 'Games')
     get_summaries(grazer, store, dept)
   end
 
   def get_summaries(grazer, store, dept)
     data = grazer.get_summary_data
-    data.each do |item|
-      process_item(item, dept, store)
-    end
+    data.each { |item| process_item(item, dept, store) }
   end
 
   def process_item(scraped_item, dept, store)
@@ -66,10 +45,8 @@ namespace :graze do
     puts "Creating record for '#{scraped_item[:title]}'"
     puts "    #{scraped_item[:url]}"
 
-    # TODO: Using AmazonGrazer here makes the factory pointless
     full_data = AmazonGrazer.get_product_data(scraped_item[:url])
 
-    # TODO: Standardise inconsistent platform names, e.g. PlayStation Playstation etc
     attrs = full_data.slice(:title, :creator, :platform, :variation, :release_date, :image)
     item = dept.items.build(attrs)
 

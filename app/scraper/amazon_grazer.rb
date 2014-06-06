@@ -25,23 +25,51 @@ class AmazonGrazer
     title.text
   end
 
-  def self.get_platform(page)
-    # Games with selectable formats
+  # Extract the platform/format from a drop-down list
+
+  def self.look_for_selectable_format(page)
     found = page.at('#selected_platform_for_display b.variationLabel')
-    return found.text if found
-
-    # Games without selectable formats
-    found = page.at('#platform-information')
-    return found.text[/Platform: ([\w ]+\w)/, 1] if found
-
-    # Music & DVD     TODO: Move this into the appropriate class
-    found = page.search('div.buying')
-    return found.text[/Format: ([\w ]+\w)/, 1] if found
+    found.text.downcase.delete(' ') if found
   end
+
+  # Extract the platform/format from a simple div
+
+  def self.look_for_format(page)
+    found = page.at('#platform-information')
+    found.text[/Platform: ([\w ]+\w)/, 1].downcase.delete(' ') if found
+  end
+
+  # Platform names can be inconsistent like Playstation4 or PlayStation 4
+  # This method attempts to standardise them
+
+  def self.get_platform(page)
+    platform = look_for_format(page) || look_for_selectable_format(page)
+
+    case platform
+      when 'nintendo3ds'     then return 'Nintendo 3DS'
+      when 'nintendo2ds'     then return 'Nintendo 2DS'
+      when 'nintendods'      then return 'Nintendo DS'
+      when 'nintendowii'     then return 'Nintendo Wii'
+      when 'nintendowiiu'    then return 'Nintendo Wii U'
+      when 'playstation3'    then return 'PlayStation 3'
+      when 'playstationvita' then return 'PlayStation Vita'
+      when 'playstation4'    then return 'PlayStation 4'
+      when 'xboxone'         then return 'Xbox One'
+      when 'xbox360'         then return 'Xbox 360'
+      when /windows|pc/      then return 'PC'
+      else puts 'Could not extract a platform.'
+    end
+
+    # Music & DVD
+    #found = page.search('div.buying')
+    #return found.text[/Format: ([\w ]+\w)/, 1] if found
+  end
+
+  # This is the games maker, album artist etc
 
   def self.get_creator(page)
     creator = page.at('.buying span a') || page.at('#brand')
-    creator.text
+    creator.text if creator
   end
 
   def self.get_variation(page)

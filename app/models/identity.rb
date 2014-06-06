@@ -1,7 +1,6 @@
 class Identity < ActiveRecord::Base
   belongs_to :user, inverse_of: :identities
 
-  #TODO: Try to get this validation working
   validates_presence_of :user
   validates_presence_of   :uid, :provider
   validates_uniqueness_of :uid, scope: :provider
