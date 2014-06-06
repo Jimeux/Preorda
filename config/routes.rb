@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+
+  resource :departments, only: [:index, :show]
+
+  resource :items,       only: [:index, :show]
+
+  root 'departments#index'
+
+
+  # This spaghetti is all for Devise and Omniauth
+
   devise_for :users, #skip: :registrations,
              controllers: {
                  omniauth_callbacks: 'omniauth_callbacks',
@@ -17,7 +27,8 @@ Rails.application.routes.draw do
     end
   end
 
-  root 'items#index'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

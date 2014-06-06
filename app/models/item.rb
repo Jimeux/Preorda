@@ -1,4 +1,5 @@
 class Item < ActiveRecord::Base
+
   belongs_to  :department
   has_many    :products, dependent: :destroy
 

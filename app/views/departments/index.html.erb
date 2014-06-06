@@ -1,6 +1,6 @@
 <div class="container">
 
-  <% @items.each do |category| %>
+  <% @items.each do |category_array| %>
 
     <div class="col-sm-6">
 
@@ -8,14 +8,14 @@
 
         <div class="panel-heading">
           <div class="pull-right" style="margin-top: 10px;margin-right: 5px;"><a href="#">View all</a></div>
-            <h4>Coming Soon for <%= category.first %></h4>
+            <h4>Coming Soon for <%= category_array.first %></h4>
         </div>
 
         <div class="panel-body">
 
           <div class="row">
 
-            <% category.last.each do |item| %>
+            <% category_array.last.each do |item| %>
 
               <div class="product col-sm-6 col-md-4">
 
