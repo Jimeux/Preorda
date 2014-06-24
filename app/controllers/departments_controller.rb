@@ -8,10 +8,11 @@ class DepartmentsController < ApplicationController
     # We'll go through the Department model instead of this hack job
     # when we have more departments
 
-    platforms = ['Nintendo 3DS', 'PlayStation 4', 'Xbox One', 'PlayStation Vita']
+    platforms = ['Nintendo 3DS', 'PlayStation 4', 'Xbox One', 'PlayStation Vita', 'Xbox 360']
 
     # This will run a separate query for each platform
     # and put the results in an array to be used in the view
+    #
     # Learning the methods in the enumerable module should beef up your Ruby
     # http://ruby-doc.org/core-2.1.2/Enumerable.html
 

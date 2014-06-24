@@ -1,17 +1,5 @@
 namespace :graze do
 
-  desc 'Create stores'
-  task create_stores: :environment do
-    names = %w{ Amazon iTunes }
-    names.each { |name| Store.create(name: name) }
-  end
-
-  desc 'Create departments'
-  task create_depts: :environment do
-    names = %w{ Games DVD Blu-Ray Music }
-    names.each { |name| Department.create(name: name) }
-  end
-
   desc 'Get games from Amazon'
   task amazon_games: :environment do
     grazer = AmazonGameGrazer

@@ -5,3 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+
+names = %w{ Amazon iTunes }
+names.each { |name| Store.create(name: name) }
+
+names = %w{ Games DVD Blu-Ray Music }
+names.each { |name| Department.create(name: name) }
