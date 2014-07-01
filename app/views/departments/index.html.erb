@@ -1,6 +1,6 @@
 <div class="container">
 
-  <% @items.each do |category_array| %>
+  <% @departments.each do |department| %>
 
     <div class="col-sm-6">
 
@@ -8,14 +8,15 @@
 
         <div class="panel-heading">
           <div class="pull-right" style="margin-top: 10px;margin-right: 5px;"><a href="#">View all</a></div>
-            <h4>Coming Soon for <%= category_array.first %></h4>
+            <h4>Coming Soon in <%= department.name %></h4>
         </div>
 
         <div class="panel-body">
 
           <div class="row">
 
-            <% category_array.last.each do |item| %>
+            <% #TODO: DB is still hit for all Items. .first(6) is just a hack for now %>
+            <% department.items.first(6).each do |item| %>
 
               <div class="product col-sm-6 col-md-4">
 
@@ -23,8 +24,8 @@
 
                 <div><%= image_tag item.image(:thumb), class: 'item-img' %></div>
 
-                <% if item.products.first.price > 0 %>
-                  <div style="color: #e50000"><%= number_to_currency item.products.first.price %></div>
+                <% if item.lowest_price > 0 %>
+                  <div style="color: #e50000"><%= number_to_currency item.lowest_price %></div>
                 <% end %>
 
                 <div>
@@ -36,8 +37,6 @@
                     TBA
                   <% end %>
                 </div>
-
-                <!--<div><%= link_to 'Pre-order', item.products.first.url, class: 'preorder-link', target: '_blank' %></div>-->
 
               </div>
             <% end %>

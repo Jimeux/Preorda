@@ -43,6 +43,14 @@ class AmazonGrazer
   # This method attempts to standardise them
 
   def self.get_platform(page)
+
+    # Music & DVD
+
+    found = page.search('div.buying')
+    return found.text[/Format: ([\w ]+\w)/, 1] if found
+
+    # Games
+
     platform = look_for_format(page) || look_for_selectable_format(page)
 
     case platform
@@ -59,10 +67,6 @@ class AmazonGrazer
       when /windows|pc/      then return 'PC'
       else puts 'Could not extract a platform.'
     end
-
-    # Music & DVD
-    #found = page.search('div.buying')
-    #return found.text[/Format: ([\w ]+\w)/, 1] if found
   end
 
   # This is the games maker, album artist etc

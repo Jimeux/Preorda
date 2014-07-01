@@ -1,9 +1,9 @@
 class AmazonGameGrazer
   extend Grazer
 
-  @top_url = 'http://www.amazon.co.uk/gp/new-releases/videogames/ref=sv_vg_h__13'
+  GAMES_TOP_URL = 'http://www.amazon.co.uk/gp/new-releases/videogames/ref=sv_vg_h__13'
 
-  def self.get_summary_data
+  def self.get_summary_data(limit=0)
     summary_data = []
     section_links.each do |section_link|
       summary_data += process_section(section_link)
@@ -13,7 +13,7 @@ class AmazonGameGrazer
 
   # Scan for section URLs (3DS, PS4 etc) and return in an array
   def self.section_links
-    get_page(@top_url)
+    get_page(GAMES_TOP_URL)
       .search('ul#zg_browseRoot ul ul li a')
       .map { |a| a.attr('href') }
   end

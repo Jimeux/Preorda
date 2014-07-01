@@ -17,4 +17,8 @@ class Item < ActiveRecord::Base
       .limit(FRONT_PAGE_LIMIT)
   }
 
+  def lowest_price
+    products.first.price
+  end
+
 end
