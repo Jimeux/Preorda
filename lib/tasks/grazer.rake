@@ -16,13 +16,6 @@ namespace :graze do
     get_summaries(grazer, store, dept)
   end
 
-  desc 'Get and insert Blu-ray data from Amazon'
-  task amazon_dvds: :environment do
-    grazer = AmazonDVDGrazer
-    store  = Store.find_by(name: 'Amazon')
-    dept   = Department.find_by(name: 'Blu-ray')
-    get_summaries(grazer, store, dept)
-  end
 end
 
 

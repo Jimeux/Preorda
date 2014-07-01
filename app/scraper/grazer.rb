@@ -11,7 +11,6 @@ module Grazer
 
   # Return a Nokogiri instance for the page at the given URI
   def get_page(uri)
-    #sleep 0.7   # Try to avoid spamming with a delay
     agent.get(URI(uri))
   end
 

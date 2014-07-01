@@ -15,6 +15,7 @@ class AmazonGameGrazer
   def self.section_links
     get_page(GAMES_TOP_URL)
       .search('ul#zg_browseRoot ul ul li a')
+      .select { |a| a.text != 'Accessories' } # Skip this shite for now
       .map { |a| a.attr('href') }
   end
 
