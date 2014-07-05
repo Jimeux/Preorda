@@ -16,6 +16,15 @@ namespace :graze do
     get_summaries(grazer, store, dept)
   end
 
+  desc 'Get and insert Music data from iTunes'
+    task itunes_music: :environment do
+    grazer = ItunesMusicChartGrazer
+    store  = Store.find_by(name: 'iTunes')
+    dept   = Department.find_by(name: 'Music')
+    #grazer.get_summary_data
+    get_summaries(grazer, store, dept)
+  end
+
 end
 
 
@@ -44,7 +53,14 @@ def create_item(scraped_item, dept, store)
   puts "Creating record for '#{scraped_item[:title]}'"
   puts "    #{scraped_item[:url]}"
 
-  full_data = AmazonGrazer.get_product_data(scraped_item[:url])
+  #there's probably a better way to do this
+  if store.name == "Amazon"
+    full_data = AmazonGrazer.get_product_data(scraped_item[:url])
+  elsif store.name == "iTunes"
+    puts "iTunes"
+    full_data = ItunesMusicChartGrazer.get_product_data(scraped_item[:url])
+  end
+
 
   attrs = full_data.slice(:title, :creator, :platform, :variation, :release_date, :image)
   item = dept.items.build(attrs)
