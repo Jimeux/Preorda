@@ -20,7 +20,7 @@
 
               <div class="product col-sm-6 col-md-4">
 
-                <div class="product-title"><%= link_to item.title.size > 18 ? item.title.first(15) + '…' : item.title, root_path %></div>
+                <div class="product-title"><%= link_to item.title.size > 16 ? item.title.first(13) + '…' : item.title, root_path %></div>
 
                 <div><%= image_tag item.image(:thumb), class: 'item-img' %></div>
 

@@ -1,5 +1,4 @@
 class ItunesMusicChartGrazer < ItunesChartGrazer
-  extend Grazer
 
   MUSIC_URL_PATH = "albums/"
 

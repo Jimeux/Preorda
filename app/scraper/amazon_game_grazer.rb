@@ -1,5 +1,4 @@
-class AmazonGameGrazer
-  extend Grazer
+class AmazonGameGrazer < AmazonGrazer
 
   GAMES_TOP_URL = 'http://www.amazon.co.uk/gp/new-releases/videogames/ref=sv_vg_h__13'
 
@@ -9,6 +8,43 @@ class AmazonGameGrazer
       summary_data += process_section(section_link)
     end
     summary_data
+  end
+
+  # This overrides the parent class method
+
+  def self.get_platform(page)
+    platform = look_for_format(page) || look_for_selectable_format(page)
+
+    case platform
+      when 'nintendo3ds'     then return 'Nintendo 3DS'
+      when 'nintendo2ds'     then return 'Nintendo 2DS'
+      when 'nintendods'      then return 'Nintendo DS'
+      when 'nintendowii'     then return 'Nintendo Wii'
+      when 'nintendowiiu'    then return 'Nintendo Wii U'
+      when 'playstation3'    then return 'PlayStation 3'
+      when 'playstationvita' then return 'PlayStation Vita'
+      when 'playstation4'    then return 'PlayStation 4'
+      when 'xboxone'         then return 'Xbox One'
+      when 'xbox360'         then return 'Xbox 360'
+      when /windows|pc/      then return 'PC'
+      else puts 'Could not extract a platform.'
+    end
+  end
+
+  private
+
+  # Extract the platform/format from a drop-down list
+
+  def self.look_for_selectable_format(page)
+    found = page.at('#selected_platform_for_display b.variationLabel')
+    found.text.downcase.delete(' ') if found
+  end
+
+  # Extract the platform/format from a simple div
+
+  def self.look_for_format(page)
+    found = page.at('#platform-information')
+    found.text[/Platform: ([\w ]+\w)/, 1].downcase.delete(' ') if found
   end
 
   # Scan for section URLs (3DS, PS4 etc) and return in an array
@@ -49,22 +85,23 @@ class AmazonGameGrazer
     {
       rank:         prod.css('span.zg_rankNumber').text[/\d{1,3}/].to_i,
       url:          url,
-      price:        get_price(prod),
-      release_date: get_release_date(prod),
+      price:        get_summary_price(prod),
+      release_date: get_summary_release_date(prod),
       asin:         url[/\/dp\/(\w{10})\//, 1], # TODO: Remove duplication
       title:        extract_title(prod.css('.zg_title').text),
       image:        prod.css('.zg_itemImageImmersion a img').attr('src').value
     }
   end
 
-  def self.get_price(prod)
+  def self.get_summary_price(prod)
     prod.css('.price') ? extract_price(prod.css('.price').text) : 0
   end
 
-  def self.get_release_date(prod)
+  def self.get_summary_release_date(prod)
     if prod.css('.zg_releaseDate')
       date = prod.css('.zg_releaseDate').text[/\d{1,2} [A-Za-z]{2,9} \d{4}/]
       Date.parse(date) if date
     end
   end
+
 end
