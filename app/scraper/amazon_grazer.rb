@@ -1,6 +1,8 @@
 class AmazonGrazer
   extend Grazer
 
+  AMAZON_URL  = 'http://www.amazon.co.uk'
+
   # TODO: Once the ASIN is known the API can be used
 
   def self.get_product_data(url)
@@ -18,55 +20,17 @@ class AmazonGrazer
     }
   end
 
-  private
-
   def self.get_title(page)
     title = page.at('#btAsinTitle') || page.at('#productTitle')
     title.text
   end
 
-  # Extract the platform/format from a drop-down list
-
-  def self.look_for_selectable_format(page)
-    found = page.at('#selected_platform_for_display b.variationLabel')
-    found.text.downcase.delete(' ') if found
-  end
-
-  # Extract the platform/format from a simple div
-
-  def self.look_for_format(page)
-    found = page.at('#platform-information')
-    found.text[/Platform: ([\w ]+\w)/, 1].downcase.delete(' ') if found
-  end
-
-  # Platform names can be inconsistent like Playstation4 or PlayStation 4
-  # This method attempts to standardise them
+  # This method attempts to standardise inconsistent platform names.
+  # The default implementation cover Music and DVD
 
   def self.get_platform(page)
-
-    # Music & DVD
-
     found = page.search('div.buying')
     return found.text[/Format: ([\w ]+\w)/, 1] if found
-
-    # Games
-
-    platform = look_for_format(page) || look_for_selectable_format(page)
-
-    case platform
-      when 'nintendo3ds'     then return 'Nintendo 3DS'
-      when 'nintendo2ds'     then return 'Nintendo 2DS'
-      when 'nintendods'      then return 'Nintendo DS'
-      when 'nintendowii'     then return 'Nintendo Wii'
-      when 'nintendowiiu'    then return 'Nintendo Wii U'
-      when 'playstation3'    then return 'PlayStation 3'
-      when 'playstationvita' then return 'PlayStation Vita'
-      when 'playstation4'    then return 'PlayStation 4'
-      when 'xboxone'         then return 'Xbox One'
-      when 'xbox360'         then return 'Xbox 360'
-      when /windows|pc/      then return 'PC'
-      else puts 'Could not extract a platform.'
-    end
   end
 
   # This is the games maker, album artist etc
