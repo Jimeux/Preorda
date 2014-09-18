@@ -11,8 +11,7 @@
     <div class="row">
 
       <% (@items || department.items).each do |item| %>
-
-        <div class="dept-item col-xs-6 col-sm-3 col-md-2 col-lg-2">
+        <div class="dept-item col-xs-6 <%= @items.nil? ? 'col-sm-3' : 'col-sm-4' %> col-md-2">
 
           <div>
             <a href="<%= item_path(item) %>">

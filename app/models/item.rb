@@ -17,11 +17,11 @@ class Item < ActiveRecord::Base
   belongs_to  :department
   has_many    :products, dependent: :destroy
 
-  FRONT_PAGE_LIMIT = 12
+  FRONT_PAGE_LIMIT = 6
 
   # TODO: Find out about conditional resizing (square for music, rectangle for DVD)
   # -- Paperclip settings                                  # TODO: Add a default image
-  has_attached_file :image, styles: { thumb: '90x120#' }, default_url: '/images/:style/missing.png'
+  has_attached_file :image, styles: { thumb: '95x130#' }, default_url: '/images/:style/missing.png'
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   scope :latest, -> {

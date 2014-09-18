@@ -4,6 +4,8 @@
 
   <%= render 'department', department: @department %>
 
+  <br>
+
   <div class="pagination-container">
     <%= will_paginate @items,
               renderer:       BootstrapPagination::Rails,

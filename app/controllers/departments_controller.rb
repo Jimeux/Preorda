@@ -7,7 +7,8 @@ class DepartmentsController < ApplicationController
 
   def show
     @department = Department.find(params[:id])
-    @items = @department.preview_items.paginate(page: params[:page], per_page: 24)
+    @items = @department.preview_items.paginate(
+        page: params[:page], per_page: 12)
   end
 
 end
