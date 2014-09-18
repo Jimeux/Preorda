@@ -9,19 +9,18 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-  <!-- TODO: Hook these up with javascript_include_tags -->
   <!--[if lt IE 9]>
-    <script data-turbolinks-track="true" src="/assets/html5shiv.js"></script>
-    <script data-turbolinks-track="true" src="/assets/respond.min.js"></script>
+    <%= javascript_include_tag 'html5shiv', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'respond.min', 'data-turbolinks-track' => true %>
   <![endif]-->
 </head>
 <body>
 
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav-links">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -31,7 +30,7 @@
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="collapse navbar-collapse" id="main-nav-links">
       <ul class="nav navbar-nav navbar-right">
 
         <% if user_signed_in? %>
@@ -51,6 +50,15 @@
   </div><!-- /.container-fluid -->
 </nav>
 
+<!-- TODO: Sort out the links and prettify URLs /department/games style -->
+<div>
+  <div class="section-heading music-colour"><a href="<%= department_path(4) %>"><i class="glyphicon glyphicon-music"></i><span>MUSIC</span></a></div>
+  <div class="section-heading games-colour"><a href="<%= department_path(1) %>"><i class="glyphicon glyphicon-phone"></i><span>GAMES</span></a></div>
+  <div class="section-heading film-colour"><a href="<%= department_path(2) %>"><i class="glyphicon glyphicon-film"></i><span>DVD & BLU-RAY</span></a></div>
+</div>
+
+<div style="display: block;clear: both;">
+
 <% if notice %>
   <div class="alert alert-success alert-dismissable site-wide">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -63,16 +71,49 @@
   </div>
 <% end %>
 
-<!--
-<form class="navbar-form navbar-right" role="search" style="margin: 0;">
-  <div class="input-group">
-    <input type="text" style="border-radius:18px 0 0 18px;border-right: 0;" class="form-control" placeholder="Search">
-    <span type="submit" style="background-color: white;border-radius:0 18px 18px 0;box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075);border-left:0;" class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-  </div>
-</form>
--->
+</div>
 
 <%= yield %>
+
+<div id="footer" style="background-color:#404040;width: 100%;padding: 25px;margin-top: 20px">
+
+  <div class="container" style="color: #ffffff;">
+    <div class="row">
+      <div class="col-sm-3">
+        <h4 style="font-weight: 200;border-bottom: 1px solid #f2f2f2;padding-bottom: 8px;">Site Map</h4>
+        Home<br>
+        Login<br>
+        Sign Up<br>
+        About<br><br>
+      </div>
+
+      <div class="col-sm-3">
+        <h4 style="font-weight: 200;border-bottom: 1px solid #c93b2a;padding-bottom: 8px;">Games</h4>
+        Nintendo 3DS<br>
+        PC & Mac<br>
+        PlayStation 4<br>
+        PlayStation 3<br>
+        Xbox One<br>
+        Xbox 360<br><br>
+      </div>
+
+      <div class="col-sm-3">
+        <h4 style="font-weight: 200;border-bottom: 1px solid #43af51;padding-bottom: 8px;">DVD & Blu-Ray</h4>
+        DVD<br>
+        Blu-ray<br>
+        Download<br><br>
+      </div>
+
+      <div class="col-sm-3">
+        <h4 style="border-bottom: 1px solid #23a7c1;padding-bottom: 8px;font-weight: 200;">Music</h4>
+        CD<br>
+        Download<br>
+      </div>
+
+    </div>
+  </div>
+
+</div>
 
 </body>
 </html>

@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
-  resource :departments, only: [:index, :show]
+  resources :departments, only: [:index, :show]
 
-  resource :items,       only: [:index, :show]
+  resources :items,       only: [:index, :show]
 
   root 'departments#index'
 

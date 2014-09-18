@@ -66,6 +66,7 @@ class ItemCreator
     full_data = @grazer.get_product_data(scraped_item[:url])
 
     attrs = full_data.slice(:title, :creator, :platform, :variation, :release_date, :image)
+    puts attrs[:image]
     item = @dept.items.build(attrs)
 
     attrs = full_data.slice(:url, :rank, :price, :asin)

@@ -1,16 +1,13 @@
 class DepartmentsController < ApplicationController
 
-  # This renders the top page and will show the newest
-  # games, DVDs, music etc eventually.
-
   def index
-    @departments = Department.latest_items
+    @departments = Department.joins(:items).group("departments.id").having("count(items.id) > ?",0)
+    .order('name ASC')
   end
 
-  # This could maybe show all items in a given department to begin with
-
   def show
-
+    @department = Department.find(params[:id])
+    @items = @department.preview_items.paginate(page: params[:page], per_page: 24)
   end
 
 end

@@ -1,51 +1,19 @@
-<div class="container">
+<%= render 'featured', department: @department %>
 
-  <% @departments.each do |department| %>
+<div class="container dept-container">
 
-    <div class="col-sm-6">
-
-      <div class="panel panel-default">
-
-        <div class="panel-heading">
-          <div class="pull-right" style="margin-top: 10px;margin-right: 5px;"><a href="#">View all</a></div>
-            <h4>Coming Soon in <%= department.name %></h4>
+  <!-- TODO: Implement search and extract this CSS -->
+  <div class="row" style="padding: 20px 15px 0 15px">
+    <div class="col-sm-offset-6 col-sm-6">
+      <form class="" role="search">
+        <div class="input-group">
+          <input type="text" style="padding-left:15px;border-radius:18px 0 0 18px !important;border-right: none;" class="form-control" placeholder="Search">
+          <span type="submit" style="background-color: white;border-radius:0 18px 18px 0 !important;box-shadow:none !important;-webkit-box-shadow:none;border-left:0;" class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
         </div>
+      </form>
+    </div>
+  </div>
 
-        <div class="panel-body">
+  <%= render @departments %>
 
-          <div class="row">
-
-            <% #TODO: DB is still hit for all Items. .first(6) is just a hack for now %>
-            <% department.items.first(6).each do |item| %>
-
-              <div class="product col-sm-6 col-md-4">
-
-                <div class="product-title"><%= link_to item.title.size > 16 ? item.title.first(13) + '…' : item.title, root_path %></div>
-
-                <div><%= image_tag item.image(:thumb), class: 'item-img' %></div>
-
-                <% if item.lowest_price > 0 %>
-                  <div style="color: #e50000"><%= number_to_currency item.lowest_price %></div>
-                <% end %>
-
-                <div>
-                  <% if item.release_date %>
-                    <span style="color: forestgreen">
-                      <%= distance_of_time_in_words_to_now(item.release_date).gsub('about', '') %> left
-                    </span>
-                  <% else %>
-                    TBA
-                  <% end %>
-                </div>
-
-              </div>
-            <% end %>
-
-          </div><!-- row        -->
-        </div>  <!-- panel-body -->
-      </div>    <!-- panel      -->
-    </div>      <!-- col-sm-6   -->
-
-  <% end %>
-
-</div><!-- container -->
+</div>

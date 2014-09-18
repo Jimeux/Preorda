@@ -1,0 +1,42 @@
+<div id="featured" style="height: 130px;overflow: hidden;">
+  <div><a href="#"><%= image_tag "hd7.jpg", size: "320x170" %></a></div>
+  <div><a href="#"><%= image_tag "hd4.jpg", size: "320x170" %></a></div>
+  <div><a href="#"><%= image_tag "hd5.jpg", size: "320x170" %></a></div>
+  <div><a href="#"><%= image_tag "hd1.jpg", size: "320x170" %></a></div>
+  <div><a href="#"><%= image_tag "hd2.jpg", size: "320x170" %></a></div>
+  <div><a href="#"><%= image_tag "hd3.jpg", size: "320x170" %></a></div>
+  <div><a href="#"><%= image_tag "hd6.jpg", size: "320x170" %></a></div>
+</div>
+
+<script>
+
+$(function() {
+
+  function feature() {
+
+    var featured = $('#featured');
+    var kids = featured.children();
+    var last = kids.last();
+
+    kids.animate({left: '-=' + 600}, 900, function() {
+
+      kids.each(function() {
+
+        var leftValue = $(this).position().left;
+
+        if (leftValue < -120) {
+          var leftPos = last.position().left + last.width();
+          $(this).css({left: leftPos});
+        }
+
+      });
+
+    });
+
+  }
+
+  //TODO: F TurboLinks in the A
+  //var featuredInterval = setInterval(feature, 8400);
+
+});
+</script>

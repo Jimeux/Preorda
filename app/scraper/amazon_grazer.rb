@@ -48,19 +48,23 @@ class AmazonGrazer
   end
 
   def self.get_image_url(page)
-    image = page.at('#main-image') || page.at('#imgTagWrapperId img')
-    image.attr('src')
+    image = page.at('#main-image')          ||
+            page.at('#imgTagWrapperId img') ||
+            page.at('.kib-image-ma')
+
+    image.attr('src').include?('base64,') ? # Sometimes binary data is
+      image.attr('data-old-hires') :        # in src attr and  url is
+      image.attr('src')                     # in data-old-hires attr
   end
 
   def self.get_release_date(page)
-    if page.at('.availOrange')
-      page.at('.availOrange').text[/released on (.*)\./, 1]
-    end # Unavailable CSS - '#availability_feature_div .availRed'
+    release_date = page.at('.availOrange') || page.at('#availability')
+    release_date.text[/released on (.*)\./, 1] if release_date
   end
 
   def self.get_price(page)
-    page.at('b.priceLarge') ?
-      extract_price(page.at('b.priceLarge').text) : 0
+    price = page.at('b.priceLarge') || page.at('#priceblock_ourprice')
+    price ? price.text[/\d+\.+\d+/].to_d : 0
   end
 
 end

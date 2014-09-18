@@ -1,3 +1,43 @@
-// Place all the styles related to the departments controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.dept-container { max-width: 900px; }
+
+.dept-item {
+  text-align: center;
+  float: left;
+  margin-bottom: 15px;
+  font-size: 95%;
+
+  .dept-item-title {
+    height: 20px;
+    overflow: hidden;
+  }
+
+  .preorder-link {
+    color:            steelblue;
+    text-decoration:  none;
+  }
+
+  .dept-item-date {
+    color: forestgreen;
+    height: 21px;
+  }
+  .dept-item-price { color: #e50000; }
+}
+
+h4.dept-heading {
+  margin-bottom: 30px;
+  font-size: 140%;
+  font-weight: 200;
+}
+
+.view-all {
+  margin-top: 9px;
+  margin-right: 5px;
+  float: right;
+}
+
+.dept-item-img {
+  box-shadow:     2px 2px 3px rgba(0,0,0,0.08);
+  //border:         1px solid #dadada;
+  border-radius:  0px;
+  margin-bottom:  5px;
+}

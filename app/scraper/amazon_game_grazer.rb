@@ -61,7 +61,10 @@ class AmazonGameGrazer < AmazonGrazer
     links = page_links_in_section(section_link)
 
     product_data = []
-    links.each { |page| product_data += get_page_data(page) }
+    links.each do |page|
+      data = get_page_data(page)
+      product_data += data if data
+    end
     product_data
   end
 

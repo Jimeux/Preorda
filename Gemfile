@@ -21,11 +21,15 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Use unicorn as the app server
 gem 'unicorn'
 
+# Pretty URLs
+gem 'friendly_id', '~> 5.0.0'
+
 # File uploads
 gem 'paperclip',  github: 'thoughtbot/paperclip'
 
 # Pagination
-#gem 'will_paginate' # I'd like to try Kaminari instead
+gem 'will_paginate'
+gem 'will_paginate-bootstrap'
 
 # Auth
 gem 'devise'

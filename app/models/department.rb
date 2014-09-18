@@ -1,11 +1,10 @@
 class Department < ActiveRecord::Base
 
-  has_many :items
+  has_many :items, -> { latest }
+  has_many :preview_items, -> { latest_in_dept }, class_name: 'Item'
 
-  # TODO: Currently hitting the DB for every Item record
-  #       Find some way to limit each set of Items to 6 or so
+  def to_param
+    "#{id} #{name.downcase}".parameterize
+  end
 
-  scope :latest_items, -> { includes(items: :products)
-                            .where('release_date > now()')
-                            .order('items.release_date') }
 end

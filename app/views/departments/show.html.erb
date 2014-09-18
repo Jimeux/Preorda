@@ -1,0 +1,15 @@
+<%= render 'featured', department: @department %>
+
+<div class="container dept-container">
+
+  <%= render 'department', department: @department %>
+
+  <div class="pagination-container">
+    <%= will_paginate @items,
+              renderer:       BootstrapPagination::Rails,
+              inner_window:   1,
+              outer_window:   0,
+              previous_label: '&laquo;',
+              next_label:     '&raquo;'  %>
+  </div>
+</div>
