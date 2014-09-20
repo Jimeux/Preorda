@@ -51,7 +51,8 @@
 </nav>
 
 <div class="btn-group btn-group-justified">
-  <% Department.all.each do |dept| %>
+  <!--TODO: This code shouldn't be here. Try to optimise so platforms are retrieved once per page.-->
+  <% (@departments ||= Department.includes(:platforms)).each do |dept| %>
 
     <div class="dropdown btn-group">
 
@@ -61,6 +62,7 @@
         </a>
       </button>
 
+      <!--TODO: Sort out far-right dropdown getting cut off.-->
       <ul class="dropdown-menu" role="menu" aria-labelledby="section-headings">
         <% dept.platforms.each do |platform| %>
           <li role="presentation">

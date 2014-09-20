@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: launchbro_production
-  username: launchbro
-  password: <%= ENV['LAUNCHBRO_DATABASE_PASSWORD'] %>
+  username: launchbro_production
+  password: stageroo
