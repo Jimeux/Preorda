@@ -29,7 +29,7 @@ class AmazonGrazer
   # The default implementation cover Music and DVD
 
   def self.get_platform(page)
-    found = page.search('div.buying')
+    found = page.search('div#byline')
     return found.text[/Format: ([\w ]+\w)/, 1] if found
   end
 

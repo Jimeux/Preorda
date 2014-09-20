@@ -50,11 +50,30 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-<!-- TODO: Sort out the links and prettify URLs /department/games style -->
-<div>
-  <div class="section-heading music-colour"><a href="<%= department_path(4) %>"><i class="glyphicon glyphicon-music"></i><span>MUSIC</span></a></div>
-  <div class="section-heading games-colour"><a href="<%= department_path(1) %>"><i class="glyphicon glyphicon-phone"></i><span>GAMES</span></a></div>
-  <div class="section-heading film-colour"><a href="<%= department_path(2) %>"><i class="glyphicon glyphicon-film"></i><span>DVD & BLU-RAY</span></a></div>
+<div class="btn-group btn-group-justified">
+  <% Department.all.each do |dept| %>
+
+    <div class="dropdown btn-group">
+
+      <button class="btn dropdown-toggle section-heading <%= dept.name.downcase %>-colour" type="button" id="section-headings" data-toggle="dropdown">
+        <a href="<%= department_path(dept) %>">
+          <i class="glyphicon glyphicon-<%= dept.name.downcase %>"></i><span><%= dept.name.upcase %></span>
+        </a>
+      </button>
+
+      <ul class="dropdown-menu" role="menu" aria-labelledby="section-headings">
+        <% dept.platforms.each do |platform| %>
+          <li role="presentation">
+            <a role="menuitem" tabindex="-1" href="<%= department_path(dept, platform: platform.id) %>">
+              <%= platform.name %>
+            </a>
+          </li>
+        <% end %>
+      </ul>
+
+    </div>
+
+  <% end %>
 </div>
 
 <div style="display: block;clear: both;">

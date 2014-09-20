@@ -3,7 +3,7 @@
  *= require_self
  */
 
-@import url(http://fonts.googleapis.com/css?family=Orbitron);
+//@import url(http://fonts.googleapis.com/css?family=Orbitron&text=LaunchBro);
 
 $navbar-default-bg:          #f2f2f2;
 $navbar-default-brand-color: #333;
@@ -78,15 +78,16 @@ div#featured div {
 
 /*      Section heading icons (under header)    */
 
-div.section-heading {
-  float:      left;
-  width:      33.3333%;
+.section-heading {
+  //float:      left;
+  //width:      33.3333%;
   color:      #ffffff;
   text-align: center;
+  padding:    0;
   a {
     display:    inline-block;
     width:      100%;
-    padding:    5px;
+    padding:    4px;
     color:      #ffffff;
     text-decoration: none;
     span { display: none; }
@@ -99,7 +100,11 @@ div.section-heading {
 
 .music-colour { background-color: $brand-primary; }
 .games-colour { background-color: $brand-danger; }
-.film-colour  { background-color: $brand-success; }
+.video-colour  { background-color: $brand-success; }
+.glyphicon-video { @extend .glyphicon-film }
+.glyphicon-games { @extend .glyphicon-phone }
+
+ul.dropdown-menu { margin-top: 0; }
 
 .dept-panel {
   margin-bottom:  -15px;

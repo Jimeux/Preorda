@@ -12,7 +12,7 @@ namespace :graze do
   task amazon_dvds: :environment do
     grazer = AmazonDVDGrazer
     store  = Store.find_by(name: 'Amazon')
-    dept   = Department.find_by(name: 'DVD')
+    dept   = Department.find_by(name: 'Video')
     ItemCreator.new(grazer, store, dept)
   end
 
@@ -59,15 +59,15 @@ class ItemCreator
   end
 
   def create_item(scraped_item)
-    sleep 1
+    sleep 0.7
     puts "Creating record for '#{scraped_item[:title]}'"
     puts "    #{scraped_item[:url]}"
 
     full_data = @grazer.get_product_data(scraped_item[:url])
 
-    attrs = full_data.slice(:title, :creator, :platform, :variation, :release_date, :image)
-    puts attrs[:image]
+    attrs = full_data.slice(:title, :creator, :variation, :release_date, :image)
     item = @dept.items.build(attrs)
+    item.platform = Platform.find_by(name: full_data[:platform])
 
     attrs = full_data.slice(:url, :rank, :price, :asin)
     attrs.merge!(scraped_item.slice(:rank))

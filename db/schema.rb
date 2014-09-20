@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140917051722) do
+ActiveRecord::Schema.define(version: 20140920033443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,7 +47,6 @@ ActiveRecord::Schema.define(version: 20140917051722) do
     t.string   "title"
     t.integer  "department_id"
     t.string   "creator"
-    t.string   "platform"
     t.string   "variation"
     t.date     "release_date"
     t.datetime "created_at"
@@ -57,10 +56,20 @@ ActiveRecord::Schema.define(version: 20140917051722) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.string   "slug"
+    t.integer  "platform_id"
   end
 
-  add_index "items", ["platform"], name: "index_items_on_platform", using: :btree
+  add_index "items", ["platform_id"], name: "index_items_on_platform_id", using: :btree
   add_index "items", ["slug"], name: "index_items_on_slug", unique: true, using: :btree
+
+  create_table "platforms", force: true do |t|
+    t.integer  "department_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "platforms", ["department_id"], name: "index_platforms_on_department_id", using: :btree
 
   create_table "products", force: true do |t|
     t.text     "url"

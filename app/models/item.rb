@@ -15,6 +15,7 @@ class Item < ActiveRecord::Base
   end
 
   belongs_to  :department
+  belongs_to  :platform
   has_many    :products, dependent: :destroy
 
   FRONT_PAGE_LIMIT = 6

@@ -1,6 +1,33 @@
-<%= render 'featured', department: @department %>
+<% render 'featured', department: @department %>
 
 <div class="container dept-container">
+  <div style="padding: 20px 15px 0 15px;font-size: 110%;">
+<!--    <%= form_for @department, method: :get do |f| %>
+      <%= select_tag 'platform', options_for_select(
+          @department.platforms.collect{ |p| [p.name, p.id] }),
+                     { prompt: 'Select Platform'} %>
+      <div style="display: inline"><%= f.submit 'GO!' %></div>
+    <% end %>
+    -->
+    <div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+      <%= params[:platform] ? @department.platforms.find(params[:platform]).name : 'Select Platform' %>
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+      <% @department.platforms.each do |platform| %>
+        <li role="presentation">
+          <a role="menuitem" tabindex="-1" href="<%= department_path(@department, platform: platform.id) %>">
+            <%= platform.name %>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  </div>
+
+
 
   <%= render 'department', department: @department %>
 
