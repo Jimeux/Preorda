@@ -82,4 +82,5 @@ production:
   <<: *default
   database: launchbro_production
   username: launchbro_production
+  host: localhost
   password: stageroo

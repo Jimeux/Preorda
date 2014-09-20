@@ -5,7 +5,7 @@ set :repo_url, 'git@bitbucket.org:jimeux/launchbro.git'
 set :deploy_to, "/var/www/#{fetch(:application)}"
 
 set :rbenv_type, :user
-set :rbenv_ruby, '2.1.0p0'
+set :rbenv_ruby, '2.1.0'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
