@@ -83,4 +83,4 @@ production:
   database: launchbro_production
   username: launchbro_production
   host: localhost
-  password: stageroo
+  password: <%= Rails.application.secrets.db_pass %>

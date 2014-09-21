@@ -1,15 +1,11 @@
-<div class="container" style="max-width: 700px;">
+<div class="container" style="max-width: 650px;">
   <div class="panel">
     <div class="panel-body">
 
       <h2 class="item-title"><%= @item.title %></h2>
 
       <h2 class="item-title item-icon">
-        <% if @item.department.name.in? %w(DVD Blu-Ray) %>
-          <i class="glyphicon glyphicon-film"></i>
-        <% elsif @item.department.name == 'Games' %>
-           <i class="glyphicon glyphicon-phone"></i>
-        <% end %>
+        <i class="glyphicon glyphicon-<%= @item.department.name.downcase %>"></i>
       </h2>
 
       <div class="row">
@@ -17,7 +13,7 @@
 
           <%= image_tag @item.image, class: 'dept-item-img img-responsive' %>
 
-          <div class="btn btn-info btn-block" style="margin: 4px 0">
+          <div class="btn btn-info btn-sm btn-block" style="margin: 4px 0">
             <%= print_time_to_release(@item) %>
           </div>
 
@@ -25,7 +21,7 @@
         <div class="col-sm-7">
 
           <% @item.products.each do |product| %>
-            <a href="<%= product.url %>" target="_blank" class="btn lg btn-warning btn-block">
+            <a href="<%= product.url %>" target="_blank" class="btn btn-sm btn-warning btn-block">
               <%= product.store.name %>:
               <%= product.price > 0 ? number_to_currency(product.price) : 'TBC' %> &raquo;
             </a>
