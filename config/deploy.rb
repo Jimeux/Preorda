@@ -21,7 +21,7 @@ set :scm, :git
 # Default value for :pty is false
 # set :pty, true
 
-#set :linked_files, %w{.env.production .env}
+set :linked_files, %w{config/secrets.yml}
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/assets}
 
 # Default value for default_env is {}
@@ -37,6 +37,7 @@ namespace :deploy do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
       # execute :touch, release_path.join('tmp/restart.txt')
+      invoke 'unicorn:restart'
     end
   end
 
