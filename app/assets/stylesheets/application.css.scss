@@ -11,7 +11,6 @@ $navbar-height:              54px;
 $panel-default-heading-bg:   #fff;
 $panel-default-border:       #d5d5d5;
 $navbar-default-border:      #e5e5e5;
-$font-family-base:           Helvetica, Arial, sans-serif;
 $btn-font-weight:            300;
 $headings-font-weight:       300;
 
@@ -35,7 +34,7 @@ a.navbar-brand {
 a.navbar-brand:hover {
   color: $brand-primary !important;
 }
-button.navbar-toggle { border: none; }
+button.navbar-toggle { border-color: $navbar-default-bg !important; }
 
 input { box-shadow: none !important; }
 
