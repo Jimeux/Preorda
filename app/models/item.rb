@@ -22,7 +22,7 @@ class Item < ActiveRecord::Base
 
   # TODO: Find out about conditional resizing (square for music, rectangle for DVD)
   # -- Paperclip settings                                  # TODO: Add a default image
-  has_attached_file :image, styles: { thumb: '95x130#', show: '240x' }, default_url: '/images/:style/missing.png'
+  has_attached_file :image, styles: { thumb: '120x160#', show: '280x' }, default_url: '/images/:style/missing.png'
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   scope :latest, -> {
