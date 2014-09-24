@@ -7,9 +7,13 @@
 
 $navbar-default-bg:          #f2f2f2;
 $navbar-default-brand-color: #333;
-$navbar-height:              50px;
+$navbar-height:              54px;
 $panel-default-heading-bg:   #fff;
 $panel-default-border:       #d5d5d5;
+$navbar-default-border:      #e5e5e5;
+$font-family-base:           Helvetica, Arial, sans-serif;
+$btn-font-weight:            300;
+$headings-font-weight:       300;
 
 /* TODO: Follow the steps on the bootstrap-sass GitHub page
  *       to remove unused components when the time comes.
@@ -19,14 +23,51 @@ $panel-default-border:       #d5d5d5;
 * { border-radius: 0 !important; }
 
 body {
-  padding-top: 51px;
-  font-family: Helvetica, Arial, sans-serif;
+  padding-top: 55px;
   font-weight: 300;
 }
 
+a.navbar-brand {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 180%;
+  padding: 20px 10px;
+}
+a.navbar-brand:hover {
+  color: $brand-primary !important;
+}
+button.navbar-toggle { border: none; }
+
 input { box-shadow: none !important; }
 
-.btn { font-weight: 300; }
+/*      Section heading icons (under header)    */
+
+.section-heading {
+  //float:      left;
+  //width:      33.3333%;
+  color:      #ffffff;
+  text-align: center;
+  padding:    2px;
+  a {
+    font-size: 90%;
+    display:    inline-block;
+    width:      100%;
+    color:      #ffffff;
+    text-decoration: none;
+    span { display: none; }
+  }
+  a:hover {
+    i    { display: none; }
+    span { display: block; }
+  }
+}
+
+.music-colour { background-color: $brand-primary; }
+.games-colour { background-color: $brand-danger; }
+.video-colour  { background-color: $brand-success; }
+.glyphicon-video { @extend .glyphicon-film }
+.glyphicon-games { @extend .glyphicon-phone }
+
+ul.dropdown-menu { margin-top: 0; }
 
 div#featured {
   background-color: black;
@@ -53,19 +94,6 @@ div#featured div {
   border: 0;
 }
 
-.navbar-brand {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 160%;
-  padding: 19px;
-  line-height: 18px;
-}
-.navbar form input {
-  background-color: $navbar-inverse-bg;
-  border: 0;
-  color: $navbar-inverse-color;
-  padding: 10px 15px;
-}
-
 .social-box { margin-top: 10px; }
 .form-container { margin-top: 20px; }
 .control-label { font-weight: 300; }
@@ -76,37 +104,6 @@ div#featured div {
   float: left;
   width: 49%;
 }
-
-/*      Section heading icons (under header)    */
-
-.section-heading {
-  //float:      left;
-  //width:      33.3333%;
-  color:      #ffffff;
-  text-align: center;
-  padding:    0;
-  a {
-    font-size: 90%;
-    display:    inline-block;
-    width:      100%;
-    padding:    4px 3px 3px 3px;
-    color:      #ffffff;
-    text-decoration: none;
-    span { display: none; }
-  }
-  a:hover {
-    i    { display: none; }
-    span { display: block; }
-  }
-}
-
-.music-colour { background-color: $brand-primary; }
-.games-colour { background-color: $brand-danger; }
-.video-colour  { background-color: $brand-success; }
-.glyphicon-video { @extend .glyphicon-film }
-.glyphicon-games { @extend .glyphicon-phone }
-
-ul.dropdown-menu { margin-top: 0; }
 
 .dept-panel {
   margin-bottom:  -15px;

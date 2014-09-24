@@ -2,22 +2,50 @@
   <div class="panel">
     <div class="panel-body">
 
-      <h2 class="item-title"><%= @item.title %></h2>
+      <h2 class="item-title">
+        <%= @item.title %> <%= "[#{@item.variation}]" unless @item.variation.blank? %>
+      </h2>
 
       <h2 class="item-title item-icon">
-        <i class="glyphicon glyphicon-<%= @item.department.name.downcase %>"></i>
+        <a href="<%= department_path(@item.department) %>">
+          <i class="glyphicon glyphicon-<%= @item.department.name.downcase %>"></i>
+        </a>
       </h2>
+
+      <h3 class="item-title item-platform">
+        <a class="label label-<%= btn_class(@item) %>" href="<%= department_path(@item.department, platform: @item.platform) %>">
+          <%= @item.platform.name %>
+        </a>
+      </h3>
 
       <div class="row">
         <div class="col-sm-5">
 
-          <%= image_tag @item.image, class: 'dept-item-img img-responsive' %>
+          <div class="item-img-block">
 
-          <div class="btn btn-info btn-sm btn-block" style="margin: 4px 0">
-            <%= print_time_to_release(@item) %>
+            <div class="item-img"><%= image_tag @item.image, width: 230 %></div>
+
+            <div class="item-control">
+
+              <div class="btn btn-sm btn-default btn-block" style="border-bottom: 1px solid #ccc;">
+                <%= print_time_to_release(@item) %>
+              </div>
+
+              <div class="btn-group-justified">
+                <a class="btn btn-sm btn-default" style="border-right: 1px solid #ccc;">
+                  <i class="glyphicon glyphicon-share-alt"></i>
+                </a>
+                <a class="btn btn-sm btn-default">
+                  <i class="glyphicon glyphicon-star-empty"></i>
+                </a>
+              </div>
+
+            </div>
+
           </div>
 
         </div>
+
         <div class="col-sm-7">
 
           <% @item.products.each do |product| %>
