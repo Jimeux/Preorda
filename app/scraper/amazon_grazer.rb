@@ -36,7 +36,7 @@ class AmazonGrazer
   # This is the games maker, album artist etc
 
   def self.get_creator(page)
-    creator = page.at('.buying span a') || page.at('#brand')
+    creator = page.at('.buying span a') || page.at('#brand') || page.at('.author a')
     creator.text if creator
   end
 
@@ -50,11 +50,12 @@ class AmazonGrazer
   def self.get_image_url(page)
     image = page.at('#main-image')          ||
             page.at('#imgTagWrapperId img') ||
+            page.at('#landingImage')        ||
             page.at('.kib-image-ma')
 
-    image.attr('src').include?('base64,') ? # Sometimes binary data is
-      image.attr('data-old-hires') :        # in src attr and  url is
-      image.attr('src')                     # in data-old-hires attr
+    image.attr('data-old-hires').blank? ?
+      image.attr('rel') || image.attr('src').gsub(/[\n ]/,'') :
+      image.attr('data-old-hires')
   end
 
   def self.get_release_date(page)

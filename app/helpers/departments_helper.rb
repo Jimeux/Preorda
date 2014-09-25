@@ -6,4 +6,10 @@ module DepartmentsHelper
         item.title, item_path(item)
   end
 
+  def print_summary_creator(item)
+    item.creator.size > 20 ?
+      item.creator.first(17) + '…' :
+      item.creator
+  end
+
 end

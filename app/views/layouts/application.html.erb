@@ -52,7 +52,7 @@
 
 <div class="btn-group btn-group-justified">
   <!--TODO: This code shouldn't be here. Try to optimise so platforms are retrieved once per page.-->
-  <% (@departments ||= Department.includes(:platforms)).each do |dept| %>
+  <% (@departments ||= Department.includes(:platforms)).reverse.each do |dept| %>
 
     <div class="dropdown btn-group">
 

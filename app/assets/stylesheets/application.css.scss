@@ -40,13 +40,15 @@ input { box-shadow: none !important; }
 
 /*      Section heading icons (under header)    */
 
+.section-heading * { padding: 0;}
 .section-heading {
   //float:      left;
   //width:      33.3333%;
   color:      #ffffff;
   text-align: center;
-  padding:    2px;
+  padding:    0 !important;
   a {
+    padding:    3px;
     font-size: 90%;
     display:    inline-block;
     width:      100%;

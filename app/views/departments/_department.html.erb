@@ -20,6 +20,9 @@
           </div>
 
           <div class="dept-item-title"><%= print_summary_title(item) %></div>
+          <% if is_on_music_dept? item %>
+            <div class="dept-item-creator text-muted"><%= print_summary_creator item %></div>
+          <% end %>
 
           <div class="dept-item-date">
             <%= print_time_to_release(item) %>

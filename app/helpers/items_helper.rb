@@ -17,4 +17,8 @@ module ItemsHelper
     end
   end
 
+  def is_on_music_dept?(item)
+    item.department.name == 'Music'
+  end
+
 end

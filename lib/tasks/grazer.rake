@@ -16,6 +16,14 @@ namespace :graze do
     ItemCreator.new(grazer, store, dept)
   end
 
+  desc 'Get and insert Music data from Amazon'
+    task amazon_music: :environment do
+    grazer = AmazonMusicGrazer
+    store  = Store.find_by(name: 'Amazon')
+    dept   = Department.find_by(name: 'Music')
+    ItemCreator.new(grazer, store, dept)
+  end
+
   desc 'Get and insert Music data from iTunes'
     task itunes_music: :environment do
     grazer = ItunesMusicChartGrazer
@@ -65,9 +73,10 @@ class ItemCreator
 
     full_data = @grazer.get_product_data(scraped_item[:url])
 
-    attrs = full_data.slice(:title, :creator, :variation, :release_date, :image)
+    attrs = full_data.slice(:title, :creator, :variation, :release_date)
     item = @dept.items.build(attrs)
     item.platform = Platform.find_by(name: full_data[:platform])
+    item.image = full_data[:image]
 
     attrs = full_data.slice(:url, :rank, :price, :asin)
     attrs.merge!(scraped_item.slice(:rank))

@@ -22,3 +22,9 @@ video_department = Department.find_by(name: 'Video')
 video_platforms.each do |platform|
   Platform.create(department: video_department, name: platform)
 end
+
+music_platforms = ['Audio CD']
+music_department = Department.find_by(name: 'Music')
+music_platforms.each do |platform|
+  Platform.create(department: music_department, name: platform)
+end

@@ -1,9 +1,12 @@
-<div class="container" style="max-width: 680px;">
+<div class="container" style="max-width: 680px;" xmlns="http://www.w3.org/1999/html">
   <div class="panel">
     <div class="panel-body">
 
       <h2 class="item-title">
         <%= @item.title %> <%= "[#{@item.variation}]" unless @item.variation.blank? %>
+        <% if is_on_music_dept? @item %>
+          <div class="item-creator text-muted"><%= @item.creator %></div>
+        <% end %>
       </h2>
 
       <h2 class="item-title item-icon">

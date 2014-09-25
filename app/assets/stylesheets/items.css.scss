@@ -1,7 +1,12 @@
 .item-title {
-  margin-top:   5px;
+  margin-top:   8px;
   font-size:    165%;
   text-align:   center;
+}
+.item-creator {
+  font-weight: 200;
+  font-size: 75%;
+  margin-top: 15px;
 }
 .item-icon {
   margin-top:   15px;
@@ -10,8 +15,8 @@
 }
 .item-platform {
   margin-top:   15px;
-  margin-bottom: 30px;
-  font-size: 120%;
+  margin-bottom: 35px;
+  font-size: 110%;
   a { font-weight: 200; }
 }
 .item-img-block {
