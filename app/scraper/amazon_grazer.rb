@@ -41,10 +41,13 @@ class AmazonGrazer
   end
 
   def self.get_variation(page)
-    page.search('.variationSelected') #TODO: Find and list all variation types below
+    variation = page.search('.variationSelected') #TODO: Find and list all variation types below
       .select { |v| v.at('.variationDefault').text =~ /Edition|Colour/ && v.at('.variationLabel') }
       .map    { |v| v.at('.variationLabel').text }
       .join(', ')
+    variation.blank? && page.at('.a-size-medium.a-color-secondary.a-text-normal') ?
+        page.at('.a-size-medium.a-color-secondary.a-text-normal').text :
+        variation
   end
 
   def self.get_image_url(page)
@@ -53,9 +56,13 @@ class AmazonGrazer
             page.at('#landingImage')        ||
             page.at('.kib-image-ma')
 
-    image.attr('data-old-hires').blank? ?
-      image.attr('rel') || image.attr('src').gsub(/[\n ]/,'') :
+    if image.attr('data-old-hires').blank?
+      image.attr('rel').blank? ?
+          image.attr('src').gsub(/[\n ]/, '') :
+          image.attr('rel')
+    else
       image.attr('data-old-hires')
+    end
   end
 
   def self.get_release_date(page)

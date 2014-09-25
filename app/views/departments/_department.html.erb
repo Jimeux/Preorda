@@ -15,12 +15,12 @@
 
           <div>
             <a href="<%= item_path(item) %>">
-              <%= image_tag item.image(:thumb), class: 'dept-item-img', width: 95 %>
+              <%= image_tag item.image(:thumb), class: 'dept-item-img', width: 105 %>
             </a>
           </div>
 
           <div class="dept-item-title"><%= print_summary_title(item) %></div>
-          <% if is_on_music_dept? item %>
+          <% if is_in_music_dept? item %>
             <div class="dept-item-creator text-muted"><%= print_summary_creator item %></div>
           <% end %>
 

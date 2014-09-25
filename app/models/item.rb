@@ -50,9 +50,9 @@ class Item < ActiveRecord::Base
 
   def set_styles
     case department.name
-      when 'Music' then '160x160#'
-      when 'Games' then '155x195#'
-      else '155x220#'
+      when 'Music' then '170x170#'   # 1    ratio
+      when 'Games' then '170x210#'   # 1.25 ratio
+      else '170x240#'                # 1.4  ratio
       end
   end
 

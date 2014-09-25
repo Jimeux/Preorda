@@ -22,7 +22,8 @@ class AmazonGameGrazer < AmazonGrazer
       when 'nintendowii'     then return 'Nintendo Wii'
       when 'nintendowiiu'    then return 'Nintendo Wii U'
       when 'playstation3'    then return 'PlayStation 3'
-      when 'playstationvita' then return 'PlayStation Vita'
+      when 'playstationvita' then return 'PlayStation Vita' #TODO: Can these be merged?
+      when 'psvita'          then return 'PlayStation Vita'
       when 'playstation4'    then return 'PlayStation 4'
       when 'xboxone'         then return 'Xbox One'
       when 'xbox360'         then return 'Xbox 360'
