@@ -40,14 +40,16 @@ class AmazonGrazer
     creator.text if creator
   end
 
-  def self.get_variation(page)
-    variation = page.search('.variationSelected') #TODO: Find and list all variation types below
+  def self.get_variation(page) #TODO: Find and list all variation types below
+    variation = page.search('.variationSelected')
       .select { |v| v.at('.variationDefault').text =~ /Edition|Colour/ && v.at('.variationLabel') }
       .map    { |v| v.at('.variationLabel').text }
       .join(', ')
-    variation.blank? && page.at('.a-size-medium.a-color-secondary.a-text-normal') ?
-        page.at('.a-size-medium.a-color-secondary.a-text-normal').text :
-        variation
+
+    variation = variation.blank? && page.at('.a-size-medium.a-color-secondary.a-text-normal') ?
+                  page.at('.a-size-medium.a-color-secondary.a-text-normal').text :
+                  nil
+    variation
   end
 
   def self.get_image_url(page)

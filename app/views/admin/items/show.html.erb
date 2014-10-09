@@ -1,0 +1,68 @@
+<div class="container">
+
+  <div class="panel-body">
+    <div class="row">
+
+      <% @items.each do |item| %>
+        <div class="dept-item col-xs-6 col-sm-4 col-md-2">
+
+          <div style="width: 100%;text-align: center;">
+            <div style="display:inline-block;background-color: #202020;color:#eee;width:105px;padding: 2px;"><%= item.id %></div>
+          </div>
+
+          <div>
+            <a href="<%= item_path(item) %>">
+              <% if item.variation %>
+                <div class="variation-caption"><%= item.variation %></div>
+              <% end %>
+              <%= image_tag item.image(:thumb), class: 'dept-item-img', width: 105 %>
+            </a>
+          </div>
+
+          <%= form_tag admin_merge_path, style: 'display:inline;' do %>
+            <%= hidden_field_tag :item_id, item.id %>
+            <%= text_field_tag(:merge_id, '', style: 'width:53px;font-size:80%;height:25px;display:inline;margin-right:-5px;') %>
+            <%= submit_tag "Merge", style: 'font-size:80%;padding:2px 6px;height:25px;width:52px;', class: 'btn btn-default btn-sm' %>
+          <% end %>
+
+
+          <div class="btn-group" style="margin-top:2px;">
+            <%= link_to admin_item_path(item),  method: :delete, style: 'width: 52px;', class: 'btn btn-default btn-xs', data: { confirm: 'Are you sure?' } do %>
+              <i class="glyphicon glyphicon-trash"></i>
+            <% end %>
+            <a href="<%= edit_admin_item_path(item.id) %>" class="btn btn-default btn-xs" style="width:52px;">
+              <i class="glyphicon glyphicon-pencil"></i>
+            </a>
+
+          </div>
+
+
+          <div class="dept-item-title" style="height: 38px;">
+            <a href="<%= item_path(item) %>"><%= item.title %></a>
+          </div>
+
+          <div class="dept-item-creator text-muted"><%= item.platform ? item.platform.name : '!No Platform!' %></div>
+
+          <div class="dept-item-creator text-muted" style="overflow:hidden;height:15px;"><%= item.creator ? item.creator : '-' %></div>
+
+          <div class="dept-item-date"><%= print_time_to_release(item) %></div>
+
+          <div class="dept-item-price">
+            <%= item.lowest_price > 0 ? number_to_currency(item.lowest_price) : '-' %>
+          </div>
+
+        </div>
+      <% end %>
+
+    </div>
+
+    <%= will_paginate @items,
+                      renderer:       BootstrapPagination::Rails,
+                      inner_window:   1,
+                      outer_window:   0,
+                      previous_label: '&laquo;',
+                      next_label:     '&raquo;'  %>
+
+  </div>
+
+</div>

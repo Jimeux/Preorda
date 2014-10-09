@@ -6,6 +6,12 @@ Rails.application.routes.draw do
 
   root 'departments#index'
 
+  namespace :admin do
+    resources :items
+    match 'merge', to: 'items#merge', via: :post, as: 'merge'
+    match '/users/:title', to: 'items#update', via: :patch
+  end
+
 
   # This spaghetti is all for Devise and Omniauth
 

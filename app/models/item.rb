@@ -16,7 +16,7 @@ class Item < ActiveRecord::Base
 
   belongs_to  :department
   belongs_to  :platform
-  has_many    :products, dependent: :destroy
+  has_many    :products, -> { order(:price) }, dependent: :destroy
 
   FRONT_PAGE_LIMIT = 6
 
@@ -57,7 +57,11 @@ class Item < ActiveRecord::Base
   end
 
   def lowest_price
-    products.first.price  #TODO: Should actually be the lowest
+    products.first.price
+  end
+
+  def list_products
+    products.to_a.uniq(&:store_id)
   end
 
 end

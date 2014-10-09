@@ -37,7 +37,7 @@
           <li><a href="<%= edit_user_registration_path %>">Account</a></li>
           <li>
             <%= form_tag destroy_user_session_path, method: :delete do %>
-              <%= submit_tag 'Log out', class: '' %>
+              <%= submit_tag 'Log out', class: 'logout-link' %>
             <% end %>
           </li>
         <% else %>

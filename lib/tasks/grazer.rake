@@ -22,6 +22,30 @@ namespace :graze do
     store  = Store.find_by(name: 'Amazon')
     dept   = Department.find_by(name: 'Music')
     ItemCreator.new(grazer, store, dept)
+    end
+
+  desc 'Get and insert DVD data from Play.com'
+  task play_dvds: :environment do
+    grazer = PlayDVDGrazer
+    store  = Store.find_by(name: 'Play')
+    dept   = Department.find_by(name: 'Video')
+    ItemCreator.new(grazer, store, dept)
+  end
+
+  desc 'Get and insert music data from Play.com'
+  task play_music: :environment do
+    grazer = PlayMusicGrazer
+    store  = Store.find_by(name: 'Play')
+    dept   = Department.find_by(name: 'Music')
+    ItemCreator.new(grazer, store, dept)
+  end
+
+  desc 'Get and insert game data from Play.com'
+  task play_games: :environment do
+    grazer = PlayGameGrazer
+    store  = Store.find_by(name: 'Play')
+    dept   = Department.find_by(name: 'Games')
+    ItemCreator.new(grazer, store, dept)
   end
 
   desc 'Get and insert Music data from iTunes'
@@ -73,17 +97,36 @@ class ItemCreator
 
     full_data = @grazer.get_product_data(scraped_item[:url])
 
-    attrs = full_data.slice(:title, :creator, :variation, :release_date)
-    item = @dept.items.build(attrs)
-    item.platform = Platform.find_by(name: full_data[:platform])
-    item.image = full_data[:image]
+    item = get_item(full_data, scraped_item)
 
     attrs = full_data.slice(:url, :rank, :price, :asin)
     attrs.merge!(scraped_item.slice(:rank))
     attrs[:store_id] = @store.id
 
     item.products.build(attrs)
+    item.description = full_data[:description] if full_data[:description] && item.description.nil?
+
     item.save!
+  end
+
+  def get_item(data, summary)
+    platform_name = data[:platform] || summary[:platform]
+    platform = Platform.find_by(name: platform_name)
+
+    item = Item.where(platform: platform,
+                      department: @dept,
+                      variation: data[:variation])
+               .where('LOWER(title) = ?', data[:title].downcase)
+               .first
+
+    if item.nil?
+      attrs = data.slice(:title, :creator, :variation, :release_date)
+      item = @dept.items.build(attrs)
+      item.platform = platform
+      item.image = data[:image]
+    end
+
+    item
   end
 
 end

@@ -1,0 +1,97 @@
+<div class="container">
+<div class="panel">
+  <div class="panel-body">
+
+    <div class="row">
+
+      <div class="col-sm-4">
+
+        <div style="width: 100%;text-align: center;">
+          <div style="display:inline-block;background-color: #202020;padding:5px;color:#eee;width:100%;"><%= @item.id %></div>
+
+          <%= image_tag @item.image(:show), class: 'img-responsive', style: 'border: 1px solid black;' %>
+
+          <br>
+
+          <%= form_tag admin_merge_path do %>
+            <%= hidden_field_tag :item_id, @item.id %>
+            <div class="form-group">
+              <div class="input-group">
+                <%= text_field_tag :merge_id, '', class: 'form-control' %>
+                <span class="input-group-btn">
+                  <%= submit_tag "Merge", class: 'btn btn-primary' %>
+                </span>
+              </div>
+            </div>
+          <% end %>
+
+          <div style="width: 100%;text-align: center;">
+            <% @item.products.each do |product| %>
+              <a style="font-size: 90%;" href="<%= product.url %>" target="_blank" class="btn btn-<%= product.store.name == 'Play' ? 'danger' : 'warning'%>">
+                <%= product.store.name %> -
+                <%= product.price && product.price > 0 ? number_to_currency(product.price) : 'TBC' %> &raquo;
+              </a>
+            <% end %>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-sm-8">
+
+        <%= form_for @item, url: admin_item_path, via: :patch  do |f| %>
+
+          <div class="form-group">
+            <%= f.label :title %>
+            <%= f.text_field :title, class: 'form-control' %>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-sm-6">
+              <%= f.label :created_at %>
+              <%= f.text_field :created_at, readonly: true, class: 'form-control' %>
+            </div>
+            <div class="form-group col-sm-6">
+              <%= f.label :release_date %>
+              <%= f.text_field :release_date, class: 'form-control' %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-sm-6">
+              <%= f.label :creator %>
+              <%= f.text_field :creator, class: 'form-control' %>
+            </div>
+            <div class="form-group col-sm-6">
+              <%= f.label :platform_id %>
+              <%= f.select :platform_id, options_for_select(
+                @item.department.platforms.pluck(:name, :id), @item.platform.id), {}, class: 'form-control' %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <%= f.label :variation %>
+              <%= f.text_field :variation, class: 'form-control' %>
+            </div>
+            <div class="form-group col-sm-6">
+              <%= f.label :image %>
+              <%= f.text_field :image, {value: '', class: 'form-control'} %>
+              <%= f.file_field :image %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :description %>
+            <%= f.text_area :description, class: 'form-control', rows: 6 %>
+          </div>
+
+          <%= f.submit 'Update Details', class: 'btn btn-primary btn-block' %>
+
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>

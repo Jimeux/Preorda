@@ -1,5 +1,5 @@
 # Create stores
-names = %w{ Amazon iTunes }
+names = %w{ Amazon Play }
 names.each { |name| Store.create(name: name) }
 
 # Create departments

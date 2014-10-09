@@ -3,7 +3,7 @@
  *= require_self
  */
 
-@import url(http://fonts.googleapis.com/css?family=Orbitron&text=LaunchBro);
+//@import url(http://fonts.googleapis.com/css?family=Orbitron&text=LaunchBro);
 
 $navbar-default-bg:          #f2f2f2;
 $navbar-default-brand-color: #333;
@@ -29,7 +29,7 @@ body {
 a.navbar-brand {
   font-family: 'Orbitron', sans-serif;
   font-size: 180%;
-  padding: 20px 10px;
+  padding: 21px 10px;
 }
 a.navbar-brand:hover {
   color: $brand-primary !important;
@@ -124,4 +124,13 @@ div#featured div {
     padding-right: 12px;
     padding-left:  12px;
   }
+}
+
+.logout-link {
+  @extend .navbar-link;
+
+  padding:    17px 25px 17px 10px;
+  font-size:  14px;
+  background: none;
+  border:     none;
 }
