@@ -31,6 +31,10 @@ gem 'paperclip',  github: 'thoughtbot/paperclip'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 
+# Search
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
+
 # Auth
 gem 'devise'
 gem 'omniauth'

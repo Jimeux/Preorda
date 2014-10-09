@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
 
+  root 'departments#index'
+
   resources :departments, only: [:index, :show]
 
   resources :items,       only: [:index, :show]
 
-  root 'departments#index'
+  get 'search', to: 'search#search', as: 'search'
 
   namespace :admin do
     resources :items

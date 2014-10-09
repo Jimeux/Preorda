@@ -8,41 +8,7 @@
 
     <h4 class="dept-heading">Coming Soon in <%= department.name %></h4>
 
-    <div class="row">
+    <%= render 'items', items: @items || department.items %>
 
-      <% (@items || department.items).each do |item| %>
-        <div class="dept-item col-xs-6 <%= @items ? 'col-sm-3' : 'col-sm-4' %> col-md-2">
-
-          <div>
-            <a href="<%= item_path(item) %>">
-
-              <% if item.variation %>
-                <div class="variation-caption"><%= item.variation %></div>
-              <% end %>
-
-              <%= image_tag item.image(:thumb), class: 'dept-item-img', width: 105 %>
-
-            </a>
-          </div>
-
-          <div class="dept-item-title"><%= print_summary_title(item) %></div>
-          <% if is_in_music_dept? item %>
-            <div class="dept-item-creator text-muted"><%= print_summary_creator item %></div>
-          <% else %>
-            <div class="dept-item-creator text-muted"><%= item.platform.name if item.platform %></div>
-          <% end %>
-
-          <div class="dept-item-date">
-            <%= print_time_to_release(item) %>
-          </div>
-
-          <div class="dept-item-price">
-            <%= item.lowest_price > 0 ? number_to_currency(item.lowest_price) : '-' %>
-          </div>
-
-        </div>
-      <% end %>
-
-    </div><!-- row        -->
   </div>  <!-- panel-body -->
 </div>    <!-- panel      -->

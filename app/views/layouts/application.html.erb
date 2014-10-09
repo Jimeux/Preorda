@@ -46,6 +46,14 @@
         <% end %>
 
       </ul>
+
+      <%= form_tag(search_path, action: 'search', method: :get, class: 'navbar-form navbar-right') do %>
+        <div class="form-group">
+          <input type="text" name="q" value="<%= params[:q] %>" class="form-control" placeholder="Search" style="margin-right: -4px;border-color: #e5e5e5">
+          <button type="submit" class="btn btn-default" style="border-color: #e5e5e5">Submit</button>
+        </div>
+      <% end %>
+
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

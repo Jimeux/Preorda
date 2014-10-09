@@ -1,4 +1,9 @@
+require 'elasticsearch/model'
+
 class Item < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
   extend FriendlyId
 
   # FriendlyID Settings
@@ -64,4 +69,21 @@ class Item < ActiveRecord::Base
     products.to_a.uniq(&:store_id)
   end
 
+  settings index: { number_of_shards: 1 } do
+    mappings dynamic: 'false' do
+      indexes :title, analyzer: 'english'
+    end
+  end
+
 end
+
+# Delete the previous Items index in Elasticsearch
+Item.__elasticsearch__.client.indices.delete index: Item.index_name rescue nil
+
+# Create the new index with the new mapping
+Item.__elasticsearch__.client.indices.create \
+  index: Item.index_name,
+  body: { settings: Item.settings.to_hash, mappings: Item.mappings.to_hash }
+
+# Index all Item records from the DB to Elasticsearch
+Item.import
