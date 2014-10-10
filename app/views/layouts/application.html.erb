@@ -26,11 +26,15 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav-links" style="padding: 16px;margin: 0">
+        <i class="glyphicon glyphicon-search"></i>
+      </button>
       <a class="navbar-brand" href="<%= root_path %>">LaunchBro</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="main-nav-links">
+
       <ul class="nav navbar-nav navbar-right">
 
         <% if user_signed_in? %>
@@ -48,10 +52,8 @@
       </ul>
 
       <%= form_tag(search_path, action: 'search', method: :get, class: 'navbar-form navbar-right') do %>
-        <div class="form-group">
-          <input type="text" name="q" value="<%= params[:q] %>" class="form-control" placeholder="Search" style="margin-right: -4px;border-color: #e5e5e5">
-          <button type="submit" class="btn btn-default" style="border-color: #e5e5e5">Submit</button>
-        </div>
+        <input type="text" name="q" value="<%= params[:q] %>" class="form-control" placeholder="Search" style="margin-right: -5px;border-color: #e5e5e5">
+        <button type="submit" class="btn btn-default" style="border-color: #e5e5e5;color:#777777;">Go</button>
       <% end %>
 
     </div><!-- /.navbar-collapse -->
@@ -104,21 +106,32 @@
 
 <%= yield %>
 
-<div id="footer" style="background-color:#404040;width: 100%;padding: 30px 0;margin-top: 20px">
+<div class="footer">
+  <div class="row">
+    <div class="col-sm-3">
+      <h4 class="footer-heading">Site Map</h4>
+      <div class="sep"></div>
+      <%= link_to 'Home', root_url %><br>
+      <%= link_to 'Login', new_user_session_url %><br>
+      <%= link_to 'Sign Up', new_user_registration_url %><br>
+    <br>
+    </div>
 
-  <div class="container footer">
-    <div class="row">
-      <div class="col-sm-3">
-        <h4 class="footer-heading">Site Map</h4>
-        <div class="sep" style="background-color: #f2f2f2"></div>
-        <%= link_to 'Home', root_url %><br>
-        <%= link_to 'Login', new_user_session_url %><br>
-        <%= link_to 'Sign Up', new_user_registration_url %><br>
+    <div class="col-sm-3">
+      <% dept = (@departments ||= Department.includes(:platforms)).reverse.first %>
+      <h4 class="footer-heading">
+        <a href="<%= department_path(dept) %>"><%= dept.name %></a>
+      </h4>
+      <div class="sep <%= dept.name.downcase %>-colour"></div>
+      <% dept.platforms.each do |platform| %>
+        <%= link_to platform.name, department_path(dept, platform: platform.id) %><br>
+      <% end %>
       <br>
-      </div>
+    </div>
 
-      <div class="col-sm-3">
-        <% dept = (@departments ||= Department.includes(:platforms)).reverse.first %>
+    <div class="col-sm-3">
+    <% @departments.reverse[1..2].each do |dept| %>
+
         <h4 class="footer-heading">
           <a href="<%= department_path(dept) %>"><%= dept.name %></a>
         </h4>
@@ -127,33 +140,19 @@
           <%= link_to platform.name, department_path(dept, platform: platform.id) %><br>
         <% end %>
         <br>
-      </div>
+    <% end %>
+    </div>
 
-      <div class="col-sm-3">
-      <% @departments.reverse[1..2].each do |dept| %>
-
-          <h4 class="footer-heading">
-            <a href="<%= department_path(dept) %>"><%= dept.name %></a>
-          </h4>
-          <div class="<%= dept.name.downcase %>-colour sep"></div>
-          <% dept.platforms.each do |platform| %>
-            <%= link_to platform.name, department_path(dept, platform: platform.id) %><br>
-          <% end %>
-          <br>
-      <% end %>
-      </div>
-
-      <div class="col-sm-3">
-        <h4 class="footer-heading">Connect</h4>
-        <div class="sep" style="background-color: #f2f2f2"></div>
-        <%= image_tag 'twitter_lg.png',  size: '45x45', style: 'border-radius:25px !important;margin-top:10px;margin-right: 10px;' %>
-        <%= image_tag 'facebook_lg.png', size: '45x45', style: 'border-radius:25px !important;margin-top:10px;margin-right: 10px;' %>
-        <%= image_tag 'gplus_lg.png',    size: '45x45', style: 'border-radius:25px !important;margin-top:10px;' %>
-      </div>
+    <div class="col-sm-3">
+      <h4 class="footer-heading">Connect</h4>
+      <div class="sep"></div>
+      <%= image_tag 'twitter_lg.png',  size: '40x40', style: 'border-radius:25px !important;margin-top:10px;margin-left:5px;margin-right: 10px;' %>
+      <%= image_tag 'facebook_lg.png', size: '40x40', style: 'border-radius:25px !important;margin-top:10px;margin-right: 10px;' %>
+      <%= image_tag 'gplus_lg.png',    size: '40x40', style: 'border-radius:25px !important;margin-top:10px;' %>
     </div>
   </div>
-
 </div>
+
 
 </body>
 </html>

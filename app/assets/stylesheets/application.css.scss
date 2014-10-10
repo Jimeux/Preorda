@@ -62,9 +62,7 @@ input { box-shadow: none !important; }
   }
 }
 
-.music-colour { background-color: $brand-primary; }
-.games-colour { background-color: $brand-danger; }
-.video-colour  { background-color: $brand-success; }
+
 .glyphicon-video { @extend .glyphicon-film }
 .glyphicon-games { @extend .glyphicon-phone }
 
@@ -129,15 +127,20 @@ div#featured div {
 .logout-link {
   @extend .navbar-link;
 
-  padding:    17px 25px 17px 10px;
+  padding:    17px 25px 17px 15px;
   font-size:  14px;
   background: none;
   border:     none;
 }
 
 .footer {
-  color: #ddd;
-  a { color: #ddd; }
+  color: #c0c0c0;
+  background-color:#404040;
+  width: 100%;
+  padding: 30px;
+  padding-top: 20px;
+  margin-top: 20px;
+  a { color: #c0c0c0; }
   a:hover {
     color: white;
     text-decoration: none;}
@@ -146,4 +149,19 @@ div#featured div {
 .sep {
   height: 1px;
   margin-bottom: 8px;
+  background-color: #c0c0c0;
 }
+
+@media(max-width:768px) {
+  .navbar-form {
+    padding: 0 12px;
+    border: 0;
+  }
+  .navbar-form .form-group {
+    margin-bottom: 0;
+  }
+}
+
+.music-colour { background-color: $brand-primary; }
+.games-colour { background-color: $brand-danger; }
+.video-colour  { background-color: $brand-success; }

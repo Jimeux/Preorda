@@ -15,7 +15,7 @@ class Item < ActiveRecord::Base
     true
   end
 
-  def slug_candidates
+  def slug_candidates       #TODO: Make this work
     [ :title, [:title, :platform], [:title, :platform, :variation] ]
   end
 
@@ -26,8 +26,7 @@ class Item < ActiveRecord::Base
   FRONT_PAGE_LIMIT = 6
 
 
-  # TODO: Find out about conditional resizing (square for music, rectangle for DVD)
-  # -- Paperclip settings                                  # TODO: Add a default image
+  # -- Paperclip settings                # TODO: Add a default image
   has_attached_file :image,
                     styles: ->(attachment) {
                       {
@@ -72,6 +71,7 @@ class Item < ActiveRecord::Base
   settings index: { number_of_shards: 1 } do
     mappings dynamic: 'false' do
       indexes :title, analyzer: 'english'
+      indexes :creator, analyzer: 'english'
     end
   end
 
@@ -81,8 +81,7 @@ end
 Item.__elasticsearch__.client.indices.delete index: Item.index_name rescue nil
 
 # Create the new index with the new mapping
-Item.__elasticsearch__.client.indices.create \
-  index: Item.index_name,
+Item.__elasticsearch__.client.indices.create index: Item.index_name,
   body: { settings: Item.settings.to_hash, mappings: Item.mappings.to_hash }
 
 # Index all Item records from the DB to Elasticsearch

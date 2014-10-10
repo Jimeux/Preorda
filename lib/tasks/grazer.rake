@@ -71,7 +71,9 @@ class ItemCreator
   private
 
   def get_summaries
-    data = @grazer.get_summary_data(2)   # TODO: Don't have this hard-coded limit
+    puts 'Getting summaries...'
+    data = @grazer.get_summary_data(3)   # TODO: Don't have this hard-coded limit
+    puts "Found #{data.size} summaries."
     data.each { |item| process_item(item) }
   end
 

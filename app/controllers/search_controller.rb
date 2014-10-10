@@ -1,6 +1,6 @@
 class SearchController < ApplicationController
   def search
     @items = params[:q].nil? ?
-       [] : Item.search("#{params[:q].delete('~')}~").records
+       [] : Item.search("*#{params[:q].gsub(/[~*]/,'')}*").records
   end
 end
