@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141002071326) do
+ActiveRecord::Schema.define(version: 20141013121631) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,17 @@ ActiveRecord::Schema.define(version: 20141002071326) do
   create_table "departments", force: true do |t|
     t.string "name"
   end
+
+  create_table "features", force: true do |t|
+    t.integer  "item_id"
+    t.text     "image"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  add_index "features", ["item_id"], name: "index_features_on_item_id", using: :btree
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false

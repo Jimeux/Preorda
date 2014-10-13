@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   resources :departments, only: [:index, :show]
 
+  resources :features
+
   resources :items,       only: [:index, :show]
 
   get 'search', to: 'search#search', as: 'search'

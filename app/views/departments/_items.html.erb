@@ -6,20 +6,25 @@
       <div>
         <a href="<%= item_path(item) %>">
 
-          <% if item.variation %>
+          <% if item.variation && false %>
             <div class="variation-caption"><%= item.variation %></div>
           <% end %>
 
-          <%= image_tag item.image(:thumb), class: 'dept-item-img', width: 105 %>
+          <%= image_tag item.image(:thumb), class: 'dept-item-img', width: 95 %>
 
         </a>
       </div>
 
       <div class="dept-item-title"><%= print_summary_title(item) %></div>
+
       <% if is_in_music_dept? item %>
-        <div class="dept-item-creator text-muted"><%= print_summary_creator item %></div>
+        <div class="dept-item-creator text-muted">
+          <%= print_summary_creator item %>
+        </div>
       <% else %>
-        <div class="dept-item-creator text-muted"><%= item.platform.name if item.platform %></div>
+        <div class="dept-item-creator text-muted">
+          <%= item.platform.name if item.platform %>
+        </div>
       <% end %>
 
       <div class="dept-item-date">
@@ -33,4 +38,4 @@
     </div>
   <% end %>
 
-</div><!-- row        -->
+</div><!-- row -->

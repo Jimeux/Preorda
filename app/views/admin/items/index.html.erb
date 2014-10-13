@@ -18,6 +18,18 @@
         <% end %>
       </div>
 
+      <br>
+
+      <%= form_for Feature.new do |f| %>
+        <%= f.label :item_id %>
+        <%= f.text_field :item_id %><br>
+        <%= f.label :image %>
+        <%= f.file_field :image %><br>
+        <%= f.submit 'Create', class: 'btn btn-primary' %>
+      <% end %>
+
+      <br>
+
     </div>
 
   </div>

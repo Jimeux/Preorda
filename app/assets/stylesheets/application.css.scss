@@ -22,8 +22,9 @@ $headings-font-weight:       300;
 * { border-radius: 0 !important; }
 
 body {
-  padding-top: 55px;
+  padding: 55px 0 0 0;
   font-weight: 300;
+  background-color: #f2f2f2;
 }
 
 a.navbar-brand {
@@ -73,6 +74,8 @@ div#featured {
   white-space: nowrap;
   overflow: hidden;
   clear: both;
+  padding: 0;
+  margin: 0 -15px;
 }
 
 div#featured div {
@@ -139,7 +142,7 @@ div#featured div {
   width: 100%;
   padding: 30px;
   padding-top: 20px;
-  margin-top: 20px;
+  //margin-top: 20px;
   a { color: #c0c0c0; }
   a:hover {
     color: white;
