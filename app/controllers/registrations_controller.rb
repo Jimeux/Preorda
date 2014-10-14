@@ -1,4 +1,8 @@
 class RegistrationsController < Devise::RegistrationsController
+  before_action do
+    redirect_to root_path unless current_user && current_user.admin?
+  end #TODO: Remove when adding user features back in
+
   def update
     account_update_params = devise_parameter_sanitizer.sanitize(:account_update)
 

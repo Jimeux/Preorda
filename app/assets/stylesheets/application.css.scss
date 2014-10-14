@@ -3,7 +3,7 @@
  *= require_self
  */
 
-@import url(http://fonts.googleapis.com/css?family=Orbitron&text=LaunchBro);
+//@import url(http://fonts.googleapis.com/css?family=Orbitron&text=LaunchBro);
 
 $navbar-default-bg:          #f2f2f2;
 $navbar-default-brand-color: #333;
@@ -13,6 +13,24 @@ $panel-default-border:       #d5d5d5;
 $navbar-default-border:      #e5e5e5;
 $btn-font-weight:            300;
 $headings-font-weight:       300;
+
+$screen-md: 966px;      // TODO: Work in progress
+$screen-sm: 642px;      // Check variables for
+$container-sm: 642px;   // tables, desktop etc
+$container-md: 966px;
+$container-lg: $container-md;
+
+@media(max-width: $screen-sm+1) {
+  .dept-container { border: 0; }
+}
+
+@media(max-width: $screen-sm+1) {
+  .navbar-form {
+    padding: 0 12px;
+    border: 0;
+  }
+  .navbar-form .form-group { margin-bottom: 0; }
+}
 
 /* TODO: Follow the steps on the bootstrap-sass GitHub page
  *       to remove unused components when the time comes.
@@ -152,16 +170,6 @@ div#featured div {
   height: 1px;
   margin-bottom: 8px;
   background-color: #c0c0c0;
-}
-
-@media(max-width:768px) {
-  .navbar-form {
-    padding: 0 12px;
-    border: 0;
-  }
-  .navbar-form .form-group {
-    margin-bottom: 0;
-  }
 }
 
 .music-colour { background-color: $brand-primary; }

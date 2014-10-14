@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
+<html>
 <head>
   <title>LaunchBro</title>
   <meta charset='utf-8' content='text/html' http-equiv='Content-Type'>
@@ -20,12 +20,12 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav-links">
+      <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav-links">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-      </button>
+      </button>-->
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav-links" style="padding: 15px 16px 13px 16px;margin: 2px 0">
         <i class="glyphicon glyphicon-search"></i>
       </button>
@@ -35,23 +35,23 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="main-nav-links">
 
-      <ul class="nav navbar-nav navbar-right">
+<!--      <ul class="nav navbar-nav navbar-right">
 
-        <% if user_signed_in? %>
-          <li><a href="<%= edit_user_registration_path %>">Account</a></li>
+        <%# if user_signed_in? %>
+          <li><a href="<%#= edit_user_registration_path %>">Account</a></li>
           <li>
-            <%= form_tag destroy_user_session_path, method: :delete do %>
-              <%= submit_tag 'Log out', class: 'logout-link' %>
-            <% end %>
+            <%#= form_tag destroy_user_session_path, method: :delete do %>
+              <%#= submit_tag 'Log out', class: 'logout-link' %>
+            <%# end %>
           </li>
-        <% else %>
-          <li><a href="<%= new_user_registration_path %>">Register</a></li>
-          <li><a href="<%= new_user_session_path %>">Login</a></li>
-        <% end %>
+        <%# else %>
+          <li><a href="<%#= new_user_registration_path %>">Register</a></li>
+          <li><a href="<%#= new_user_session_path %>">Login</a></li>
+        <%# end %>
 
-      </ul>
+      </ul>-->
 
-      <%= form_tag(search_path, action: 'search', method: :get, class: 'navbar-form navbar-right') do %>
+      <%= form_tag(search_path, method: :get, class: 'navbar-form navbar-right') do %>
         <input type="text" name="q" value="<%= params[:q] %>" class="form-control" placeholder="Search" style="margin-right: -5px;border-color: #e5e5e5">
         <button type="submit" class="btn btn-default" style="border-color: #e5e5e5;color:#777777;">Go</button>
       <% end %>
@@ -90,12 +90,13 @@
 <div class="footer">
   <div class="row">
     <div class="col-sm-3">
-      <h4 class="footer-heading">LaunchBro</h4>
+      <h4 class="footer-heading"><a href="<%= root_path %>">LaunchBro</a></h4>
       <div class="sep"></div>
-      <%= link_to 'Home', root_url %><br>
-      <%= link_to 'Login', new_user_session_url %><br>
-      <%= link_to 'Sign Up', new_user_registration_url %><br>
-    <br>
+      Browse, follow and find the best prices for the latest new releases in music, video and games.
+
+      <br><br>© LaunchBro 2014
+      <%#= link_to 'Login', new_user_session_url %><br>
+      <%#= link_to 'Sign Up', new_user_registration_url %><br>
     </div>
 
     <div class="col-sm-3">
@@ -125,7 +126,7 @@
     </div>
 
     <div class="col-sm-3">
-      <h4 class="footer-heading">Connect</h4>
+      <h4 class="footer-heading">Follow us on</h4>
       <div class="sep"></div>
       <%= image_tag 'twitter_lg.png',  size: '40x40', style: 'border-radius:25px !important;margin-top:10px;margin-left:5px;margin-right: 10px;' %>
       <%= image_tag 'facebook_lg.png', size: '40x40', style: 'border-radius:25px !important;margin-top:10px;margin-right: 10px;' %>

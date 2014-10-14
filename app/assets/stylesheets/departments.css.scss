@@ -1,10 +1,9 @@
 .dept-container {
-  max-width: 960px;
+  margin-bottom: -20px; //TODO: This isn't working on the server
   padding-bottom: 30px;
   background-color: #ffffff;
   border: 1px solid #e5e5e5;
   border-width: 0 1px;
-  margin-bottom: -20px;
   //box-shadow: 0 3px 5px #d7d7d7;
 }
 
@@ -17,6 +16,7 @@
   .dept-item-title {
     height: 17px;
     overflow: hidden;
+    margin-top: 2px;
   }
 
   .dept-item-creator {
@@ -78,10 +78,4 @@ div.variation-caption{
   color:    white;
   opacity:  0.9;
   //filter:   alpha(opacity=65);
-}
-
-@media(max-width:768px) {
-  .dept-container {
-    border: 0;
-  }
 }

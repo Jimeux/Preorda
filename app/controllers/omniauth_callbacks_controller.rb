@@ -1,5 +1,9 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
+  before_action do
+    redirect_to root_path unless current_user && current_user.admin?
+  end #TODO: Remove when adding user features back in
+
   # Make it clear that a new account will be created
 
   def twitter  ; callback end
