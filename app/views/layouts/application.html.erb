@@ -60,33 +60,14 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-<div class="btn-group btn-group-justified">
-  <!--TODO: This code shouldn't be here. Try to optimise so platforms are retrieved once per page.-->
-  <% (@departments ||= Department.includes(:platforms)).reverse.each do |dept| %>
-
-    <div class="dropdown btn-group">
-
-      <button class="btn dropdown-toggle section-heading <%= dept.name.downcase %>-colour" type="button" id="section-headings" data-toggle="dropdown">
-        <a href="<%= department_path(dept) %>">
-          <i class="glyphicon glyphicon-<%= dept.name.downcase %>"></i><span><%= dept.name.upcase %></span>
-        </a>
-      </button>
-
-      <!--TODO: Sort out far-right dropdown getting cut off.-->
-      <ul class="dropdown-menu" role="menu" aria-labelledby="section-headings">
-        <% dept.platforms.each do |platform| %>
-          <li role="presentation">
-            <a role="menuitem" tabindex="-1" href="<%= department_path(dept, platform: platform.id) %>">
-              <%= platform.name %>
-            </a>
-          </li>
-        <% end %>
-      </ul>
-
+<% @departments.each do |dept| %>
+    <div class="section-heading <%= dept.name.downcase %>-colour">
+      <a href="<%= department_path(dept) %>">
+        <i class="glyphicon glyphicon-<%= dept.name.downcase %>"></i>
+        <span><%= dept.name.upcase %></span>
+      </a>
     </div>
-
-  <% end %>
-</div>
+<% end %>
 
 <div style="display: block;clear: both;">
 
@@ -109,7 +90,7 @@
 <div class="footer">
   <div class="row">
     <div class="col-sm-3">
-      <h4 class="footer-heading">Site Map</h4>
+      <h4 class="footer-heading">LaunchBro</h4>
       <div class="sep"></div>
       <%= link_to 'Home', root_url %><br>
       <%= link_to 'Login', new_user_session_url %><br>
@@ -118,7 +99,7 @@
     </div>
 
     <div class="col-sm-3">
-      <% dept = (@departments ||= Department.includes(:platforms)).reverse.first %>
+      <% dept = @departments.first %>
       <h4 class="footer-heading">
         <a href="<%= department_path(dept) %>"><%= dept.name %></a>
       </h4>
@@ -130,7 +111,7 @@
     </div>
 
     <div class="col-sm-3">
-    <% @departments.reverse[1..2].each do |dept| %>
+    <% @departments[1..2].each do |dept| %>
 
         <h4 class="footer-heading">
           <a href="<%= department_path(dept) %>"><%= dept.name %></a>
@@ -152,7 +133,6 @@
     </div>
   </div>
 </div>
-
 
 </body>
 </html>

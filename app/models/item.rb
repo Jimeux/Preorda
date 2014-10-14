@@ -40,6 +40,8 @@ class Item < ActiveRecord::Base
 
   scope :latest, -> {
     includes(:products)
+    .includes(:platform)
+    .includes(:department)
     .select('DISTINCT ON(items.title, items.release_date) *')
     .where('items.release_date > now() OR items.release_date IS NULL')
     .order('items.release_date, items.title')
@@ -47,7 +49,9 @@ class Item < ActiveRecord::Base
   }
 
   scope :latest_in_dept, -> {
-    includes(:products)
+    includes(:department)
+    .includes(:products)
+    .includes(:platform)
     .where('items.release_date > now() OR items.release_date IS NULL')
     .order('items.release_date, items.title')
   }

@@ -1,7 +1,7 @@
 class DepartmentsController < ApplicationController
 
   def index
-    @departments = Department.includes(:platforms).order('name ASC')
+    #@departments = Department.includes(:platforms).order('name ASC')
   end
 
   def show

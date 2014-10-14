@@ -4,6 +4,7 @@
   background-color: #ffffff;
   border: 1px solid #e5e5e5;
   border-width: 0 1px;
+  margin-bottom: -20px;
   //box-shadow: 0 3px 5px #d7d7d7;
 }
 
@@ -14,15 +15,13 @@
   font-size: 95%;
 
   .dept-item-title {
-    margin-top: 3px;
-    height: 20px;
+    height: 17px;
     overflow: hidden;
   }
 
   .dept-item-creator {
     font-weight: 200;
-    margin-bottom: 2px;
-    font-size: 90%;
+    height: 17px;
   }
 
   .preorder-link {
@@ -32,13 +31,13 @@
 
   .dept-item-date {
     color: forestgreen;
-    height: 21px;
+    height: 17px;
   }
   .dept-item-price { color: #e50000; }
 }
 
 h4.dept-heading {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   padding: 0 5px;
   font-size: 135%;
   font-weight: 200;
@@ -46,7 +45,7 @@ h4.dept-heading {
 
 .view-all {
   margin-top: 9px;
-  margin-right: 5px;
+  margin-right: 10px;
   float: right;
 }
 
@@ -54,14 +53,14 @@ h4.dept-heading {
   box-shadow:     2px 2px 3px rgba(0,0,0,0.08);
   //border:         1px solid #dadada;
   border-radius:  0px;
-  margin-bottom:  5px;
+  margin-bottom:  3px;
 }
 
 div.variation-caption{
   position:  absolute;
   left:      0;
   right:     0;
-  width:     105px;
+  width:     95px;
   margin:    0 auto;
   font-size: 80%;
   padding:   4px;
@@ -79,4 +78,10 @@ div.variation-caption{
   color:    white;
   opacity:  0.9;
   //filter:   alpha(opacity=65);
+}
+
+@media(max-width:768px) {
+  .dept-container {
+    border: 0;
+  }
 }
