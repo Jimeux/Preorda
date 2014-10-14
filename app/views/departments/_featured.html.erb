@@ -1,4 +1,4 @@
-<div id="featured" style="text-align:center;height: 145px;overflow: auto;-webkit-overflow-scrolling: touch;">
+<div id="featured" style="height: 145px;overflow: hidden;">
   <% Feature.all.each do |feature| %>
     <div>
       <a href="<%= item_path feature.item_id %>">

@@ -3,7 +3,7 @@
  *= require_self
  */
 
-//@import url(http://fonts.googleapis.com/css?family=Orbitron&text=LaunchBro);
+@import url(http://fonts.googleapis.com/css?family=Orbitron&text=LaunchBro);
 
 $navbar-default-bg:          #f2f2f2;
 $navbar-default-brand-color: #333;
@@ -14,10 +14,10 @@ $navbar-default-border:      #e5e5e5;
 $btn-font-weight:            300;
 $headings-font-weight:       300;
 
-$screen-md: 966px;      // TODO: Work in progress
+$screen-md: 962px;      // TODO: Work in progress
 $screen-sm: 642px;      // Check variables for
 $container-sm: 642px;   // tables, desktop etc
-$container-md: 966px;
+$container-md: 962px;
 $container-lg: $container-md;
 
 @media(max-width: $screen-sm+1) {
