@@ -14,17 +14,17 @@ $navbar-default-border:      #e5e5e5;
 $btn-font-weight:            300;
 $headings-font-weight:       300;
 
-$screen-md: 962px;      // TODO: Work in progress
-$screen-sm: 642px;      // Check variables for
-$container-sm: 642px;   // tables, desktop etc
-$container-md: 962px;
+$screen-md: 960px;      // TODO: Work in progress
+$screen-sm: 640px;      // Check variables for
+$container-sm: 640px;   // tables, desktop etc
+$container-md: 960px;
 $container-lg: $container-md;
 
-@media(max-width: $screen-sm+1) {
+@media(max-width: $screen-sm - 1) {
   .dept-container { border: 0; }
 }
 
-@media(max-width: $screen-sm+1) {
+@media(max-width: $screen-sm) {
   .navbar-form {
     padding: 0 12px;
     border: 0;
@@ -61,7 +61,7 @@ input { box-shadow: none !important; }
 
 .section-heading {
   float:      left;
-  width:      33.3333333%;
+  width:      33.33333333%;
   color:      #ffffff;
   text-align: center;
   padding:    0 !important;
