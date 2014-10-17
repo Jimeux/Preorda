@@ -237,10 +237,8 @@ div#featured div {
  * Media query styles
  */
 
-@media(max-width: $screen-sm - 1) {
-  .styled-container { border: 0; }
-}
 @media(max-width: $screen-sm) {
+  .styled-container { border: 0; }
   .navbar-form {
     padding: 0 12px;
     border:  0;
