@@ -55,9 +55,9 @@ input { box-shadow: none !important; }
  * Media query styles
  */
 
-//@media(max-width: $screen-sm - 1) { //TODO: Testing to see if this is causing
-//  .dept-container { border: 0; }    // the iPhone display issue
-//}
+@media(max-width: $screen-sm - 1) {
+  .dept-container { border: 0; }
+}
 @media(max-width: $screen-sm) {
   .navbar-form {
     padding: 0 12px;
@@ -106,12 +106,17 @@ button#search-button {
  *  Section heading styles (MVG under header)
  */
 
+.sections-wrapper {
+  display:      table;
+  table-layout: fixed;
+  width:        100%;
+}
 .section-heading {
-  float:      left;
-  width:      33.33333333%;
+  display:    table-cell;
+  height:     20px;
   color:      #ffffff;
   text-align: center;
-  padding:    0 !important;
+  //padding:    0 !important;
 
   a {
     padding:         3px;

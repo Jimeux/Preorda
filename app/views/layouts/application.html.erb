@@ -18,14 +18,16 @@
 
   <%= render 'layouts/nav' %>
 
-  <% @departments.each do |dept| %>
-    <div class="section-heading <%= dept.name %>-colour">
-      <a href="<%= department_path(dept) %>">
-        <i class="glyphicon glyphicon-<%= dept.name %>"></i>
-        <span><%= t("dept.#{dept.name}") %></span>
-      </a>
-    </div>
-  <% end %>
+  <div class="sections-wrapper">
+    <% @departments.each do |dept| %>
+      <div class="section-heading <%= dept.name %>-colour">
+        <a href="<%= department_path(dept) %>">
+          <i class="glyphicon glyphicon-<%= dept.name %>"></i>
+          <span><%= t("dept.#{dept.name}") %></span>
+        </a>
+      </div>
+    <% end %>
+  </div>
 
   <div style="display: block;clear: both;">
 
