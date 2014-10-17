@@ -1,4 +1,32 @@
 en:
+  site:
+    brand: "LaunchBro"
+    description: "Browse, follow and find the best prices for the latest new releases in music, video and games."
+    follow_us: "Follow us on"
+
+  search:
+      button: "Go"
+      placeholder: "Search"
+
+  nav:
+    account: "Account"
+    login: "Login"
+    log_out: "Log out"
+    register: "Sign up"
+
+  dept:
+    games: "Games"
+    music: "Music"
+    video: "Video"
+
+    show:
+      select_platform: "Select Platform"
+      select_format: "Select Format"
+
+    index:
+      view_all: "View all"
+      coming_soon: "Coming Soon in %{dept}"
+
   number:
     currency:
       format:

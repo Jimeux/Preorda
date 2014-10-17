@@ -1,59 +1,41 @@
 namespace :graze do
 
-  desc 'Get and insert game data from Amazon'
-  task amazon_games: :environment do
-    grazer = AmazonGameGrazer
-    store  = Store.find_by(name: 'Amazon')
-    dept   = Department.find_by(name: 'Games')
-    ItemCreator.new(grazer, store, dept)
+  desc 'Graze items using these args: s=store d=dept p=pages'
+  task items: :environment do
+    store_name = (ENV['s'] || ENV['store']).downcase
+    dept_name  = (ENV['d'] || ENV['dept']).downcase
+    pages      = (ENV['p'] || ENV['pages']).to_i
+    graze(store_name, dept_name, pages)
   end
 
-  desc 'Get and insert DVD data from Amazon'
-  task amazon_dvds: :environment do
-    grazer = AmazonDVDGrazer
-    store  = Store.find_by(name: 'Amazon')
-    dept   = Department.find_by(name: 'Video')
-    ItemCreator.new(grazer, store, dept)
+  # Amazon convenience tasks
+  task amazon_music: :environment do ; graze('amazon', 'music') end
+  task amazon_games: :environment do ; graze('amazon', 'games') end
+  task amazon_dvds:  :environment do ; graze('amazon', 'video') end
+
+  # Play.com convenience tasks
+  task play_music:   :environment do ; graze('play',   'music') end
+  task play_games:   :environment do ; graze('play',   'games') end
+  task play_dvds:    :environment do ; graze('play',   'video') end
+
+
+  def graze(store_name, dept_name, pages=2)
+    store  = Store.where('lower(name) = ?', store_name.downcase).first
+    dept   = Department.where('lower(name) = ?', dept_name.downcase).first
+    grazer = get_grazer(store_name, dept_name)
+    ItemCreator.new(grazer, store, dept, pages)
   end
 
-  desc 'Get and insert Music data from Amazon'
-    task amazon_music: :environment do
-    grazer = AmazonMusicGrazer
-    store  = Store.find_by(name: 'Amazon')
-    dept   = Department.find_by(name: 'Music')
-    ItemCreator.new(grazer, store, dept)
+  def get_grazer(store_name, dept_name)
+    if store_name == 'amazon'
+      return AmazonDVDGrazer   if dept_name == 'video'
+      return AmazonGameGrazer  if dept_name == 'games'
+      return AmazonMusicGrazer if dept_name == 'music'
+    elsif store_name == 'play'
+      return PlayDVDGrazer     if dept_name == 'video'
+      return PlayGameGrazer    if dept_name == 'games'
+      return PlayMusicGrazer   if dept_name == 'music'
     end
-
-  desc 'Get and insert DVD data from Play.com'
-  task play_dvds: :environment do
-    grazer = PlayDVDGrazer
-    store  = Store.find_by(name: 'Play')
-    dept   = Department.find_by(name: 'Video')
-    ItemCreator.new(grazer, store, dept)
-  end
-
-  desc 'Get and insert music data from Play.com'
-  task play_music: :environment do
-    grazer = PlayMusicGrazer
-    store  = Store.find_by(name: 'Play')
-    dept   = Department.find_by(name: 'Music')
-    ItemCreator.new(grazer, store, dept)
-  end
-
-  desc 'Get and insert game data from Play.com'
-  task play_games: :environment do
-    grazer = PlayGameGrazer
-    store  = Store.find_by(name: 'Play')
-    dept   = Department.find_by(name: 'Games')
-    ItemCreator.new(grazer, store, dept)
-  end
-
-  desc 'Get and insert Music data from iTunes'
-    task itunes_music: :environment do
-    grazer = ItunesMusicChartGrazer
-    store  = Store.find_by(name: 'iTunes')
-    dept   = Department.find_by(name: 'Music')
-    ItemCreator.new(grazer, store, dept)
   end
 
 end
@@ -61,10 +43,11 @@ end
 # This class can be put in a new file
 
 class ItemCreator
-  def initialize(grazer, store, dept)
+  def initialize(grazer, store, dept, pages)
     @grazer = grazer
     @store  = store
     @dept   = dept
+    @pages  = pages
     get_summaries
   end
 
@@ -72,7 +55,7 @@ class ItemCreator
 
   def get_summaries
     puts 'Getting summaries...'
-    data = @grazer.get_summary_data(3)   # TODO: Don't have this hard-coded limit
+    data = @grazer.get_summary_data(@pages)
     puts "Found #{data.size} summaries."
     data.each { |item| process_item(item) }
   end
@@ -86,14 +69,13 @@ class ItemCreator
 
   def update_item(scraped_item, stored_product)
     puts "Updating '#{stored_product.item.title}'"
-
     new_values = scraped_item.slice(:price, :rank)
     stored_product.assign_attributes(new_values)
     stored_product.item.release_date = scraped_item.slice(:release_date)
   end
 
   def create_item(scraped_item)
-    sleep 0.7
+    sleep 0.4
     puts "Creating record for '#{scraped_item[:title]}'"
     puts "    #{scraped_item[:url]}"
 
@@ -106,7 +88,10 @@ class ItemCreator
     attrs[:store_id] = @store.id
 
     item.products.build(attrs)
-    item.description = full_data[:description] if full_data[:description] && item.description.nil?
+
+    if full_data[:description] && item.description.nil?
+      item.description = full_data[:description]
+    end
 
     item.save!
   end

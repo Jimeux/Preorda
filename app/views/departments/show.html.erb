@@ -1,20 +1,23 @@
-<% render 'featured', department: @department %>
+<div class="container styled-container dept-container">
 
-<div class="container dept-container">
-  <div style="padding: 20px 15px 0 15px;font-size: 110%;">
-<!--    <%= form_for @department, method: :get do |f| %>
+  <div id="platform-select-no-js" class="platform-select-container">
+    <%= form_for @department, method: :get do |f| %>
+
       <%= select_tag 'platform', options_for_select(
           @department.platforms.collect{ |p| [p.name, p.id] }),
-                     { prompt: 'Select Platform'} %>
-      <div style="display: inline"><%= f.submit 'GO!' %></div>
+                     { prompt: print_selected_platform(@platform, @department) } %>
+
+      <%= f.submit 'GO!', class: 'btn btn-default btn-xs', style: 'display:inline;' %>
     <% end %>
-    -->
-    <div class="dropdown">
+  </div>
+
+  <div id="platform-select-js" class="dropdown platform-select-container">
+
     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-      <%= params[:platform] ? @department.platforms.find(params[:platform]).name :
-              (@department.name == 'Games' ?  'Select Platform' : 'Select Format') %>
+      <%= print_selected_platform(@platform, @department) %>
       <span class="caret"></span>
     </button>
+
     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
       <% @department.platforms.each do |platform| %>
         <li role="presentation">
@@ -25,10 +28,6 @@
       <% end %>
     </ul>
   </div>
-
-  </div>
-
-
 
   <%= render 'department', department: @department %>
 
@@ -42,4 +41,5 @@
               previous_label: '&laquo;',
               next_label:     '&raquo;'  %>
   </div>
+
 </div>

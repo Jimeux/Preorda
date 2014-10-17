@@ -1,4 +1,4 @@
-<div class="container dept-container" style="max-width: 680px;">
+<div class="container styled-container" style="max-width: 680px;">
   <div class="panel">
     <div class="panel-body">
 
@@ -16,7 +16,7 @@
       </h2>
 
       <h3 class="item-title item-platform">
-        <a class="label label-<%= btn_class(@item) %>" href="<%= department_path(@item.department, platform: @item.platform) %>">
+        <a class="label label-<%= @item.department.name %>" href="<%= department_path(@item.department, platform: @item.platform) %>">
           <%= @item.platform.name %>
         </a>
       </h3>

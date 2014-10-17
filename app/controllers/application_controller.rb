@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   def set_departments
     # Needed on all pages for the section headings and footer
-    @departments ||= Department.includes(:platforms).reverse
+    @departments ||= Department.all
   end
 
 end

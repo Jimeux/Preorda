@@ -1,12 +1,7 @@
-#require 'elasticsearch/model'
-
 class Item < ActiveRecord::Base
-  #include Elasticsearch::Model
-  #include Elasticsearch::Model::Callbacks
-
   extend FriendlyId
 
-  # FriendlyID Settings
+  # --- FriendlyID Settings ---#
 
   friendly_id :title, use: :slugged
 
@@ -19,6 +14,8 @@ class Item < ActiveRecord::Base
     [ :title, [:title, :platform], [:title, :platform, :variation] ]
   end
 
+  # --- Associations ---#
+
   belongs_to  :department
   belongs_to  :platform
   has_many    :products, -> { order(:price) }, dependent: :destroy
@@ -26,17 +23,25 @@ class Item < ActiveRecord::Base
   FRONT_PAGE_LIMIT = 6
 
 
-  # -- Paperclip settings                # TODO: Add a default image
+  # --- Paperclip settings ---#           # TODO: Add a default image
+
   has_attached_file :image,
                     styles: ->(attachment) {
-                      {
-                        show: '450x',
-                        thumb: attachment.instance.set_styles
-                      }
+                      { show: '450x',
+                        thumb: attachment.instance.set_image_styles }
                     },
                     default_url: '/images/:style/missing.png'
-
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+
+  def set_image_styles
+    case department.name
+      when 'Music' then '170x170#'   # 1    ratio
+      when 'Games' then '170x210#'   # 1.25 ratio
+      else '170x240#'                # 1.4  ratio
+    end
+  end
+
+  # --- Scopes ---#
 
   scope :latest, -> {
     includes(:products)
@@ -56,37 +61,15 @@ class Item < ActiveRecord::Base
     .order('items.release_date, items.title')
   }
 
-  def set_styles
-    case department.name
-      when 'Music' then '170x170#'   # 1    ratio
-      when 'Games' then '170x210#'   # 1.25 ratio
-      else '170x240#'                # 1.4  ratio
-      end
-  end
+  # --- Model methods ---#
 
   def lowest_price
     products.first.price
   end
 
+  # Returns one product per store
   def list_products
     products.to_a.uniq(&:store_id)
   end
 
-#  settings index: { number_of_shards: 1 } do
-#    mappings dynamic: 'false' do
-#      indexes :title, analyzer: 'english'
-#      indexes :creator, analyzer: 'english'
-#    end
-#  end
-
 end
-
-# Delete the previous Items index in Elasticsearch
-#Item.__elasticsearch__.client.indices.delete index: Item.index_name rescue nil
-
-# Create the new index with the new mapping
-#Item.__elasticsearch__.client.indices.create index: Item.index_name,
-#  body: { settings: Item.settings.to_hash, mappings: Item.mappings.to_hash }
-
-# Index all Item records from the DB to Elasticsearch
-#Item.import

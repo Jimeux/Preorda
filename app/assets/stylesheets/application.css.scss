@@ -3,8 +3,6 @@
  *= require_self
  */
 
-@import url(http://fonts.googleapis.com/css?family=Orbitron&text=LaunchBro);
-
 $navbar-default-bg:          #f2f2f2;
 $navbar-default-brand-color: #333;
 $navbar-height:              54px;
@@ -14,50 +12,99 @@ $navbar-default-border:      #e5e5e5;
 $btn-font-weight:            300;
 $headings-font-weight:       300;
 
-$screen-md: 960px;      // TODO: Work in progress
-$screen-sm: 640px;      // Check variables for
+$screen-md:    960px;   // TODO: Work in progress
+$screen-sm:    640px;   // Check variables for
 $container-sm: 640px;   // tables, desktop etc
-$container-md: 960px;
+$container-md: 960px;   // and test more thoroughly
 $container-lg: $container-md;
 
-@media(max-width: $screen-sm - 1) {
-  .dept-container { border: 0; }
-}
-
-@media(max-width: $screen-sm) {
-  .navbar-form {
-    padding: 0 12px;
-    border: 0;
-  }
-  .navbar-form .form-group { margin-bottom: 0; }
-}
-
-/* TODO: Follow the steps on the bootstrap-sass GitHub page
+/*
+ * TODO: Follow the steps on the bootstrap-sass GitHub page
  *       to remove unused components when the time comes.
  */
 @import "bootstrap";
 
-* { border-radius: 0 !important; }
+/* TODO: Consider serving this font locally (if legal)
+ * Brand font
+ */
+@import url(http://fonts.googleapis.com/css?family=Orbitron&text=LaunchBro);
 
+/*
+ * Changes to Bootstrap defaults
+ */
+
+* { border-radius: 0 !important; } // Setting the sass var above doesn't work
 body {
-  padding: 55px 0 0 0;
-  font-weight: 300;
+  padding:          55px 0 0 0;
+  font-weight:      300;
   background-color: #f2f2f2;
 }
+input { box-shadow: none !important; }
+.panel {
+  -webkit-box-shadow: none;
+  box-shadow:         none;
+  margin:             0;
+}
+.panel-body, .alert-form {
+  margin: 0;
+  border: 0;
+}
+.dropdown-menu { margin-top: -1px;}
+
+/*
+ * Media query styles
+ */
+
+//@media(max-width: $screen-sm - 1) { //TODO: Testing to see if this is causing
+//  .dept-container { border: 0; }    // the iPhone display issue
+//}
+@media(max-width: $screen-sm) {
+  .navbar-form {
+    padding: 0 12px;
+    border:  0;
+  }
+  .navbar-form .form-group { margin-bottom: 0; }
+}
+
+/*
+ * Navbar styles
+ */
 
 a.navbar-brand {
   font-family: 'Orbitron', sans-serif;
-  font-size: 180%;
-  padding: 21px 10px;
+  font-size:   180%;
+  padding:     21px 10px;
 }
 a.navbar-brand:hover {
   color: $brand-primary !important;
 }
-button.navbar-toggle { border-color: $navbar-default-bg !important; }
+button.navbar-toggle {
+  border-color: $navbar-default-bg !important;
+}
+button.search-toggle {
+  padding: 15px 16px 13px 16px;
+  margin:  2px 0;
+}
+input#q {
+  margin-right: -5px;
+  border-color: #e5e5e5;
+}
+button#search-button {
+  border-color: #e5e5e5;
+  color:        #777777;
+}
+.logout-link {
+  @extend .navbar-link;
 
-input { box-shadow: none !important; }
+  padding:    17px 25px 17px 15px;
+  font-size:  14px;
+  background: none;
+  border:     none;
+}
 
-/*      Section heading icons (under header)    */
+/*
+ *  Section heading styles (MVG under header)
+ */
 
 .section-heading {
   float:      left;
@@ -65,74 +112,84 @@ input { box-shadow: none !important; }
   color:      #ffffff;
   text-align: center;
   padding:    0 !important;
+
   a {
-    padding:    3px;
-    font-size: 90%;
-    display:    inline-block;
-    width:      100%;
-    color:      #ffffff;
+    padding:         3px;
+    font-size:       90%;
+    display:         inline-block;
+    width:           100%;
+    color:           #ffffff;
     text-decoration: none;
-    span { display: none; }
+    span { display:  none; }
   }
+
   a:hover {
     i    { display: none; }
     span { display: block; }
   }
 }
-
-
 .glyphicon-video { @extend .glyphicon-film }
 .glyphicon-games { @extend .glyphicon-phone }
 
-ul.dropdown-menu { margin-top: 0; }
+/*
+ *  Featured items hero styles
+ */
 
 div#featured {
   background-color: black;
-  white-space: nowrap;
-  overflow: hidden;
-  clear: both;
-  padding: 0;
-  margin: 0 -15px;
+  white-space:      nowrap;
+  overflow:         hidden;
+  clear:            both;
+  padding:          0;
+  margin:           0 -15px;
+  height:           145px;
 }
-
 div#featured div {
-  display:  inline;
-  position: relative;
+  display:      inline;
+  position:     relative;
   margin-right: -4px;
-  padding: 0;
+  padding:      0;
 }
 
-.panel {
-  -webkit-box-shadow: none;
-  box-shadow: none;
+/*
+ * Site-wide styles
+ */
+
+.styled-container {
+  margin-bottom:    -20px;
+  padding-bottom:   40px;
+  background-color: #ffffff;
+  border:           1px solid #e5e5e5;
+  border-width:     0 1px;
+  //box-shadow: 0 3px 5px #d7d7d7;
+}
+
+/*
+ * Form and alert styles
+ */
+
+.social-box     { margin-top: 10px;     }
+.form-container { margin-top: 20px;     }
+.control-label  { font-weight: 300;     }
+.btn-bottom     { margin-bottom: -12px; }
+.site-wide-alert {
   margin: 0;
+  border: none;
 }
-
-.panel-body, .alert-form {
-  margin: 0;
-  border: 0;
-}
-
-.social-box { margin-top: 10px; }
-.form-container { margin-top: 20px; }
-.control-label { font-weight: 300; }
-.btn-bottom { margin-bottom: -12px; }
-.site-wide { margin: 0; border: none; }
-
-.half-width {
+.half-width-btn {
   float: left;
   width: 49%;
 }
 
-.dept-panel {
-  margin-bottom:  -20px;
-  border:         0;
-  .panel-body {padding-bottom: 0;}
-}
+/*
+ * will_paginate styles
+ */
 
 .pagination-container {
-  width:      100%;
-  text-align: center;
+  width:         100%;
+  text-align:    center;
+  margin-bottom: -20px;
+
   .disabled span {
     padding-right: 7px;
     padding-left:  7px;
@@ -144,34 +201,44 @@ div#featured div {
   }
 }
 
-.logout-link {
-  @extend .navbar-link;
-
-  padding:    17px 25px 17px 15px;
-  font-size:  14px;
-  background: none;
-  border:     none;
-}
+/*
+ * Footer styles
+ */
 
 .footer {
-  color: #c0c0c0;
-  background-color:#404040;
-  width: 100%;
-  padding: 30px;
-  padding-top: 20px;
-  margin-top: 20px;
-  a { color: #c0c0c0; }
-  a:hover {
-    color: white;
-    text-decoration: none;}
-}
+  color:            #c0c0c0;
+  background-color: #404040;
+  width:            100%;
+  padding:          20px 30px 30px;
+  margin-top:       20px;
 
-.sep {
-  height: 1px;
-  margin-bottom: 8px;
+  a { color:        #c0c0c0; }
+
+  a:hover {
+    color:           white;
+    text-decoration: none;
+  }
+}
+.footer-separator {
+  height:           1px;
+  margin-bottom:    8px;
   background-color: #c0c0c0;
 }
+.footer-social {
+  border-radius: 25px !important;
+  margin-top:    10px;
+}
 
+// Put these at the bottom to avoid them being overridden
+.dept-panel {
+  margin-bottom:  -20px;
+  border:         0;
+  .panel-body { padding-bottom: 0;}
+}
 .music-colour { background-color: $brand-primary; }
-.games-colour { background-color: $brand-danger; }
-.video-colour  { background-color: $brand-success; }
+.games-colour { background-color: $brand-danger;  }
+.video-colour { background-color: $brand-success; }
+
+.label-music  { @extend .label-primary }
+.label-games  { @extend .label-danger  }
+.label-video  { @extend .label-success }

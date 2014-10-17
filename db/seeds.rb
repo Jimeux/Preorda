@@ -3,7 +3,7 @@ names = %w{ Amazon Play }
 names.each { |name| Store.create(name: name) }
 
 # Create departments
-names = %w{ Music Video Games }
+names = %w{ music video games }
 names.each { |name| Department.create(name: name) }
 
 # Create platforms

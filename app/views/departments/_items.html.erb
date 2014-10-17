@@ -1,13 +1,16 @@
 <div class="row">
 
   <% items.each do |item| %>
-    <div class="dept-item col-xs-6 <%= @items ? 'col-sm-3' : 'col-sm-4' %> col-md-2">
+    <%# TODO: @items.present? below checks whether we're on the index or show page %>
+    <div class="dept-item col-xs-6 <%= @items.present? ? 'col-sm-3' : 'col-sm-4' %> col-md-2">
 
       <div>
         <a href="<%= item_path(item) %>">
 
-          <% if item.variation && false %>
-            <div class="variation-caption"><%= item.variation %></div>
+          <% if item.variation %>
+            <div class="variation-caption">
+              <%= item.variation %>
+            </div>
           <% end %>
 
           <%= image_tag item.image(:thumb), class: 'dept-item-img', width: 95 %>
@@ -15,16 +18,22 @@
         </a>
       </div>
 
-      <div class="dept-item-title"><%= print_summary_title(item) %></div>
+      <div class="dept-item-title">
+        <%= print_summary_title(item) %>
+      </div>
 
-      <% if is_in_music_dept? item %>
+      <% if is_in_music_dept?(item) %>
+
         <div class="dept-item-creator text-muted">
-          <%= print_summary_creator item %>
+          <%= print_summary_creator(item) %>
         </div>
+
       <% else %>
+
         <div class="dept-item-creator text-muted">
           <%= item.platform.name if item.platform %>
         </div>
+
       <% end %>
 
       <div class="dept-item-date">

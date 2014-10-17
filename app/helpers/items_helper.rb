@@ -9,16 +9,8 @@ module ItemsHelper
     end
   end
 
-  def btn_class(item)           #TODO: Remove this abomination
-    case item.department.name
-      when 'Games' then return 'danger'
-      when 'Music' then return 'primary'
-      when 'Video' then return 'success'
-    end
-  end
-
   def is_in_music_dept?(item)
-    item.department.name == 'Music'
+    item.department.name == 'music'
   end
 
 end

@@ -1,0 +1,59 @@
+<% #TODO: Uncomment the stuff here when adding sign ups back %>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+
+      <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav-links">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>-->
+
+      <button type="button" class="navbar-toggle search-toggle" data-toggle="collapse" data-target="#main-nav-links">
+        <i class="glyphicon glyphicon-search"></i>
+      </button>
+
+      <a class="navbar-brand" href="<%= root_path %>">
+        <%= t('site.brand') %>
+      </a>
+
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="main-nav-links">
+
+      <ul class="nav navbar-nav navbar-right">
+
+        <% if user_signed_in? %>
+          <li>
+            <a href="<%= edit_user_registration_path %>">
+              <%= t('nav.account') %>
+            </a>
+          </li>
+          <li>
+            <%= form_tag destroy_user_session_path, method: :delete do %>
+              <%= submit_tag t('nav.log_out'), class: 'logout-link' %>
+            <% end %>
+          </li>
+        <% end %>
+        <!--
+        <%# else %>
+          <li><a href="<%#= new_user_registration_path %>"><%#= t('nav.register') %></a></li>
+          <li><a href="<%#= new_user_session_path %>"><%#= t('nav.login') %></a></li>
+        <%# end %>
+        -->
+      </ul>
+
+      <%= form_tag(search_path, method: :get, class: 'navbar-form navbar-right') do %>
+        <input type="text" id="q" name="q" value="<%= params[:q] %>" class="form-control" placeholder="<%=t('search.placeholder')%>">
+        <button type="submit" id="search-button" class="btn btn-default">
+          <%=t('search.button')%>
+        </button>
+      <% end %>
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

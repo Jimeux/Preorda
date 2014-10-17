@@ -1,139 +1,51 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>LaunchBro</title>
-  <meta charset='utf-8' content='text/html' http-equiv='Content-Type'>
-  <meta content='LaunchBro description.' name='Description'>
-  <meta content='width=device-width, initial-scale=1.0' name='viewport'>
-  <meta content='IE=edge' http-equiv='X-UA-Compatible'>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-  <!--[if lt IE 9]>
-    <%= javascript_include_tag 'html5shiv', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'respond.min', 'data-turbolinks-track' => true %>
-  <![endif]-->
-</head>
-<body>
+  <head>
+    <title><%= t('site.brand') %></title>
+    <meta charset='utf-8' content='text/html' http-equiv='Content-Type'>
+    <meta content='LaunchBro description.' name='Description'>
+    <meta content='width=device-width, initial-scale=1.0' name='viewport'>
+    <meta content='IE=edge' http-equiv='X-UA-Compatible'>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <!--[if lt IE 9]>
+      <%= javascript_include_tag 'html5shiv', 'data-turbolinks-track' => true %>
+      <%= javascript_include_tag 'respond.min', 'data-turbolinks-track' => true %>
+    <![endif]-->
+  </head>
+  <body>
 
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav-links">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>-->
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav-links" style="padding: 15px 16px 13px 16px;margin: 2px 0">
-        <i class="glyphicon glyphicon-search"></i>
-      </button>
-      <a class="navbar-brand" href="<%= root_path %>">LaunchBro</a>
-    </div>
+  <%= render 'layouts/nav' %>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="main-nav-links">
-
-<!--      <ul class="nav navbar-nav navbar-right">
-
-        <%# if user_signed_in? %>
-          <li><a href="<%#= edit_user_registration_path %>">Account</a></li>
-          <li>
-            <%#= form_tag destroy_user_session_path, method: :delete do %>
-              <%#= submit_tag 'Log out', class: 'logout-link' %>
-            <%# end %>
-          </li>
-        <%# else %>
-          <li><a href="<%#= new_user_registration_path %>">Register</a></li>
-          <li><a href="<%#= new_user_session_path %>">Login</a></li>
-        <%# end %>
-
-      </ul>-->
-
-      <%= form_tag(search_path, method: :get, class: 'navbar-form navbar-right') do %>
-        <input type="text" name="q" value="<%= params[:q] %>" class="form-control" placeholder="Search" style="margin-right: -5px;border-color: #e5e5e5">
-        <button type="submit" class="btn btn-default" style="border-color: #e5e5e5;color:#777777;">Go</button>
-      <% end %>
-
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
-<% @departments.each do |dept| %>
-    <div class="section-heading <%= dept.name.downcase %>-colour">
+  <% @departments.each do |dept| %>
+    <div class="section-heading <%= dept.name %>-colour">
       <a href="<%= department_path(dept) %>">
-        <i class="glyphicon glyphicon-<%= dept.name.downcase %>"></i>
-        <span><%= dept.name.upcase %></span>
+        <i class="glyphicon glyphicon-<%= dept.name %>"></i>
+        <span><%= t("dept.#{dept.name}") %></span>
       </a>
     </div>
-<% end %>
+  <% end %>
 
-<div style="display: block;clear: both;">
+  <div style="display: block;clear: both;">
 
-<% if notice %>
-  <div class="alert alert-success alert-dismissable site-wide">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <%= notice %>
+  <% if notice.present? %>
+    <div class="alert alert-success alert-dismissable site-wide-alert">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= notice %>
+    </div>
+  <% elsif alert.present? %>
+    <div class="alert alert-danger alert-dismissable site-wide-alert">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= alert %>
+    </div>
+  <% end %>
+
   </div>
-<% elsif alert %>
-  <div class="alert alert-danger alert-dismissable site-wide">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <%= alert %>
-  </div>
-<% end %>
 
-</div>
+  <%= yield %>
 
-<%= yield %>
+  <%= render 'layouts/footer' %>
 
-<div class="footer">
-  <div class="row">
-    <div class="col-sm-3">
-      <h4 class="footer-heading"><a href="<%= root_path %>">LaunchBro</a></h4>
-      <div class="sep"></div>
-      Browse, follow and find the best prices for the latest new releases in music, video and games.
-
-      <br><br>© LaunchBro 2014
-      <%#= link_to 'Login', new_user_session_url %><br>
-      <%#= link_to 'Sign Up', new_user_registration_url %><br>
-    </div>
-
-    <div class="col-sm-3">
-      <% dept = @departments.first %>
-      <h4 class="footer-heading">
-        <a href="<%= department_path(dept) %>"><%= dept.name %></a>
-      </h4>
-      <div class="sep <%= dept.name.downcase %>-colour"></div>
-      <% dept.platforms.each do |platform| %>
-        <%= link_to platform.name, department_path(dept, platform: platform.id) %><br>
-      <% end %>
-      <br>
-    </div>
-
-    <div class="col-sm-3">
-    <% @departments[1..2].each do |dept| %>
-
-        <h4 class="footer-heading">
-          <a href="<%= department_path(dept) %>"><%= dept.name %></a>
-        </h4>
-        <div class="<%= dept.name.downcase %>-colour sep"></div>
-        <% dept.platforms.each do |platform| %>
-          <%= link_to platform.name, department_path(dept, platform: platform.id) %><br>
-        <% end %>
-        <br>
-    <% end %>
-    </div>
-
-    <div class="col-sm-3">
-      <h4 class="footer-heading">Follow us on</h4>
-      <div class="sep"></div>
-      <%= image_tag 'twitter_lg.png',  size: '40x40', style: 'border-radius:25px !important;margin-top:10px;margin-left:5px;margin-right: 10px;' %>
-      <%= image_tag 'facebook_lg.png', size: '40x40', style: 'border-radius:25px !important;margin-top:10px;margin-right: 10px;' %>
-      <%= image_tag 'gplus_lg.png',    size: '40x40', style: 'border-radius:25px !important;margin-top:10px;' %>
-    </div>
-  </div>
-</div>
-
-</body>
+  </body>
 </html>

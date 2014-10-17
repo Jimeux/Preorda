@@ -1,36 +1,36 @@
 .dept-container {
-  margin-bottom: -20px; //TODO: This isn't working on the server
-  padding-bottom: 30px;
-  background-color: #ffffff;
-  border: 1px solid #e5e5e5;
-  border-width: 0 1px;
-  //box-shadow: 0 3px 5px #d7d7d7;
+  padding-top: 20px;
 }
-
+.platform-select-container {
+  margin-left: 15px;
+}
+#platform-select-js {
+  display: none;
+}
 .dept-item {
-  text-align: center;
-  float: left;
+  text-align:    center;
+  float:         left;
   margin-bottom: 15px;
-  font-size: 95%;
+  font-size:     95%;
 
   .dept-item-title {
-    height: 17px;
-    overflow: hidden;
+    height:     17px;
+    overflow:   hidden;
     margin-top: 2px;
   }
 
   .dept-item-creator {
     font-weight: 200;
-    height: 17px;
+    height:      17px;
   }
 
   .preorder-link {
-    color:            steelblue;
-    text-decoration:  none;
+    color:           steelblue;
+    text-decoration: none;
   }
 
   .dept-item-date {
-    color: forestgreen;
+    color:  forestgreen;
     height: 18px;
   }
   .dept-item-price { color: #e50000; }
@@ -38,20 +38,19 @@
 
 h4.dept-heading {
   margin-bottom: 20px;
-  padding: 0 5px;
-  font-size: 135%;
-  font-weight: 200;
+  padding:       0 5px;
+  font-size:     135%;
+  font-weight:   200;
 }
 
 .view-all {
-  margin-top: 9px;
+  margin-top:   9px;
   margin-right: 10px;
-  float: right;
+  float:        right;
 }
 
 .dept-item-img {
   box-shadow:     2px 2px 3px rgba(0,0,0,0.08);
-  //border:         1px solid #dadada;
   border-radius:  0px;
   margin-bottom:  3px;
 }
@@ -67,13 +66,11 @@ div.variation-caption{
   overflow:  hidden;
 
   /* styling */
-  // TODO: Make these styles sexier
-  /* webkit example */
+  // TODO: Make these styles sexier and cross-browser
   background-image: -webkit-gradient(
                   linear, left top, left bottom, from(rgba(50,50,50,0.7)),
                   to(rgba(100,150,240,0.1)), color-stop(.4,#333333)
   );
-  //background-color: steelblue;
   color:    white;
   opacity:  0.9;
   //filter:   alpha(opacity=65);

@@ -12,4 +12,14 @@ module DepartmentsHelper
       item.creator
   end
 
+  def print_selected_platform(platform, dept)
+    if platform.present?
+      platform.name
+    else
+      dept.name == 'games' ?
+          t('dept.show.select_platform') :
+          t('dept.show.select_format')
+    end
+  end
+
 end
