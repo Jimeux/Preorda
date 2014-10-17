@@ -13,7 +13,7 @@
             </div>
           <% end %>
 
-          <%= image_tag item.image(:thumb), class: 'dept-item-img', width: 95 %>
+          <%= image_tag item.image(:thumb), class: 'dept-item-img', width: 95, height: thumb_height_for(item.department) %>
 
         </a>
       </div>

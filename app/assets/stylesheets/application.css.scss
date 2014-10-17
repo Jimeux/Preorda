@@ -52,21 +52,6 @@ input { box-shadow: none !important; }
 .dropdown-menu { margin-top: -1px;}
 
 /*
- * Media query styles
- */
-
-@media(max-width: $screen-sm - 1) {
-  .dept-container { border: 0; }
-}
-@media(max-width: $screen-sm) {
-  .navbar-form {
-    padding: 0 12px;
-    border:  0;
-  }
-  .navbar-form .form-group { margin-bottom: 0; }
-}
-
-/*
  * Navbar styles
  */
 
@@ -247,3 +232,18 @@ div#featured div {
 .label-music  { @extend .label-primary }
 .label-games  { @extend .label-danger  }
 .label-video  { @extend .label-success }
+
+/*
+ * Media query styles
+ */
+
+@media(max-width: $screen-sm - 1) {
+  .styled-container { border: 0; }
+}
+@media(max-width: $screen-sm) {
+  .navbar-form {
+    padding: 0 12px;
+    border:  0;
+  }
+  .navbar-form .form-group { margin-bottom: 0; }
+}

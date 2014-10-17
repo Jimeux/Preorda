@@ -18,7 +18,7 @@
       <%= t('dept.index.coming_soon', dept: t("dept.#{department.name}")) %>
     </h4>
 
-    <%= render 'items', items: (@items || department.items) %>
+    <%= render 'items', items: (@items || department.items) if (@items || department.items) %>
 
   </div>  <!-- panel-body -->
 </div>    <!-- panel      -->

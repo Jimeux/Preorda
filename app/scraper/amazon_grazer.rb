@@ -49,7 +49,9 @@ class AmazonGrazer
     variation = variation.blank? && page.at('.a-size-medium.a-color-secondary.a-text-normal') ?
                   page.at('.a-size-medium.a-color-secondary.a-text-normal').text :
                   nil
-    variation
+    if variation
+      variation.gsub(/,? ?Explicit Lyrics/, '')
+    end
   end
 
   def self.get_image_url(page)

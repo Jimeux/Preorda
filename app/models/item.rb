@@ -34,9 +34,9 @@ class Item < ActiveRecord::Base
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   def set_image_styles
-    case department.name
-      when 'Music' then '170x170#'   # 1    ratio
-      when 'Games' then '170x210#'   # 1.25 ratio
+    case department.name.downcase
+      when 'music' then '170x170#'   # 1    ratio
+      when 'games' then '170x210#'   # 1.25 ratio
       else '170x240#'                # 1.4  ratio
     end
   end

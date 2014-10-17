@@ -47,16 +47,18 @@ gem 'mechanize'
 group :development do
   gem 'spring'
   gem 'spring-commands-rspec'
-  gem 'rspec-rails'
-  gem 'capybara'
   # Deployment
   gem 'capistrano-rbenv',   github: 'capistrano/rbenv'
   gem 'capistrano-bundler', github: 'capistrano/bundler'
   gem 'capistrano-rails'
 end
 
-group :test do
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0.0'
+  gem 'ffaker'
+  gem 'site_prism'
   gem 'factory_girl_rails'
+  gem 'capybara'
   gem 'launchy'
   #gem 'simplecov', :require => false  # Test coverage
 end
