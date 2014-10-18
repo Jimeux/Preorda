@@ -4,11 +4,13 @@ class SearchController < ApplicationController
     #   [] : Item.search("*#{params[:q].gsub(/[~*]/,'')}*").records
     if params[:q].blank?
       #TODO: Do validations checking
+      @items = []
+      return
     end
 
     query_param = "%#{params[:q]}%"
-    @items = Item.where('title ILIKE ? OR creator ILIKE ?',
-                        query_param,
-                        query_param)
+    @items = Item.where('title ILIKE ? OR creator ILIKE ?', query_param, query_param)
+
+    @items = @items.paginate(page: params[:page], per_page: 24)
   end
 end
