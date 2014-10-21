@@ -44,6 +44,7 @@ end
 
 class ItemCreator
   def initialize(grazer, store, dept, pages)
+    @aLinker = AffiliateLinker.new
     @grazer = grazer
     @store  = store
     @dept   = dept
@@ -86,6 +87,8 @@ class ItemCreator
     attrs = full_data.slice(:url, :rank, :price, :asin)
     attrs.merge!(scraped_item.slice(:rank))
     attrs[:store_id] = @store.id
+
+    attrs[:url] = @aLinker.getAffiliateLink(@store.name, attrs[:url])
 
     item.products.build(attrs)
 
