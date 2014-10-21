@@ -1,56 +1,26 @@
 <div class="container styled-container">
-  <div class="row">
 
-    <% @items.each do |item| %>
-      <div class="dept-item col-xs-6 col-sm-3 col-md-2">
+  <div class="panel dept-panel">
 
-        <div>
-          <a href="<%= item_path(item) %>">
+    <div class="panel-body">
 
-            <% if item.variation %>
-              <div class="variation-caption"><%= item.variation %></div>
-            <% end %>
+      <h4 class="dept-heading">
+        <%= page_entries_info(@items, {}) %>
+      </h4>
 
-            <%= image_tag item.image(:thumb), class: 'dept-item-img', width: 95 %>
+      <%= render 'departments/items', items: @items %>
 
-          </a>
-        </div>
-
-        <div class="dept-item-title">
-          <%= print_summary_title(item) %>
-        </div>
-
-        <% if is_in_music_dept? item %>
-          <div class="dept-item-creator text-muted">
-            <%= print_summary_creator item %>
-          </div>
-        <% else %>
-          <div class="dept-item-creator text-muted">
-            <%= item.platform.name if item.platform %>
-          </div>
-        <% end %>
-
-        <div class="dept-item-date">
-          <%= print_time_to_release(item) %>
-        </div>
-
-        <div class="dept-item-price">
-          <%= item.lowest_price > 0 ? number_to_currency(item.lowest_price) : '-' %>
-        </div>
-
-      </div>
-    <% end %>
-
-  </div><!-- row -->
+    </div>
+  </div>
 
   <br>
 
   <div class="pagination-container">
       <%= will_paginate @items,
                         renderer:       BootstrapPagination::Rails,
-                  inner_window:   1,
-          outer_window:   0,
-          previous_label: '&laquo;',
-          next_label:     '&raquo;'  %>
+                        inner_window:   1,
+                        outer_window:   0,
+                        previous_label: '&laquo;',
+                        next_label:     '&raquo;'  %>
   </div>
 </div>
