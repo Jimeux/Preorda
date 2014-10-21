@@ -6,6 +6,7 @@ require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/rspec'
 require 'site_prism'
+require 'webmock/rspec'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -48,7 +49,7 @@ RSpec.configure do |config|
   config.include Rails.application.routes.url_helpers
 
   # FactoryGirl
-  config.include FactoryGirl::Syntax::Methods
+  #config.include FactoryGirl::Syntax::Methods
 
   config.before(:suite) do
     load "#{Rails.root}/db/seeds.rb"

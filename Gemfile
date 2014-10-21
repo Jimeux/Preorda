@@ -55,11 +55,15 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
-  gem 'ffaker'
-  gem 'site_prism'
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'launchy'
+end
+
+group :test do
+  gem 'webmock'
+  gem 'ffaker'
+  gem 'site_prism'
   #gem 'simplecov', :require => false  # Test coverage
 end
 

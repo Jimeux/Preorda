@@ -2,7 +2,7 @@ require 'mechanize'
 
 module Grazer
 
-  # Cache an instance of Mechanize for retrieving web pages
+  # Cache an instance of Mechanize for retrieving web page_objects
   def agent
     @agent ||= Mechanize.new do |agent|
       agent.user_agent_alias = 'Mac Safari'
