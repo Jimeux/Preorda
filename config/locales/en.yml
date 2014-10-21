@@ -27,6 +27,19 @@ en:
       view_all: "View all"
       coming_soon: "Coming Soon in %{dept}"
 
+  will_paginate:
+      page_entries_info:
+        single_page:
+          zero:  "No results found"
+          one:   "Displaying 1 result"
+          other: "Displaying all %{count} results"
+        single_page_html:
+          zero:  "No results found"
+          one:   "1 result found"
+          other: "Displaying all&nbsp;%{count} results"
+        multi_page: "%{count} results found (showing %{from}&nbsp;-&nbsp;%{to})"
+        multi_page_html: "%{count} results found (showing %{from}&nbsp;-&nbsp;%{to})"
+
   number:
     currency:
       format:

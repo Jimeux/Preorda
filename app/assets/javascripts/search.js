@@ -10,7 +10,7 @@ var searchGoEvent = function(e)
     e.preventDefault();
     var qString = $qInput.val().trim();
 
-    if(qString.length != 0)
+    if(qString.length != 0 && qString.length >= 3)
     {
         $searchForm.submit();
     }

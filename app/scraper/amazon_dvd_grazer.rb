@@ -1,9 +1,16 @@
 class AmazonDVDGrazer < AmazonGrazer
 
-  DVD_TOP_URL = 'http://www.amazon.co.uk/s/ref=s9_al_bw_srch?rh=n%3A283926%2Cp_69%3A1y-%2Cp_n_binding_browse-bin%3A383381011&page=1&bbn=283926&rw_html_to_wsrp=1&pf_rd_m=A3P5ROKL5A1OLE&pf_rd_s=center-3&pf_rd_r=1T98JGJZQWGH3QMR0GG0&pf_rd_t=101&pf_rd_p=509179087&pf_rd_i=573412'
+  def self.top_url
+    'http://www.amazon.co.uk/s/ref=s9_al_bw_srch?rh=n%3A283926%2Cp_69%3A1y-%2Cp_n_binding_browse-bin%3A383381011&page=1&bbn=283926&rw_html_to_wsrp=1&pf_rd_m=A3P5ROKL5A1OLE&pf_rd_s=center-3&pf_rd_r=1T98JGJZQWGH3QMR0GG0&pf_rd_t=101&pf_rd_p=509179087&pf_rd_i=573412'
+  end
+
+  # @Override
+  def self.get_platform(page)
+    'DVD'
+  end
 
   def self.get_summary_data(limit)
-    page_url = DVD_TOP_URL  # Start on the first page
+    page_url = top_url # Start on the first page
     summary_data = []
 
     limit.times do   # Put in a limit for now to avoid too many requests

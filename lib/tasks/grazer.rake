@@ -5,24 +5,26 @@ namespace :graze do
     store_name = (ENV['s'] || ENV['store']).downcase
     dept_name  = (ENV['d'] || ENV['dept']).downcase
     pages      = (ENV['p'] || ENV['pages']).to_i
-    graze(store_name, dept_name, pages)
+    #graze(store_name, dept_name, pages)
   end
 
   # Amazon convenience tasks
-  task amazon_music: :environment do ; graze('amazon', 'music') end
-  task amazon_games: :environment do ; graze('amazon', 'games') end
-  task amazon_dvds:  :environment do ; graze('amazon', 'video') end
+  task amazon_music:  :environment do ; graze('amazon', 'music', AmazonMusicGrazer)  end
+  task amazon_games:  :environment do ; graze('amazon', 'games', AmazonGameGrazer)   end
+  task amazon_dvds:   :environment do ; graze('amazon', 'video', AmazonDVDGrazer)    end
+  task amazon_bluray: :environment do ; graze('amazon', 'video', AmazonBlurayGrazer) end
 
   # Play.com convenience tasks
-  task play_music:   :environment do ; graze('play',   'music') end
-  task play_games:   :environment do ; graze('play',   'games') end
-  task play_dvds:    :environment do ; graze('play',   'video') end
+  task play_music:    :environment do ; graze('play',   'music', PlayMusicGrazer)    end
+  task play_games:    :environment do ; graze('play',   'games', PlayGameGrazer)     end
+  task play_dvds:     :environment do ; graze('play',   'video', PlayDVDGrazer)      end
+  task play_bluray:   :environment do ; graze('play',   'video', PlayBlurayGrazer)   end
 
 
-  def graze(store_name, dept_name, pages=2)
+  def graze(store_name, dept_name, grazer, pages=2)
     store  = Store.where('lower(name) = ?', store_name.downcase).first
     dept   = Department.where('lower(name) = ?', dept_name.downcase).first
-    grazer = get_grazer(store_name, dept_name)
+    #grazer = get_grazer(store_name, dept_name)
     ItemCreator.new(grazer, store, dept, pages)
   end
 
