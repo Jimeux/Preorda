@@ -19,6 +19,8 @@ class AffiliateLinker
   end
 
   def process_affiliate_url_params(url, link_id)
+
+    final_url = nil
     if @affiliate.affiliate_url != nil
       final_url = @affiliate.affiliate_url
     else
@@ -58,7 +60,7 @@ class AffiliateLinker
     ends_with_q_mark = final_url.ends_with?('?')
     ends_with_ampersand = final_url.ends_with?('&')
 
-    (ends_with_q_mark || ends_with_ampersand) ?
+    final_url += (ends_with_q_mark || ends_with_ampersand) ?
         url_param_string : '&' + url_param_string
   end
 
