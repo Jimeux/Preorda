@@ -77,6 +77,11 @@ input#q {
 button#search-button {
   border-color: #e5e5e5;
   color:        #777777;
+  text-decoration: none;
+}
+button#search-button:focus {
+  outline-width:  2px;  //TODO: Style other button/input outlines
+  outline-offset: -3px;
 }
 .logout-link {
   @extend .navbar-link;
@@ -232,6 +237,10 @@ div#featured div {
 .label-music  { @extend .label-primary }
 .label-games  { @extend .label-danger  }
 .label-video  { @extend .label-success }
+
+.btn-play     { @extend .btn-danger  }
+.btn-amazon   { @extend .btn-warning }
+.btn-itunes   { @extend .btn-info    }
 
 /*
  * Media query styles

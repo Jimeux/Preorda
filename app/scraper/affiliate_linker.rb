@@ -3,68 +3,63 @@ require 'uri'
 class AffiliateLinker
   @affiliate
 
-  def getAffiliateLink(storeName, url, linkId = nil)
+  def get_affiliate_link(store_name, url, link_id = nil)
 
-    if @affiliate.nil? || @affiliate.name != storeName
-      @affiliate = Store.find_by_name(storeName)
+    if @affiliate.nil? || @affiliate.name != store_name
+      @affiliate = Store.find_by_name(store_name)
     end
 
     #find if url contains the store domain
     if url.include? @affiliate.domain
-      url = processAffiliateURLParams(url, linkId)
+      url = process_affiliate_url_params(url, link_id)
     end
 
     #return url untouched if it doesn't contain the store domain
-    return url
-
+    url
   end
 
-  def processAffiliateURLParams(url, linkId)
-
-    finalUrl = nil
-
+  def process_affiliate_url_params(url, link_id)
     if @affiliate.affiliate_url != nil
-      finalUrl = @affiliate.affiliate_url
+      final_url = @affiliate.affiliate_url
     else
-      finalUrl = url
+      final_url = url
     end
 
-    urlParams = @affiliate.url_parameters
+    url_params = @affiliate.url_parameters
 
-    urlParamString = ''
+    url_param_string = ''
 
-    urlParams.each{ |urlParam|
+    url_params.each do |url_param|
 
-      if urlParamString != ''
-        urlParamString += '&'
+      if url_param_string != ''
+        url_param_string += '&'
       end
 
-      urlParamString += urlParam.name
-      urlParamString+= '='
+      url_param_string += url_param.name
+      url_param_string += '='
 
-      if urlParam.value == '<product_website>'
-        urlParamString += CGI::escape(url)
-      elsif urlParam.value == '<product_id>'
+      if url_param.value == '<product_website>'
+        url_param_string += CGI::escape(url)
+      elsif url_param.value == '<product_id>'
         #generate a random id for links without an id given
-        urlParamString += CGI::escape( (linkId.nil?)? SecureRandom.hex(4) : linkId)
+        url_param_string +=
+            CGI::escape((link_id.nil?) ? SecureRandom.hex(4) : link_id)
       else
-        urlParamString += urlParam.value
+        url_param_string += url_param.value
       end
 
-    }
-    puts urlParamString
+    end
+    puts url_param_string
 
-    containsQMark = finalUrl.include?('?')
+    contains_q_mark = final_url.include?('?')
 
-    finalUrl += (containsQMark == true)? '': '?'
+    final_url += contains_q_mark ? '' : '?'
 
-    endsWithQMark = finalUrl.ends_with?('?')
-    endsWithAmpersand = finalUrl.ends_with?('&')
+    ends_with_q_mark = final_url.ends_with?('?')
+    ends_with_ampersand = final_url.ends_with?('&')
 
-    finalUrl += (endsWithQMark == true || endsWithAmpersand == true)? urlParamString : '&'+urlParamString
-
-    return finalUrl
-
+    (ends_with_q_mark || ends_with_ampersand) ?
+        url_param_string : '&' + url_param_string
   end
 
 end

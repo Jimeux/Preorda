@@ -6,6 +6,8 @@ class Department < ActiveRecord::Base
 
   default_scope -> { includes(:platforms).order('id ASC') }
 
+  validates_uniqueness_of :name
+
   def to_param # TODO: temporary pretty URL solution. Renders: /1-games/
     "#{id} #{name.downcase}".parameterize
   end

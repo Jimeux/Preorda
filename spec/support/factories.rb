@@ -9,12 +9,13 @@ FactoryGirl.define do
   end
 
   factory :platform do
-    department
+    association :department
     sequence(:name)  { |n| "Platform #{n}" }
   end
 
   factory :item do
-    department
+    association :department
+    association :platform
     sequence(:title)       { |n| "Title   #{n}" }
     sequence(:creator)     { |n| "Creator #{n}" }
     sequence(:description) { |n| "Description #{n}"}
@@ -22,8 +23,8 @@ FactoryGirl.define do
   end
 
   factory :product do
-    item
-    store
+    association :item
+    association :store
     url 'http://site.com/item'
     price 9.99
     asin 'B00NPZI1ZS'

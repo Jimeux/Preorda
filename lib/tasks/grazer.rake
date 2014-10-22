@@ -20,6 +20,8 @@ namespace :graze do
   task play_dvds:     :environment do ; graze('play',   'video', PlayDVDGrazer)      end
   task play_bluray:   :environment do ; graze('play',   'video', PlayBlurayGrazer)   end
 
+  # iTunes convenience tasks
+  task itunes_music:  :environment do ; graze('itunes', 'music', ItunesMusicGrazer)  end
 
   def graze(store_name, dept_name, grazer, pages=2)
     store  = Store.where('lower(name) = ?', store_name.downcase).first
@@ -46,7 +48,7 @@ end
 
 class ItemCreator
   def initialize(grazer, store, dept, pages)
-    @aLinker = AffiliateLinker.new
+    @linker = AffiliateLinker.new
     @grazer = grazer
     @store  = store
     @dept   = dept
@@ -57,7 +59,7 @@ class ItemCreator
   private
 
   def get_summaries
-    puts 'Getting summaries...'
+    puts "Getting summaries from #{@pages} pages..."
     data = @grazer.get_summary_data(@pages)
     puts "Found #{data.size} summaries."
     data.each { |item| process_item(item) }
@@ -86,19 +88,23 @@ class ItemCreator
 
     item = get_item(full_data, scraped_item)
 
+    build_product(item, scraped_item, full_data)
+
+    item.save!
+  end
+
+  def build_product(item, scraped_item, full_data)
     attrs = full_data.slice(:url, :rank, :price, :asin)
     attrs.merge!(scraped_item.slice(:rank))
     attrs[:store_id] = @store.id
 
-    attrs[:url] = @aLinker.getAffiliateLink(@store.name, attrs[:url])
+    attrs[:url] = @linker.get_affiliate_link(@store.name, attrs[:url])
 
     item.products.build(attrs)
 
     if full_data[:description] && item.description.nil?
       item.description = full_data[:description]
     end
-
-    item.save!
   end
 
   def get_item(data, summary)

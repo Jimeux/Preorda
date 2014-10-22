@@ -3,4 +3,6 @@ class Store < ActiveRecord::Base
   has_many :url_parameters
 
   default_scope -> { includes(:url_parameters).order('id ASC') }
+
+  validates_uniqueness_of :name
 end
