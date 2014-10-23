@@ -1,7 +1,8 @@
 FactoryGirl.define do
 
   factory :store do
-    name 'Amazon'
+    name 'TestStore'
+    domain 'teststore.com'
   end
 
   factory :department do

@@ -32,14 +32,10 @@ store_records = [
         domain:        'zavvi.com',
         affiliate:     'Affiliate Window',
         affiliate_url: 'http://www.awin1.com/cread.php?',
-        url_params:    [{
-                            name:  'awinmid',
-                            value: '1234'
-                        },
+        url_params:    [{ name:  'awinmid',  value: '1234' },
                         { name: 'awinaffid', value: '123456' },
-                        { name: 'clickref', value: '<product_id>' },
-                        { name: 'p', value: '<product_website>' }
-                       ]
+                        { name: 'clickref',  value: '<product_id>' },
+                        { name: 'p',         value: '<product_website>' } ]
     }
 ]
 
@@ -47,8 +43,10 @@ store_records.each do |store_record|
   store = Store.create(
       store_record.slice(:name, :domain, :affiliate, :affiliate_url))
 
-  store_record[:url_params].each do |url_param|
-    store.url_parameters.create(url_param)
+  if store.persisted?
+    store_record[:url_params].each do |url_param|
+      store.url_parameters.create(url_param)
+    end
   end
 end
 

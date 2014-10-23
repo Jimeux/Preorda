@@ -27,6 +27,13 @@ en:
       view_all: "View all"
       coming_soon: "Coming Soon in %{dept}"
 
+  item:
+    release:
+      today: "Out today"
+      past: "Out now"
+      future: "%{time_left} left"
+      tbc: "TBC"
+
   will_paginate:
       page_entries_info:
         single_page:

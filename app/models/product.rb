@@ -15,25 +15,28 @@ class Product < ActiveRecord::Base
 
   def process_affiliate_params(url)
     uri = URI.parse(url)
+
     existing_params  = uri.query ? URI.decode_www_form(uri.query) : []
     affiliate_params = store.url_parameters.pluck(:name, :value)
-
     params = (existing_params + affiliate_params).to_h
-    affiliate_window_setup(params)
 
     uri.query = URI.encode_www_form(params) unless params.empty?
     uri.to_s
   end
 
-  def affiliate_window_setup(params)
-    if params['<product_website>']
-      params['<product_website>'] += CGI::escape(url)
+  # This method will take a URL like http://store.com/product
+  # and return http://affiliate.com?referrer=http://store.com/product
+  def affiliate_window_setup(uri, params)
+    product_website = params.key('<product_website>')
+    params[product_website] = CGI::escape(url) if product_website
+
+    product_id = params.key('<product_id>')
+    if product_id
+      link_id = SecureRandom.hex(4) unless link_id
+      params[product_id] = CGI::escape(link_id)
     end
 
-    if params['<product_id>']
-      link_id = SecureRandom.hex(4) unless link_id
-      params['<product_id>'] += CGI::escape(link_id)
-    end
+    uri
   end
 
 end

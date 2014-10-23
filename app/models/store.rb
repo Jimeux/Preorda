@@ -5,4 +5,5 @@ class Store < ActiveRecord::Base
   default_scope -> { includes(:url_parameters).order('id ASC') }
 
   validates_uniqueness_of :name
+  validates_presence_of   :domain
 end

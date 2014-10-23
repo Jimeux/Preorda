@@ -3,15 +3,20 @@ class Item < ActiveRecord::Base
 
   # --- FriendlyID Settings ---#
 
-  friendly_id :title, use: :slugged
+  friendly_id :slug_candidates, use: :slugged
 
-  def should_generate_new_friendly_id?
-    # TODO: Set this to something reasonable for production
-    true
-  end
+  #def should_generate_new_friendly_id? ; true end
 
-  def slug_candidates       #TODO: Make this work
-    [ :title, [:title, :platform], [:title, :platform, :variation] ]
+  def slug_candidates
+    if variation.nil?
+      [ :title,
+        [:title, :platform_id]
+      ]
+    else
+      [ [:title, :variation],
+        :title
+      ]
+    end
   end
 
   # --- Associations ---#
