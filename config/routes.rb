@@ -4,11 +4,22 @@ Rails.application.routes.draw do
 
   resources :departments, only: [:index, :show]
 
-  resources :features
+  class DeptUrlConstrainer
+    def matches?(request)
+      dept_name = request.path.split('/')
+        .reject(&:blank?).first
+      dept_name =~ /music|video|games/
+    end
+  end
 
-  resources :items,       only: [:index, :show]
+  constraints(DeptUrlConstrainer.new) do
+    match '/:id', to: 'departments#show', via: :get, as: 'short_dept'
+    match '/:id/:platform', to: 'departments#show', via: :get, as: 'short_plat'
+  end
 
-  get 'search', to: 'search#search', as: 'search'
+  resources :items, path: 'preorders', only: [:index, :show]
+
+  get '/search', to: 'search#search', as: 'search'
 
   namespace :admin do
     resources :items

@@ -23,7 +23,7 @@
     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
       <% @department.platforms.each do |platform| %>
         <li role="presentation">
-          <a role="menuitem" tabindex="-1" href="<%= department_path(@department, platform: platform.id) %>">
+          <a role="menuitem" tabindex="-1" href="<%= short_plat_path(@department, platform: platform.friendly_id) %>">
             <%= platform.name %>
           </a>
         </li>

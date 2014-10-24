@@ -28,17 +28,17 @@ module Grazer
     return if platform.nil?
 
     case platform.downcase.delete(' ')
-      when /nintendo3ds|3ds/        then return 'Nintendo 3DS'
-      when /2ds|nintendo2ds/        then return 'Nintendo 2DS'
-      when /ds|nintendods/          then return 'Nintendo DS'
-      when 'nintendowii'            then return 'Nintendo Wii'
-      when /wiiu|nintendowiiu/      then return 'Nintendo Wii U'
-      when 'playstation3'           then return 'PlayStation 3'
-      when /psvita|playstationvita/ then return 'PlayStation Vita'
-      when 'playstation4'           then return 'PlayStation 4'
-      when 'xboxone'                then return 'Xbox One'
-      when 'xbox360'                then return 'Xbox 360'
-      when /windows|pc|pcgames/     then return 'PC'
+      when /nintendo3ds|3ds/           then return 'Nintendo 3DS'
+      when /2ds|nintendo2ds/           then return 'Nintendo 2DS'
+      when /ds|nintendods/             then return 'Nintendo DS'
+      when 'nintendowii'               then return 'Nintendo Wii'
+      when /wiiu|nintendowiiu/         then return 'Nintendo Wii U'
+      when 'playstation3'              then return 'PlayStation 3'
+      when /psvita|playstationvita/    then return 'PlayStation Vita'
+      when 'playstation4'              then return 'PlayStation 4'
+      when 'xboxone'                   then return 'Xbox One'
+      when 'xbox360'                   then return 'Xbox 360'
+      when /windows|pc|pcgames|macosx|mac/ then return 'PC' #TODO: Update to be PC & Mac
       else puts 'Could not extract a platform.'
     end
   end

@@ -6,13 +6,13 @@ class DepartmentsController < ApplicationController
   end
 
   def show
-    @department = Department.includes(:platforms).find(params[:id])
-    @platform   = @department.platforms.find(params[:platform]) if params[:platform]
+    @department = Department.includes(:platforms).friendly.find(params[:id])
+    @platform   = @department.platforms.friendly.find(params[:platform]) if params[:platform]
 
     # Create an instance var to allow pagination of the items association
     @items = @department.preview_items.paginate(
         page: params[:page], per_page: 24)
-    @items = @items.where(platform: params[:platform]) if params[:platform]
+    @items = @items.where(platform: @platform) if @platform
   end
 
 end

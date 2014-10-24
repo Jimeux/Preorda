@@ -16,13 +16,13 @@
       </h2>
 
       <h2 class="item-title item-icon">
-        <a href="<%= department_path(@item.department) %>">
+        <a href="<%= short_dept_path(@item.department) %>">
           <i class="glyphicon glyphicon-<%= @item.department.name.downcase %>"></i>
         </a>
       </h2>
 
       <h3 class="item-title item-platform">
-        <a class="label label-<%= @item.department.name %>" href="<%= department_path(@item.department, platform: @item.platform) %>">
+        <a class="label label-<%= @item.department.name %>" href="<%= short_plat_path(@item.department, platform: @item.platform) %>">
             <%= @item.platform.name if @item.platform %>
         </a>
       </h3>

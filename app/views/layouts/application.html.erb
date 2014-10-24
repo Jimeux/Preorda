@@ -22,7 +22,7 @@
   <div class="sections-wrapper">
     <% @departments.each do |dept| %>
       <div class="section-heading <%= dept.name %>-colour">
-        <a href="<%= department_path(dept) %>">
+        <a href="<%= short_dept_path(dept) %>">
           <i class="glyphicon glyphicon-<%= dept.name %>"></i>
           <span><%= t("dept.#{dept.name}") %></span>
         </a>

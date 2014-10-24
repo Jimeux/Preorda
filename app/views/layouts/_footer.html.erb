@@ -14,13 +14,13 @@
     <div class="col-sm-3">
       <% games = @departments.detect {|d| d[:name].downcase == 'games' } %>
       <h4 class="footer-heading">
-        <a href="<%= department_path(games) %>">
+        <a href="<%= short_dept_path(games) %>">
           <%= t("dept.#{games.name}") %>
         </a>
       </h4>
       <div class="footer-separator <%= games.name.downcase %>-colour"></div>
       <% games.platforms.each do |platform| %>
-        <%= link_to platform.name, department_path(games, platform: platform.id) %><br>
+        <%= link_to platform.name, short_plat_path(games, platform: platform.friendly_id) %><br>
       <% end %>
       <br>
     </div>
@@ -28,11 +28,11 @@
     <div class="col-sm-3">
       <% @departments.select {|d| d[:name].downcase != 'games' }.each do |dept| %>
         <h4 class="footer-heading">
-          <a href="<%= department_path(dept) %>"><%= t("dept.#{dept.name}") %></a>
+          <a href="<%= short_dept_path(dept) %>"><%= t("dept.#{dept.name}") %></a>
         </h4>
         <div class="<%= dept.name.downcase %>-colour footer-separator"></div>
         <% dept.platforms.each do |platform| %>
-          <%= link_to platform.name, department_path(dept, platform: platform.id) %><br>
+          <%= link_to platform.name, short_plat_path(dept, platform: platform.friendly_id) %><br>
         <% end %>
         <br>
       <% end %>
