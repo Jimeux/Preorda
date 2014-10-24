@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= t('site.brand') %></title>
+    <title><%= "#{yield(:title)} | " unless yield(:title).blank? %><%= t('site.brand') %></title>
     <meta charset='utf-8' content='text/html' http-equiv='Content-Type'>
-    <meta content='LaunchBro description.' name='Description'>
+    <meta name="keywords" content="<%= yield(:meta_keywords) %>" />
+    <meta name="description" content="<%= yield(:meta_description) %>" />
     <meta content='width=device-width, initial-scale=1.0' name='viewport'>
     <meta content='IE=edge' http-equiv='X-UA-Compatible'>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>

@@ -1,3 +1,9 @@
+<% #TODO: Try to have variation and creator where available. Look up SEO best practices
+   content_for :title, @item.title +
+    (@item.creator ? ' - ' + @item.creator : ' | ' + t("dept.#{@item.department.name}")) %>
+<% content_for :meta_keywords, '' %>
+<% content_for :meta_description, '' %>
+
 <div class="container styled-container" style="max-width: 680px;">
   <div class="panel">
     <div class="panel-body">
