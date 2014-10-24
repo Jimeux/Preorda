@@ -71,7 +71,7 @@
           </div>
 
           <div class="item-desc">
-            <%= raw @item.description.gsub("\n", '<br>') if @item.description %>
+            <%= print_item_description(@item) %>
           </div>
         </div>
       </div>

@@ -12,6 +12,8 @@ function hideLongDescriptions() {
   var lessText = "< Show less";
 
   $('.item-desc').each(function() {
+    if ($(this).find('.table').length != 0) return;
+
     var content = $(this).html();
 
     if(content.length > showChar) {

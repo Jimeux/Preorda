@@ -22,8 +22,19 @@ class ItunesMusicGrazer
         asin:         page.at('div.multi-button button').attr('adam-id'),
         price:        extract_price(page.at('span.price').text),
         url:          url,
-        description:  nil
+        description:  get_track_listing(page)
     }
+  end
+
+  def self.get_track_listing(page)
+    rows = page.at('.tracklist-table.content').search('tr.song')
+    output = rows.each_with_object([]) do |row, output|
+      row.at('span.badges').remove if row.at('span.badges')
+      index = row.at('.index').text.strip
+      name  = row.at('.name').text.strip
+      output << "#{index}\t#{name}"
+    end
+    output.join("\n")
   end
 
   def self.check_variation(title)

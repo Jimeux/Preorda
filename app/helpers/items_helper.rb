@@ -19,4 +19,23 @@ module ItemsHelper
     item.department.name == 'music'
   end
 
+  def print_item_description(item)
+    return if item.description.blank?
+
+    if is_in_music_dept?(item) && item.description.include?("1\t")
+      lines = item.description.split("\n")
+      tracks = lines.map do |l|
+        parts = l.split("\t")
+        { index: parts[0], name: parts[1]  }
+      end
+      tracks.map! do |track|
+        "<tr><td>#{track[:index]}</td><td>#{track[:name]}</td></tr>"
+      end
+
+      raw "<table class=\"table table-striped table-condensed\"><tbody>#{tracks.join(' ')}</tbody></table>"
+    else
+      raw item.description.gsub("\n", '<br>') if item.description
+    end
+  end
+
 end
