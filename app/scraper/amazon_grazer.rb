@@ -25,15 +25,10 @@ class AmazonGrazer
     title.text
   end
 
-  # This method attempts to standardise inconsistent platform names.
-  # The default implementation cover Music and DVD
-
   def self.get_platform(page)
     found = page.search('div#byline')
     return found.text[/Format: ([\w ]+\w)/, 1] if found
   end
-
-  # This is the games maker, album artist etc
 
   def self.get_creator(page)
     creator = page.at('.buying span a') || page.at('#brand') || page.at('.author a')

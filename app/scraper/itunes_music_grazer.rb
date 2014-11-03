@@ -67,11 +67,12 @@ class ItunesMusicGrazer
   end
 
   def self.extract_summary_data(prod)
-    prod.at('li.expected-release-date span.label').remove
+    prod.at('li.expected-release-date span.label').try(:remove)
+    release_date = prod.at('li.expected-release-date') || prod.at('li.release-date')
     {
         url:          prod.at('a.artwork-link').attr('href'),
         price:        extract_price(prod.at('span.price').text),
-        release_date: prod.at('li.expected-release-date').text,
+        release_date: release_date.text,
         asin:         prod.attr('adam-id'),
         title:        extract_title(prod.at('li.name').text),
         image:        prod.at('div.artwork img').attr('src-swap-high-dpi'),

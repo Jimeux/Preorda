@@ -6,7 +6,7 @@ class AmazonBlurayGrazer < AmazonDVDGrazer
 
   # @Override
   def self.get_platform(page)
-    'Blu-Ray'
+    PLATFORMS[:bluray]
   end
 
 end

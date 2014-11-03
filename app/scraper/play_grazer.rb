@@ -6,10 +6,10 @@ class PlayGrazer
   def self.get_product_data(url)
     page = get_page(url)
     {
-        title:        get_title(page),
+        title:        extract_title(get_title(page)),
         platform:     get_platform,
         creator:      page.at('.nobox.pan p:contains("Artist")') ? page.at('.nobox.pan p:contains("Artist")').text[/Artist: (.*)/, 1] : nil,
-        variation:    nil,    #TODO: Variation
+        variation:    extract_variation(get_title(page)),
         image:        get_image(page),
         release_date: get_release_date(page),
         asin:         url[/\/(\d{8})\//, 1],
@@ -35,7 +35,7 @@ class PlayGrazer
 
   def self.get_title(page)
     title = page.at('.h1-product-page') || page.at('.product-overview h1')
-    extract_title(title.text)
+    title.text
   end
 
   def self.get_release_date(page)
@@ -66,8 +66,6 @@ class PlayGrazer
 
     summary_data
   end
-
-  #TODO: URLs may need to be updated for Play.com(often gives seller page link rather than summary page).
 
   def self.extract_summary_data(prod)
     url = URI.join(PLAY_URL, prod.at('.media-title a').attr('href')).to_s

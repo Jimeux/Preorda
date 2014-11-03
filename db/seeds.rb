@@ -59,7 +59,7 @@ game_platforms  = ['Nintendo 3DS', 'Nintendo 2DS',
                    'Nintendo DS', 'Nintendo Wii',
                    'Nintendo Wii U', 'PlayStation 3',
                    'PlayStation Vita', 'PlayStation 4',
-                   'Xbox One', 'Xbox 360', 'PC']
+                   'Xbox One', 'Xbox 360', 'PC & Mac']
 game_department = Department.find_by(name: 'games')
 game_platforms.each do |platform|
   Platform.create(department: game_department, name: platform)

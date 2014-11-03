@@ -1,8 +1,8 @@
 <% #TODO: Try to have variation and creator where available. Look up SEO best practices
    content_for :title, @item.title +
     (@item.creator ? ' - ' + @item.creator : ' | ' + t("dept.#{@item.department.name}")) %>
-<% content_for :meta_keywords, '' %>
-<% content_for :meta_description, '' %>
+<% content_for :meta_keywords, nil %>
+<% content_for :meta_description, nil %>
 
 <div class="container styled-container" style="max-width: 680px;">
   <div class="panel">
@@ -39,21 +39,23 @@
               </div>
             </div>
 
-            <div class="item-control">
-
-              <div class="btn btn-sm btn-default btn-block" style="border-bottom: 1px solid #ccc;">
+              <div class="btn btn-sm btn-default btn-block" style="margin: 10px 0;">
                 <%= print_time_to_release(@item) %>
               </div>
-
+<!--
+            <div class="item-control">
               <div class="btn-group-justified">
-                <a class="btn btn-sm btn-default" style="border-right: 1px solid #ccc;">
-                  <i class="glyphicon glyphicon-share-alt"></i>
-                </a>
                 <a class="btn btn-sm btn-default">
                   <i class="glyphicon glyphicon-star-empty"></i>
                 </a>
               </div>
-
+            </div>
+-->
+            <div id="sharethis-container" style="text-align: center;">
+              <span st_url="<%= item_url(@item) %>" st_title="<%= "#{print_time_to_release(@item)} until #{@item.title} is released!" %>" st_image="<%= File.join(root_url, @item.image(:thumb)) %>" st_via="launchbro" class='st_facebook_large'   displayText='Facebook'></span>
+              <span st_url="<%= item_url(@item) %>" st_title="<%= "#{print_time_to_release(@item)} until #{@item.title} is released!" %>" st_image="<%= File.join(root_url, @item.image(:thumb)) %>" st_via="launchbro" class='st_twitter_large'    displayText='Tweet'></span>
+              <span st_url="<%= item_url(@item) %>" st_title="<%= "#{print_time_to_release(@item)} until #{@item.title} is released!" %>" st_image="<%= File.join(root_url, @item.image(:thumb)) %>" st_via="launchbro" class='st_googleplus_large' displayText='Google +'></span>
+              <span st_url="<%= item_url(@item) %>" st_title="<%= "#{print_time_to_release(@item)} until #{@item.title} is released!" %>" st_image="<%= File.join(root_url, @item.image(:thumb)) %>" st_via="launchbro" class='st_sharethis_large'  displayText='ShareThis'></span>
             </div>
 
           </div>

@@ -111,10 +111,11 @@ class ItemCreator
     platform_name = data[:platform] || summary[:platform]
     platform = Platform.find_by(name: platform_name)
 
-    item = Item.where(platform: platform,
-                      department: @dept,
-                      variation: data[:variation])
-               .where('LOWER(title) = ?', data[:title].downcase)
+    # Convert 'Family Guy - Season 14' to 'familyguyseason14'
+    where_query = data[:title].downcase.gsub(/[\.\- ]/, '')
+
+    item = Item.where(platform: platform, department: @dept, variation: data[:variation])
+               .where("lower(translate(items.title, '.- ', '')) = ?", where_query)
                .first
 
     if item.nil?

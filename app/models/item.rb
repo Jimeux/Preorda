@@ -27,12 +27,12 @@ class Item < ActiveRecord::Base
 
   FRONT_PAGE_LIMIT = 6
 
-
   # --- Paperclip settings ---#           # TODO: Add a default image
 
   has_attached_file :image,
+                    url:        '/system/:class/:id/:style/image.:extension',
                     styles: ->(attachment) {
-                      { show: '450x',
+                          { show: '450x',
                         thumb: attachment.instance.set_image_styles }
                     },
                     default_url: '/images/:style/missing.png'
