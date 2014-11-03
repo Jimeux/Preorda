@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   resources :departments, only: [:index, :show]
 
+  resources :features, only: [:create]
+
   class DeptUrlConstrainer
     def matches?(request)
       dept_name = request.path.split('/')

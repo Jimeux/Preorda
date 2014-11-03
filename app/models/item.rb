@@ -69,7 +69,7 @@ class Item < ActiveRecord::Base
   # --- Model methods ---#
 
   def lowest_price
-    products.first.price
+    products.first.price || 0
   end
 
   # Returns one product per store

@@ -9,7 +9,7 @@ class Admin::ItemsController < ApplicationController
   end
 
   def show
-    @department = Department.find(params[:id])
+    @department = Department.friendly.find(params[:id])
     @items = @department.preview_items.paginate(
         page: params[:page], per_page: 18)
   end
