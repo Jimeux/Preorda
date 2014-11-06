@@ -17,19 +17,13 @@ module Grazer
       bluray:           'Blu-Ray',
   }
 
-  GAME_PLATFORMS = {
-      nintendo_3ds:     'Nintendo 3DS',
-      nintendo_2ds:     'Nintendo 2DS',
-      nintendo_ds:      'Nintendo DS',
-      nintendo_wii:     'Nintendo Wii',
-      nintendo_wii_u:   'Nintendo Wii U',
-      playstation_3:    'PlayStation 3',
-      playstation_vita: 'PlayStation Vita',
-      playstation_4:    'PlayStation 4',
-      xbox_one:         'Xbox One',
-      xbox_360:         'Xbox 360',
-      pc_and_mac:       'PC & Mac'
-  }
+  GAME_PLATFORMS = [
+      'Nintendo 3DS', 'Nintendo 2DS', 'Nintendo DS', 'Nintendo Wii', 'Nintendo Wii U',
+      'PlayStation 3', 'PS3', 'PS 3',
+      'PlayStation Vita',
+      'PlayStation 4', 'PS4', 'PS 4',
+      'Xbox One', 'Xbox 360', 'PC & Mac'
+  ]
 
   # Cache an instance of Mechanize for retrieving web pages
   def agent
@@ -52,7 +46,7 @@ module Grazer
     # Remove [DVD], (XBox) etc
     title = text.gsub(/\[.+\]|\(.+\)/, '').gsub(': ', ' - ').strip
 
-    GAME_PLATFORMS.values.each  { |p| title.gsub!(p, '') }
+    GAME_PLATFORMS.each  { |p| title.gsub!(/#{p}(?! console)/i, '') }
     MUSIC_PLATFORMS.values.each { |p| title.gsub!(p, '') }
     VIDEO_PLATFORMS.values.each { |p| title.gsub!(p, '') }
     ['Deluxe', 'Deluxe Edition', 'Limited Edition'].each { |p| title.gsub!(p, '') }
@@ -74,9 +68,9 @@ module Grazer
       when /ds|nintendods/                 then return 'Nintendo DS'
       when 'nintendowii'                   then return 'Nintendo Wii'
       when /wiiu|nintendowiiu/             then return 'Nintendo Wii U'
-      when 'playstation3'                  then return 'PlayStation 3'
+      when /playstation3|ps3/              then return 'PlayStation 3'
       when /psvita|playstationvita/        then return 'PlayStation Vita'
-      when 'playstation4'                  then return 'PlayStation 4'
+      when /playstation4|ps4/              then return 'PlayStation 4'
       when 'xboxone'                       then return 'Xbox One'
       when 'xbox360'                       then return 'Xbox 360'
       when /windows|pc|pcgames|macosx|mac/ then return 'PC & Mac'

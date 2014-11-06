@@ -21,17 +21,18 @@
         </a>
       </h2>
 
-      <h3 class="item-title item-platform">
-        <a class="label label-<%= @item.department.name %>" href="<%= short_plat_path(@item.department, platform: @item.platform) %>">
-            <%= @item.platform.name if @item.platform %>
-        </a>
-      </h3>
+      <% if @item.platform %>
+        <h3 class="item-title item-platform">
+          <a class="label label-<%= @item.department.name %>" href="<%= short_plat_path(@item.department, platform: @item.platform) %>">
+              <%= @item.platform.name %>
+          </a>
+        </h3>
+      <% end %>
 
       <div class="row">
         <div class="col-sm-5">
 
           <div class="item-img-block">
-
 
             <div class="item-img">
               <div class="wrapper">

@@ -15,8 +15,10 @@ Rails.application.routes.draw do
   end
 
   constraints(DeptUrlConstrainer.new) do
-    match '/:id', to: 'departments#show', via: :get, as: 'short_dept'
-    match '/:id/:platform', to: 'departments#show', via: :get, as: 'short_plat'
+    match '/:id',                      to: 'departments#show', via: :get, as: 'short_dept'
+    match '/:id/page/:page',           to: 'departments#show', via: :get, as: 'short_dept_page'
+    match '/:id/:platform',            to: 'departments#show', via: :get, as: 'short_plat'
+    match '/:id/:platform/page/:page', to: 'departments#show', via: :get, as: 'short_plat_page'
   end
 
   resources :items, path: 'preorders', only: [:index, :show]

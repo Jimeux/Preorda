@@ -1,4 +1,5 @@
-<% content_for :title, t("dept.#{@department.name}") %>
+<% content_for :title,
+   raw("#{@platform.name + ' | ' if @platform.present?}#{t("dept.#{@department.name}")}") %>
 
 <div class="container styled-container dept-container">
 
