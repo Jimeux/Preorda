@@ -55,6 +55,27 @@ h4.dept-heading {
   margin-bottom:  3px;
 }
 
+#dots {
+  display:        block;
+  text-align:     center;
+  margin-top:     18px;
+  margin-bottom:  -10px;
+}
+.dot {
+  display:          inline-block;
+  width:            12px;
+  height:           12px;
+  border-radius:    6px !important;
+  background-color: #eeeeee;
+  margin-right:     25px;
+}
+.dot:last-of-type {
+  margin-right: 0;
+}
+.dot-active {
+  background-color: #cacaca;
+}
+
 div.variation-caption{
   position:  absolute;
   left:      0;
