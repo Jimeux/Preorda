@@ -17,7 +17,7 @@ describe 'The Homepage' do
   end
 
   describe 'department summaries' do
-    include_context 'items loaded'
+    #include_context 'items loaded'
 
     #it '' do
     #end

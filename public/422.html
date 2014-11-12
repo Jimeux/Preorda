@@ -1,67 +1,73 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>The change you wanted was rejected (422)</title>
+  <title>Preorda | The change you wanted was rejected. (422)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
-  body {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
-  }
+    html { height: 100%; }
+    body {
+      background-color: #f2f2f2;
+      color: #404040;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      text-align: center;
+      background: rgba(255,255,255,1);
+      background: -moz-linear-gradient(-45deg, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(224,224,224,1) 100%);
+      background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(47%, rgba(246,246,246,1)), color-stop(100%, rgba(224,224,224,1)));
+      background: -webkit-linear-gradient(-45deg, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(224,224,224,1) 100%);
+      background: -o-linear-gradient(-45deg, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(224,224,224,1) 100%);
+      background: -ms-linear-gradient(-45deg, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(224,224,224,1) 100%);
+      background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(224,224,224,1) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e0e0e0', GradientType=1 );
+    }
 
-  div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
-  }
+    * {
+      font-weight: 200;
+    }
+    h1 {
+      font-size: 700%;
+      margin: 0;
+      margin-top: -25px;
+    }
 
-  div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+    div.main {
+      width: 100%;
+      text-align: center;
+    }
 
-  h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
-  }
+    a {
+      color: #777777;
+      display: inline-block;
+      padding: 10px 20px;
+      background: white;
+      border: 1px solid #e5e5e5;
+      text-decoration: none;
+      font-size: 90%;
+    }
+    a:hover {
+      background: #fcfcfc;
+      color: #404040;
+    }
+    h4 {
+      font-size: 120%;
+      margin: 30px 0 50px 0;
+    }
 
-  div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
   </style>
+  <script>
+    window.onload = function() {
+      var inner = document.getElementById("content");
+      var inHeight = inner.offsetHeight;
+      var conHeight = window.innerHeight;
+      inner.style.marginTop = ((conHeight - inHeight) / 2) + 'px';
+    };
+  </script>
 </head>
 
 <body>
-  <!-- This file lives in public/422.html -->
-  <div class="dialog">
-    <div>
-      <h1>The change you wanted was rejected.</h1>
-      <p>Maybe you tried to change something you didn't have access to.</p>
-    </div>
-    <p>If you are the application owner check the logs for more information.</p>
-  </div>
+<div id="content" class="main">
+  <h1>422</h1>
+  <h4>The change you wanted was rejected.</h4>
+  <a href="http://pre.com">Go to Preorda.com</a>
+</div>
 </body>
 </html>
