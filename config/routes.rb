@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :departments, only: [:index, :show]
 
-  resources :features, only: [:create]
+  resources :features, only: [:index, :create]
 
   class DeptUrlConstrainer
     def matches?(request)

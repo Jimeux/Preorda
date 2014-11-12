@@ -1,5 +1,12 @@
 class FeaturesController < ApplicationController
 
+  def index
+    @features = Feature.all
+    respond_to do |format|
+      format.json { render json: @features }
+    end
+  end
+
   def create
     Feature.create! feature_params
     redirect_to :back
