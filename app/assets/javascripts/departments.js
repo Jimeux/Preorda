@@ -3,7 +3,7 @@ $(document).on('ready page:change', function () {
   $('#platform-select-js').show();
 });
 
-$(document).on('ready page:change', loadFeatures);
+$(document).on('page:change', loadFeatures);
 $(window).resize(loadFeatures);
 
 var features;    //TODO: Get rid of this global
@@ -15,6 +15,7 @@ function loadFeatures() {
   if (typeof features == 'undefined') {
     $.get('/features', function(data) {
       features = data;
+      console.log(data);
       featuresLoaded(features, featuredDiv);
     });
   }
@@ -49,8 +50,8 @@ function featuresLoaded(features, container) {
   $.each(features.slice(0, limit), function (index, feature) {
     container.append(
         '<div>' +
-          '<a href="">' +
-            '<img width="' + imgWidth + '" height="' + imgHeight + '" src="' + feature.image + '">' +
+          '<a href="' + feature.link_href + '">' +
+            '<img width="' + imgWidth + '" height="' + imgHeight + '" src="' + feature.image_url + '">' +
           '</a>' +
         '</div>'
     );

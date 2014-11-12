@@ -9,7 +9,4 @@ class Feature < ActiveRecord::Base
   validates_presence_of :image
   validates_uniqueness_of :item_id
 
-  def as_json(options)
-    { :item_id => item_id, :image => image }
-  end
 end
