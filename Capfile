@@ -3,7 +3,7 @@ require 'capistrano/setup'
 
 # Includes default deployment tasks
 require 'capistrano/deploy'
-require 'capistrano/rbenv'
+#require 'capistrano/rbenv'
 require 'capistrano/rails'
 
 # Includes tasks from other gems included in your Gemfile

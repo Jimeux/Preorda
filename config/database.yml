@@ -80,7 +80,7 @@ test:
 #
 production:
   <<: *default
-  database: launchbro_production
-  username: launchbro_production
+  database: preorda_production
+  username: preorda_production
   host: localhost
   password: <%= Rails.application.secrets.db_pass %>

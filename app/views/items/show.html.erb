@@ -1,6 +1,6 @@
 <% #TODO: Try to have variation and creator where available. Look up SEO best practices
-   content_for :title, @item.title +
-    (@item.creator ? ' - ' + @item.creator : ' | ' + t("dept.#{@item.department.name}")) %>
+   content_for :title, raw(@item.title +
+    (@item.creator ? ' - ' + @item.creator : ' | ' + t("dept.#{@item.department.name}"))) %>
 <% content_for :meta_keywords, nil %>
 <% content_for :meta_description, nil %>
 

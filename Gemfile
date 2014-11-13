@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '2.1.0'
+ruby '2.1.3'
 
-gem 'rails', '4.1.1'
+gem 'rails', '4.1.6'
 
 gem 'pg' # postgresql DB
 
@@ -25,7 +25,7 @@ gem 'unicorn'
 gem 'friendly_id', '~> 5.0.0'
 
 # File uploads
-gem 'paperclip',  github: 'thoughtbot/paperclip'
+gem 'paperclip', '~> 4.2'
 
 # Pagination
 gem 'will_paginate'
@@ -48,7 +48,7 @@ group :development do
   gem 'spring'
   gem 'spring-commands-rspec'
   # Deployment
-  gem 'capistrano-rbenv',   github: 'capistrano/rbenv'
+#  gem 'capistrano-rbenv',   github: 'capistrano/rbenv'
   gem 'capistrano-bundler', github: 'capistrano/bundler'
   gem 'capistrano-rails'
 end

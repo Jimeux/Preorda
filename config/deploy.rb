@@ -1,16 +1,18 @@
 lock '3.2.1'
 
-set :application, 'launchbro'
+set :application, 'preorda'
 set :repo_url, 'git@bitbucket.org:jimeux/launchbro.git'
 set :deploy_to, "/var/www/#{fetch(:application)}"
 
-set :rbenv_type, :user
-set :rbenv_ruby, '2.1.0'
+#set :rbenv_type, :user
+#set :rbenv_ruby, '2.1.0'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
 set :scm, :git
+
+#set :deploy_via, :remote_cache # User git pull instead of clone
 
 # Default value for :format is :pretty
 # set :format, :pretty

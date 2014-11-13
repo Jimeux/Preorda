@@ -41,9 +41,10 @@ class AmazonGrazer
       .map    { |v| v.at('.variationLabel').text }
       .join(', ')
 
-    variation = variation.blank? && page.at('.a-size-medium.a-color-secondary.a-text-normal') ?
-                  page.at('.a-size-medium.a-color-secondary.a-text-normal').text :
-                  nil
+    if variation.blank? && page.at('.a-size-medium.a-color-secondary.a-text-normal')
+      variation = page.at('.a-size-medium.a-color-secondary.a-text-normal').text
+    end
+
     if variation
       variation.gsub(/,? ?Explicit Lyrics/, '')
     end

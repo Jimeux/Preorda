@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= "#{yield(:title)} | " unless yield(:title).blank? %><%= t('site.brand') %></title>
+    <title><%= "#{yield(:title)} | " unless yield(:title).blank? %><%= t('site.brand') %><%= ' - Coming soon in music, video and games' if yield(:title).blank? %></title>
     <meta charset='utf-8' content='text/html' http-equiv='Content-Type'>
     <meta name="keywords" content="<%= yield(:meta_keywords) %>" />
     <meta name="description" content="<%= yield(:meta_description) %>" />

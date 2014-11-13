@@ -35,7 +35,8 @@ class Item < ActiveRecord::Base
                           { show: '450x',
                         thumb: attachment.instance.set_image_styles }
                     },
-                    default_url: '/images/:style/missing.png'
+                    default_url: '/images/:style/missing.png' #,
+                    #use_timestamp: false
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   def set_image_styles

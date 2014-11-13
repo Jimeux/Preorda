@@ -29,51 +29,57 @@ function loadFeatures() {
 }
 
 function displayPage(page) {
-  var container = $('#featured'),
-      limit     = 1,
+  var imgLimit  = 1,
       imgWidth  = 322,
-      imgHeight = 150,
-      imgRatio  = 2.2,
       pageWidth = $(window).width();
 
   if (pageWidth <= 440) {
-    limit = 1;
+    imgLimit = 1;
     imgWidth = pageWidth;
   } else if (pageWidth > 440 && pageWidth < 640) {
-    limit = 2;
+    imgLimit = 2;
     imgWidth = parseInt(pageWidth / 2, 10);
   } else if (pageWidth >= 640 && pageWidth < 960) {
-    limit = 2;
+    imgLimit = 2;
   } else if (pageWidth >= 960)
-    limit = 3;
+    imgLimit = 3;
 
-  imgHeight = parseInt(imgWidth / imgRatio, 10);
-  container.height(imgHeight);
+  var pageCount = parseInt(features.length / imgLimit, 10);
+
+  if (page >= pageCount)
+    page = currentPage = pageCount-1;
+
+  var start = parseInt(page * imgLimit, 10);
+
+  displayFeatures(start, imgLimit, imgWidth);
+  displayDots(page, pageCount);
+}
+
+function displayFeatures(start, limit, width) {
+  var container = $('#featured'),
+      ratio     = 2.2,
+      height    = parseInt(width / ratio, 10);
+
+  container.height(height);
   container.empty();
-
-  var start = parseInt(page * limit, 10);
 
   $.each(features.slice(start, start+limit), function (index, feature) {
     var html = $(
-        '<div>' +
-          '<a href="' + feature.link_href + '">' +
-            '<img width="' + imgWidth + '" height="' + imgHeight + '" src="' + feature.image_url + '">' +
-          '</a>' +
-        '</div>'
+      '<div>' +
+        '<a href="' + feature.link_href + '">' +
+          '<img width="' + width + '" height="' + height + '" src="' + feature.image_url + '">' +
+        '</a>' +
+      '</div>'
     );
     html.appendTo(container);
   });
-
-  displayDots(limit, page);
 }
 
-function displayDots(limit, page) {
+function displayDots(page, pageCount) {
   var dotContainer = $('#dots');
   dotContainer.empty();
 
-  var dotNum = parseInt(features.length / limit, 10);
-
-  for (var i = 0; i < dotNum; i++) {
+  for (var i = 0; i < pageCount; i++) {
     var dot = $('<a class="dot" href="#" data-page-num="' + i + '"></a>');
     if (i === page) dot.addClass('dot-active');
     dotContainer.append(dot);

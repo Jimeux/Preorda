@@ -4,7 +4,8 @@ module Grazer
 
   VARIATIONS = {
       deluxe: 'Deluxe Edition',
-      limited: 'Limited Edition'
+      limited: 'Limited Edition',
+      collector: "Collector's Edition"
   }
 
   MUSIC_PLATFORMS = {
@@ -46,10 +47,10 @@ module Grazer
     # Remove [DVD], (XBox) etc
     title = text.gsub(/\[.+\]|\(.+\)/, '').gsub(': ', ' - ').strip
 
-    GAME_PLATFORMS.each  { |p| title.gsub!(/#{p}(?! console)/i, '') }
+    GAME_PLATFORMS.each         { |p| title.gsub!(/#{p}(?! console)/i, '') }
     MUSIC_PLATFORMS.values.each { |p| title.gsub!(p, '') }
     VIDEO_PLATFORMS.values.each { |p| title.gsub!(p, '') }
-    ['Deluxe', 'Deluxe Edition', 'Limited Edition'].each { |p| title.gsub!(p, '') }
+    VARIATIONS.values.each      { |p| title.gsub!(p, '') }
 
     title
   end
