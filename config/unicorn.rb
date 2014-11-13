@@ -1,8 +1,10 @@
+app_name = "preorda"
+
 worker_processes 2
 
 # listen on both a Unix domain socket and a TCP port,
 # we use a shorter backlog for quicker failover when busy
-listen "/tmp/unicorn.launchbro.sock", backlog: 64
+listen "/tmp/unicorn.#{app_name}.sock", backlog: 64
 
 # Preload our app for more speed
 preload_app true
@@ -10,14 +12,14 @@ preload_app true
 # nuke workers after 30 seconds instead of 60 seconds (the default)
 timeout 30
 
-pid "/tmp/unicorn.launchbro.pid"
+pid "/tmp/unicorn.#{app_name}.pid"
 
 
-working_directory "/var/www/launchbro/current"
+working_directory "/var/www/#{app_name}/current"
 
 # feel free to point this anywhere accessible on the filesystem
 user 'deploy', 'deploy'
-shared_path = "/var/www/launchbro/shared"
+shared_path = "/var/www/#{app_name}/shared"
 
 stderr_path "#{shared_path}/log/unicorn.stderr.log"
 stdout_path "#{shared_path}/log/unicorn.stdout.log"
@@ -31,7 +33,7 @@ before_fork do |server, worker|
 
   # Before forking, kill the master process that belongs to the .oldbin PID.
   # This enables 0 downtime deploys.
-  old_pid = "/tmp/unicorn.launchbro.pid.oldbin"
+  old_pid = "/tmp/unicorn.#{app_name}.pid.oldbin"
   if File.exists?(old_pid) && server.pid != old_pid
     begin
       Process.kill("QUIT", File.read(old_pid).to_i)

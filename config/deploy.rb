@@ -8,7 +8,8 @@ set :deploy_to, "/var/www/#{fetch(:application)}"
 #set :rbenv_ruby, '2.1.0'
 
 set :rvm_type, :user                     # Defaults to: :auto
-set :rvm_ruby_version, '2.1.3p242'      # Defaults to: 'default'
+#set :rvm_ruby_version, '2.1.3p242'      # Defaults to: 'default'
+set :rvm_custom_path,  '/usr/local/rvm'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
