@@ -9,50 +9,37 @@ class AmazonDVDGrazer < AmazonGrazer
     'DVD'
   end
 
-  def self.get_summary_data(limit)
-    page_url = top_url # Start on the first page
-    summary_data = []
-
-    limit.times do   # Put in a limit for now to avoid too many requests
-
-      # Get a Mechanize object for the URL
-
-      page = get_page(page_url)
-
-      # Find all product divs and extract their data
-
-      page.search('.prod').each do |p|
-        summary_data << extract_summary_data(p)
-      end
-
-      # Set page_url to the next page before the next iteration of the loop
-      # If no link is found, then we're finished
-
-      next_link = page.at('a#pagnNextLink')
-
-      if next_link
-        # Join the relative URL with the Amazon domain
-        page_url = URI.join(AMAZON_URL, next_link.attr('href')).to_s
-      else
-        break
-      end
-
-    end
-
-    summary_data
+  def self.selector
+    AmazonDVDSelector
   end
 
-  def self.extract_summary_data(prod)
-    url = prod.css('h3 a').attr('href').value
-    {
-        rank:         prod.attr('id')[/\d+/].to_i + 1,
-        url:          url,
-        price:        extract_price(prod.css('li.newp span.bld.lrg.red').text),
-        release_date: prod.css('li span.grey.sml').text[/\d{1,2} [A-Za-z]{2,9} \d{4}/],
-        asin:         url[/\/dp\/(\w{10})\//, 1],
-        title:        prod.css('h3 a').text,
-        image:        prod.css('.image.imageContainer img').attr('src')
+  protected
+
+  class AmazonDVDSelector
+    SELECTORS = {
+        item:         '.s-item-container',
+        next_link:    'a#pagnNextLink',
+        url:          'a.a-link-normal.a-text-normal',
+        price:        'span.s-price',
+        release_date: 'span.a-size-small.a-color-secondary',
+        title:        'h2.s-access-title',
+        image:        'img.s-access-image'
     }
-  end
 
+    def self.set_item(item) ; @item = item end
+
+    def self.url   ; @item.css(SELECTORS[:url]).attr('href').value  end
+    def self.price ; @item.css(SELECTORS[:price]).text              end
+    def self.asin  ; url[/\/dp\/(\w{10})\//, 1]                     end
+    def self.title ; @item.css(SELECTORS[:title]).text              end
+    def self.image ; @item.css(SELECTORS[:image]).attr('src').value end
+    def self.release_date
+      @item.css(SELECTORS[:release_date]).text[/\d{1,2} [A-Za-z]{2,9} \d{4}/]
+    end
+  end
 end
+
+
+#SAVED_FILE_NAME = "amazon_dvds.html"
+#FILE_PATH 			= File.join(File.dirname(__FILE__), SAVED_FILE_NAME)
+#page = agent.get(File.join("file://", FILE_PATH))

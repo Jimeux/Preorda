@@ -1,5 +1,5 @@
 class PlayGrazer
-  extend Grazer
+  extend GrazerBase
 
   PLAY_URL = 'http://www.play.com'
 

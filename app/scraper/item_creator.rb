@@ -3,6 +3,14 @@ class ItemCreator
     graze('itunes', 'music', ItunesMusicGrazer)
   end
 
+  def self.amazon_dvds
+    graze('amazon', 'video', AmazonDVDGrazer)
+  end
+
+  def self.amazon_bluray
+    graze('amazon', 'video', AmazonBlurayGrazer)
+  end
+
   def self.graze(store_name, dept_name, grazer, pages=2)
     store  = Store.where('lower(name) = ?', store_name.downcase).first
     dept   = Department.where('lower(name) = ?', dept_name.downcase).first

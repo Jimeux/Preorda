@@ -1,6 +1,8 @@
 class AmazonGameGrazer < AmazonGrazer
 
-  GAMES_TOP_URL = 'http://www.amazon.co.uk/gp/new-releases/videogames/ref=sv_vg_h__13'
+  def self.top_url
+    'http://www.amazon.co.uk/gp/new-releases/videogames/ref=sv_vg_h__13'
+  end
 
   def self.get_summary_data(limit=0)
     summary_data = []
@@ -10,24 +12,51 @@ class AmazonGameGrazer < AmazonGrazer
     summary_data
   end
 
-  # This overrides the parent class method
-
   def self.get_platform(page)
     platform = look_for_format(page) || look_for_selectable_format(page)
     extract_platform(platform)
   end
 
+  def self.selector
+    AmazonGamesSelector
+  end
+
+  protected
+
+  class AmazonGamesSelector
+    SELECTORS = {
+        item:         '.s-item-container',
+        next_link:    'a#pagnNextLink',
+        url:          '.zg_itemImageImmersion a',
+        price:        '.price',
+        release_date: '.zg_releaseDate',
+        title:        '.zg_title',
+        image:        '.zg_itemImageImmersion a img'
+    }
+
+    def self.set_item(item) ; @item = item end
+
+    def self.url   ; @item.css(SELECTORS[:url]).attr('href').value  end
+    def self.price ; @item.css(SELECTORS[:price]).try(:text)        end
+    def self.asin  ; url[/\/dp\/(\w{10})\//, 1]                     end
+    def self.title ; @item.css(SELECTORS[:title]).text              end
+    def self.image ; @item.css(SELECTORS[:image]).attr('src').value end
+    def self.release_date
+      if @item.css(SELECTORS[:release_date])
+        @item.css(SELECTORS[:release_date]).text[/\d{1,2} [A-Za-z]{2,9} \d{4}/]
+      end
+    end
+  end
+
   private
 
   # Extract the platform/format from a drop-down list
-
   def self.look_for_selectable_format(page)
     found = page.at('#selected_platform_for_display b.variationLabel')
     found.text if found
   end
 
   # Extract the platform/format from a simple div
-
   def self.look_for_format(page)
     found = page.at('#platform-information')
     found.text[/Platform: ([\w ]+\w)/, 1] if found
@@ -35,7 +64,7 @@ class AmazonGameGrazer < AmazonGrazer
 
   # Scan for section URLs (3DS, PS4 etc) and return in an array
   def self.section_links
-    get_page(GAMES_TOP_URL)
+    get_page(top_url)
       .search('ul#zg_browseRoot ul ul li a')
       .select { |a| a.text != 'Accessories' } # Skip this shite for now
       .map { |a| a.attr('href') }
@@ -66,30 +95,6 @@ class AmazonGameGrazer < AmazonGrazer
   def self.get_page_data(page)
     get_page(page).search('.zg_itemImmersion').map do |product|
       extract_summary_data(product)
-    end
-  end
-
-  def self.extract_summary_data(prod)
-    url = prod.css('.zg_itemImageImmersion a').attr('href').value.strip
-    {
-      rank:         prod.css('span.zg_rankNumber').text[/\d{1,3}/].to_i,
-      url:          url,
-      price:        get_summary_price(prod),
-      release_date: get_summary_release_date(prod),
-      asin:         url[/\/dp\/(\w{10})\//, 1], # TODO: Remove duplication
-      title:        extract_title(prod.css('.zg_title').text),
-      image:        prod.css('.zg_itemImageImmersion a img').attr('src').value
-    }
-  end
-
-  def self.get_summary_price(prod)
-    prod.css('.price') ? extract_price(prod.css('.price').text) : 0
-  end
-
-  def self.get_summary_release_date(prod)
-    if prod.css('.zg_releaseDate')
-      date = prod.css('.zg_releaseDate').text[/\d{1,2} [A-Za-z]{2,9} \d{4}/]
-      Date.parse(date) if date
     end
   end
 
