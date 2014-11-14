@@ -1,3 +1,5 @@
+require 'resolv-replace.rb'
+
 namespace :graze do
 
   desc 'Graze items using these args: s=store d=dept p=pages'

@@ -1,6 +1,6 @@
 app_name = "preorda"
 
-worker_processes 1
+worker_processes 2
 
 # listen on both a Unix domain socket and a TCP port,
 # we use a shorter backlog for quicker failover when busy
