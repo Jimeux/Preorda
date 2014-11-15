@@ -40,9 +40,51 @@
               </div>
             </div>
 
-              <div class="btn btn-sm btn-default btn-block" style="margin: 10px 0;">
-                <%= print_time_to_release(@item) %>
+            <div class="btn btn-sm btn-default btn-block" style="margin: 10px 0;">
+              <%= print_time_to_release(@item) %>
+            </div>
+
+            <% if @alternatives.present? %>
+
+              <div class="dropdown" style="margin-bottom: 10px;">
+
+                <button class="btn btn-sm btn-default btn-block dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                  Choose format
+                  <span class="caret"></span>
+                </button>
+
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                  <% @alternatives.each do |item| %>
+                    <li role="presentation">
+                      <a role="menuitem" tabindex="-1" href="<%= item_path(item) %>">
+                        <%= item.platform.name %>
+                      </a>
+                    </li>
+                  <% end %>
+                </ul>
               </div>
+            <% end %>
+
+            <% if @variations.present? %>
+
+              <div class="dropdown" style="margin-bottom: 10px;">
+
+                <button class="btn btn-sm btn-default btn-block dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                  Choose variation
+                  <span class="caret"></span>
+                </button>
+
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                  <% @variations.each do |item| %>
+                    <li role="presentation">
+                      <a role="menuitem" tabindex="-1" href="<%= item_path(item) %>">
+                        <%= item.variation ? item.variation : 'Standard' %>
+                      </a>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
 <!--
             <div class="item-control">
               <div class="btn-group-justified">

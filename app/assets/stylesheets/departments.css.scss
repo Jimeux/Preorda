@@ -4,6 +4,14 @@
 .platform-select-container {
   margin-left: 15px;
 }
+.platform-container {
+  width: 100%;
+  text-align: center;
+  //padding: 0 15px;
+  .btn {
+    margin-bottom: 4px;
+  }
+}
 #platform-select-js {
   display: none;
 }

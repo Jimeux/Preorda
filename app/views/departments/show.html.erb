@@ -32,6 +32,18 @@
     </ul>
   </div>
 
+<!--  <div class="platform-container">
+    <% @department.platforms.each do |platform| %>
+      <% if @platform.present? && @platform.name == platform.name %>
+        <a class="btn btn-default btn-sm active" href="<%= short_dept_path(@department) %>">
+      <% else %>
+        <a class="btn btn-default btn-sm" href="<%= short_plat_path(@department, platform: platform.friendly_id) %>">
+      <% end %>
+        <%= platform.name %>
+      </a>
+    <% end %>
+  </div>-->
+
   <%= render 'department', department: @department %>
 
   <br>

@@ -43,20 +43,25 @@ module GrazerBase
     text.gsub('£', '').to_d
   end
 
-  def extract_title(text)
+  def extract_title(text, platform=nil)
     # Remove [DVD], (XBox) etc
     title = text.gsub(/\[.+\]|\(.+\)/, '').gsub(': ', ' - ').strip
     GAME_PLATFORMS.each         { |p| title.gsub!(/#{p}(?! console)/i, '') }
     VIDEO_PLATFORMS.each        { |p| title.gsub!(/#{p}/i, '') }
     MUSIC_PLATFORMS.values.each { |p| title.gsub!(/#{p}/i, '') }
     VARIATIONS.values.each      { |p| title.gsub!(/#{p}/i, '') }
+    if platform == 'Blu-Ray'
+      title.gsub!(/ 3D$/, '')
+    end
     title
   end
 
-  def extract_variation(text)
+  def extract_variation(text, platform=nil)
     return VARIATIONS[:deluxe]   if text =~ /delux/i
     return VARIATIONS[:limited]  if text =~ /limited ed/i
-    return VARIATIONS[:bluray3d] if text =~ /blu-ray 3d|blu ?ray 3d/i
+    if platform == 'Blu-Ray'
+      VARIATIONS[:bluray3d] if text =~ /blu-ray 3d|blu ?ray 3d| 3D$/i
+    end
   end
 
   def extract_platform(platform)
