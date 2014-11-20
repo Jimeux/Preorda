@@ -29,6 +29,11 @@ var ItemSlider = React.createClass({
   },
 
   componentWillUpdate: function() {
+    // This sets the padding for .panel-body
+    var padding = window.outerWidth < 500 ? 0 : 10;
+    $(this.getDOMNode().parentNode.parentNode)   //TODO: Use a class or media queries for this
+        .css({paddingLeft: padding, paddingRight: padding});
+
     //$(this.refs.content.getDOMNode())
     //    .css('opacity', 0.45)
     //    .animate({opacity: 1.0}, 250);
@@ -71,8 +76,9 @@ var ItemSlider = React.createClass({
     //$(self.refs.content.getDOMNode()).animate({opacity: 0.25}, 250);
     $.get('departments.json?page=' + nextPage + '&id=' + this.props.id, function(data) {
       if ($(data.content).find('.dept-item-title').length >= 1) {
-        self.cache[nextPage-1] = data.content;
-        self.setState({content: data.content, page: nextPage, forwardDisabled: '', backDisabled: backDisabled});
+        var content = $(data.content).html();
+        self.cache[nextPage-1] = content;
+        self.setState({content: content, page: nextPage, forwardDisabled: '', backDisabled: backDisabled});
       } else {
         self.setState({content: self.state.content, page: self.state.page, forwardDisabled: 'disabled', backDisabled: backDisabled});
       }
@@ -80,11 +86,12 @@ var ItemSlider = React.createClass({
   },
 
   render: function() {
+    var xs  = (window.outerWidth < 500);
     var linkStyle = {paddingTop: this.state.vPadding, paddingBottom: this.state.vPadding};
 
     return (
         <div>
-          <div className="col-xs-1 chevron">
+          <div className="col-xs-1 chevron" style={{width: xs ? '10%' : '6%'}}>
             <a href="#" className={this.state.backDisabled} onClick={this.pageDown} style={linkStyle}>
               <i className="glyphicon glyphicon-chevron-left"></i>
             </a>
@@ -92,11 +99,11 @@ var ItemSlider = React.createClass({
 
           <div className="col-xs-10"
                ref="content"
-               style={{padding: 0, width: '88%'}}
+               style={{padding: 0, width: xs ? '80%' : '88%'}}
                dangerouslySetInnerHTML={{__html: this.state.content}}>
           </div>
 
-          <div className="col-xs-1 chevron">
+          <div className="col-xs-1 chevron" style={{width: xs ? '10%' : '6%'}}>
             <a href="#" className={this.state.forwardDisabled} onClick={this.pageUp} style={linkStyle}>
               <i className="glyphicon glyphicon-chevron-right"></i>
             </a>
@@ -109,8 +116,7 @@ var ItemSlider = React.createClass({
 function attachSliders() {
   $('.dept-preview').each(function () {
     var $container = $(this).find('.preview-items');
-    var content = $container.clone().wrap('<p>').parent().html(); // Hack to include parent's HTML
-    $container.parent().css({paddingLeft: 10, paddingRight: 10});
+    var content = $container.html();
 
     React.render(
         <ItemSlider dept={$(this).data('name')} id={$(this).data('id')} initialContent={content} />,
