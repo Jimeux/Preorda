@@ -2,7 +2,8 @@
 
   <% items.each do |item| %>
     <%# TODO: @items.present? below checks whether we're on the index or show page %>
-    <div class="dept-item col-xs-6 <%= @items.present? ? 'col-sm-3' : 'col-sm-4' %> col-md-2">
+    <% show_flag = @items.present? %>
+    <div class="dept-item col-xs-6 <%= show_flag ? 'col-sm-3' : 'col-sm-4' %> col-md-2">
 
       <div>
         <a href="<%= item_path(item) %>">
@@ -27,7 +28,7 @@
           <%= print_summary_creator(item) %>
         </div>
 
-      <% else %>
+      <% elsif show_flag %>
 
         <div class="dept-item-creator text-muted">
           <%= item.platform.name if item.platform %>

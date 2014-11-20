@@ -50,8 +50,8 @@ class Item < ActiveRecord::Base
   # --- Scopes ---#
 
   scope :latest, -> {
+    #.includes(:platform)
     includes(:products)
-    .includes(:platform)
     .includes(:department)
     .select('DISTINCT ON(items.title, items.release_date) *')
     .where('items.release_date > now() OR items.release_date IS NULL')
@@ -70,7 +70,6 @@ class Item < ActiveRecord::Base
   scope :latest_page, ->(dept_id, page) {
     includes(:department)
     .includes(:products)
-    .includes(:platform)
     .select('DISTINCT ON(items.title, items.release_date) *')
     .where(department_id: dept_id)
     .where('items.release_date > now() OR items.release_date IS NULL')
