@@ -4,9 +4,11 @@ class DepartmentsController < ApplicationController
     # @departments is currently set in ApplicationController
     # Leave this blank to avoid hitting the DB again.
 
+    sleep 0.2
+
     respond_to do |format|
       format.html
-      format.json { render json: index_json }
+      format.json { render json: { content: get_items_page } }
     end
   end
 
@@ -22,22 +24,13 @@ class DepartmentsController < ApplicationController
 
   private
 
-  def index_json
-    page       = params[:page] || 1
-    dept_items = Item.latest_page(params[:id], page)
-    dept_items.each_with_object([]) do |item, item_array|
-      item_array << {
-          url:          item_path(item),
-          variation:    item.variation,
-          image_url:    item.image.url(:thumb),
-          image_height: view_context.thumb_height_for(item.department),
-          title:        item.title.size > 16 ? item.title.first(13) + '…' : item.title,
-          creator:      view_context.is_in_music_dept?(item) ? view_context.print_summary_creator(item) : '',
-          platform:     item.platform ? item.platform.name : '',
-          release_date: view_context.print_time_to_release(item),
-          price:        item.lowest_price > 0 ? view_context.raw(view_context.number_to_currency(item.lowest_price)) : '-'
-      }
-    end.to_json
+  def get_items_page
+    page  = params[:page] || 1
+    items = Item.latest_page(params[:id], page)
+    render_to_string(template: 'departments/_items',
+                     formats: ['html'],
+                     layout: false,
+                     locals: { items: items })
   end
 
 end
