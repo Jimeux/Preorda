@@ -24,8 +24,8 @@ var ItemSlider = React.createClass({
 
   componentDidMount: function() {
     this.hammer = new Hammer(this.getDOMNode());
-    this.hammer.on('swipeleft', this.pageDown);
-    this.hammer.on('swiperight', this.pageUp);
+    this.hammer.on('swiperight', this.pageDown);
+    this.hammer.on('swipeleft',  this.pageUp);
 
     window.addEventListener("resize", this.setHeight);
     this.setHeight();
