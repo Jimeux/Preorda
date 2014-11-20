@@ -24,9 +24,9 @@ module DepartmentsHelper
 
   def thumb_height_for(department)
     case department.name
-      when 'games' then return 120
-      when 'video' then return 135
-      when 'music' then return 95
+      when 'games' then return 114
+      when 'video' then return 126
+      when 'music' then return 90
       else return ''
     end
   end

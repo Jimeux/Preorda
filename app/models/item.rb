@@ -41,9 +41,9 @@ class Item < ActiveRecord::Base
 
   def set_image_styles
     case department.name.downcase
-      when 'music' then '170x170#'   # 1    ratio
-      when 'games' then '170x210#'   # 1.25 ratio
-      else '170x240#'                # 1.4  ratio
+      when 'music' then '150x150#'   # 1    ratio
+      when 'games' then '150x190#'   # 1.25 ratio
+      else '150x210#'                # 1.4  ratio
     end
   end
 
@@ -65,6 +65,16 @@ class Item < ActiveRecord::Base
     .includes(:platform)
     .where('items.release_date > now() OR items.release_date IS NULL')
     .order('items.release_date, items.title')
+  }
+
+  scope :latest_page, ->(dept_id, page) {
+    includes(:department)
+    .includes(:products)
+    .includes(:platform)
+    .where(department_id: dept_id)
+    .where('items.release_date > now() OR items.release_date IS NULL')
+    .order('items.release_date, items.title')
+    .paginate(page: page, per_page: FRONT_PAGE_LIMIT)
   }
 
   # --- Model methods ---#

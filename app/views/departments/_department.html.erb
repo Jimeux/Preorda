@@ -2,7 +2,7 @@
 <%# TODO: Make the index and show views more independent to avoid this variable %>
 <% index_flag = @items.nil? %>
 
-<div class="panel dept-panel" data-name="<%=department.name%>" data-id="<%=department.id%>">
+<div class="panel dept-panel<%= ' dept-preview' if index_flag %>" data-name="<%=department.name%>" data-id="<%=department.id%>">
 
   <div class="panel-body">
 

@@ -25,6 +25,20 @@ var ItemSlider = React.createClass({
   },
 
   componentDidMount: function() {
+    window.addEventListener("resize", this.setHeight);
+    this.setHeight();
+  },
+
+  componentWillUnmount: function() {
+    console.log('LEAVING');
+  },
+
+  componentWillUpdate: function() {
+    $(this.refs.content.getDOMNode()).css('opacity', 0.35).animate({opacity: 1.0}, 200);
+    //console.log(this.getDOMNode());
+  },
+
+  setHeight: function() {
     var cHeight = this.refs.content.getDOMNode().offsetHeight;
     this.setState({vPadding: parseInt(cHeight / 2 - 55, 10)});
   },
@@ -35,18 +49,22 @@ var ItemSlider = React.createClass({
 
     var self = this;
     var nextPage = goForward ? this.state.page+1 : this.state.page-1;
+    var backDisabled = nextPage <= 0 ? 'disabled' : '';
 
-    this.setState({
-      backDisabled: nextPage <= 0 ? 'disabled' : ''
-    });
-
-    if (nextPage <= 0) return;
+    if (nextPage <= 0) {
+      this.setState({
+        backDisabled: backDisabled
+      });
+      return;
+    }
 
     $.get('departments.json?page=' + nextPage + '&id=' + this.props.id, function(items) {
       if (items.length > 0) {
-        self.setState({items: items, page: nextPage, forwardDisabled: ''});
+        $(self.refs.content.getDOMNode()).animate({opacity: 0.35}, 200, function() {
+          self.setState({items: items, page: nextPage, forwardDisabled: '', backDisabled: backDisabled});
+        });
       } else {
-        self.setState({items: self.state.items, page: self.state.page, forwardDisabled: 'disabled'});
+        self.setState({items: self.state.items, page: self.state.page, forwardDisabled: 'disabled', backDisabled: backDisabled});
       }
     });
   },
@@ -89,7 +107,7 @@ var PreviewItem = React.createClass({
     var creator   = item.creator   ? <div className="dept-item-creator text-muted">{item.creator}</div> : '';
 
     return (
-        <div key={'item'+(new Date().getTime())} className="dept-item col-xs-6 col-sm-4 col-md-2">
+        <div className="dept-item col-xs-6 col-sm-4 col-md-2">
           <div>
             <a href={item.url}>
               {variation}
@@ -109,10 +127,10 @@ var PreviewItem = React.createClass({
 $(document).on('page:change', attachSliders);
 
 function attachSliders() {
-  $('.dept-panel').each(function () {
+  $('.dept-preview').each(function () {
     var $container = $(this).find('.preview-items');
     var content = $container.html();
-    $container.parent().css({paddingLeft: 0, paddingRight: 0});
+    $container.parent().css({paddingLeft: 10, paddingRight: 10});
 
     React.render(
         <ItemSlider dept={$(this).data('name')} id={$(this).data('id')} initialContent={content} />,
