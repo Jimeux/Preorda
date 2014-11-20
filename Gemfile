@@ -48,8 +48,8 @@ group :development do
   gem 'spring'
   gem 'spring-commands-rspec'
   # Deployment
-  gem 'capistrano-rvm'
-#  gem 'capistrano-rbenv',   github: 'capistrano/rbenv'
+#  gem 'capistrano-rvm'
+  gem 'capistrano-rbenv',   github: 'capistrano/rbenv'
   gem 'capistrano-bundler', github: 'capistrano/bundler'
   gem 'capistrano-rails'
 end

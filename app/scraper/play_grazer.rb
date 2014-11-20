@@ -1,15 +1,15 @@
 class PlayGrazer
-  extend Grazer
+  extend GrazerBase
 
   PLAY_URL = 'http://www.play.com'
 
   def self.get_product_data(url)
     page = get_page(url)
     {
-        title:        extract_title(get_title(page)),
+        title:        extract_title(get_title(page), get_platform),
         platform:     get_platform,
         creator:      page.at('.nobox.pan p:contains("Artist")') ? page.at('.nobox.pan p:contains("Artist")').text[/Artist: (.*)/, 1] : nil,
-        variation:    extract_variation(get_title(page)),
+        variation:    extract_variation(get_title(page), get_platform),
         image:        get_image(page),
         release_date: get_release_date(page),
         asin:         url[/\/(\d{8})\//, 1],

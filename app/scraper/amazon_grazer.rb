@@ -1,5 +1,5 @@
 class AmazonGrazer
-  extend Grazer
+  extend GrazerBase
 
   AMAZON_URL  = 'http://www.amazon.co.uk'
 
@@ -36,6 +36,8 @@ class AmazonGrazer
   end
 
   def self.get_variation(page) #TODO: Find and list all variation types below
+    return 'Blu-Ray 3D' if get_title(page)[/Blu-ray 3D/i]
+
     variation = page.search('.variationSelected')
       .select { |v| v.at('.variationDefault').text =~ /Edition|Colour/ && v.at('.variationLabel') }
       .map    { |v| v.at('.variationLabel').text }
@@ -45,9 +47,7 @@ class AmazonGrazer
       variation = page.at('.a-size-medium.a-color-secondary.a-text-normal').text
     end
 
-    if variation
-      variation.gsub(/,? ?Explicit Lyrics/, '')
-    end
+    variation.present? ? variation.gsub(/,? ?Explicit Lyrics/, '') : nil
   end
 
   def self.get_image_url(page)
@@ -73,6 +73,56 @@ class AmazonGrazer
   def self.get_price(page)
     price = page.at('b.priceLarge') || page.at('#priceblock_ourprice')
     price ? price.text[/\d+\.+\d+/].to_d : 0
+  end
+
+  ##
+  # Return an an object with a hash of CSS selectors
+  # and methods to extract each summary value
+  ##
+  def self.selector
+    raise NotImplementedError
+  end
+
+  def self.get_summary_data(limit)
+    page_url = top_url # Start on the first page
+    summary_data = []
+
+    limit.times do   # Put in a limit for now to avoid too many requests
+      # Get a Mechanize object for the URL
+      page = get_page(page_url)
+
+      # Find all product divs and extract their data
+      items = page.search(selector::SELECTORS[:item])
+      items.each do |item|
+        summary_data << extract_summary_data(item)
+      end
+
+      # Set page_url to the next page before the next iteration of the loop
+      # If no link is found, then we're finished
+      next_link = page.at(selector::SELECTORS[:next_link])
+
+      if next_link
+        # Join the relative URL with the Amazon domain
+        page_url = URI.join(AMAZON_URL, next_link.attr('href')).to_s
+      else
+        break
+      end
+
+    end
+
+    summary_data
+  end
+
+  def self.extract_summary_data(item)
+    selector.set_item(item)
+    {
+        url:          selector.url.strip,
+        price:        extract_price(selector.price),
+        asin:         selector.asin,
+        title:        selector.title,
+        image:        selector.image,
+        release_date: selector.release_date
+    }
   end
 
 end

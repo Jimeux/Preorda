@@ -1,5 +1,5 @@
 class ItunesMusicGrazer
-  extend Grazer
+  extend GrazerBase
 
   def self.section_url;
     'https://itunes.apple.com/gb/collection/pre-orders/id1?fcId=303241591'

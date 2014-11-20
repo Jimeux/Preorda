@@ -4,11 +4,12 @@ set :application, 'preorda'
 set :repo_url, 'git@bitbucket.org:jimeux/launchbro.git'
 set :deploy_to, "/var/www/#{fetch(:application)}"
 
-#set :rbenv_type, :user
-#set :rbenv_ruby, '2.1.0'
+set :rbenv_type, :user
+set :rbenv_ruby, '2.1.3'
 
-set :rvm_type, :user                     # Defaults to: :auto
-set :rvm_ruby_version, '2.1.3p242'      # Defaults to: 'default'
+#set :rvm_type, :user                     # Defaults to: :auto
+#set :rvm_ruby_version, '2.1.3p242'      # Defaults to: 'default'
+#set :rvm_custom_path,  '/usr/local/rvm'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
@@ -42,7 +43,7 @@ namespace :deploy do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
       # execute :touch, release_path.join('tmp/restart.txt')
-      invoke 'unicorn:restart'
+      #invoke 'unicorn:restart'
     end
   end
 

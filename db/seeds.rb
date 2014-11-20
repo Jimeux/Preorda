@@ -27,6 +27,8 @@ store_records = [
     #Zavvi is just an example of an affiliate window style setup would need to get real id values
     #clickrefs are typically a way of identifying a link you've created through the AWin dashboard (for analytical purposes)
     #p is the url encoded URL to where you're linking
+=begin
+#TODO: Comment out until the grazer is done
     {
         name:          'Zavvi',
         domain:        'zavvi.com',
@@ -37,6 +39,7 @@ store_records = [
                         { name: 'clickref',  value: '<product_id>' },
                         { name: 'p',         value: '<product_website>' } ]
     }
+=end
 ]
 
 store_records.each do |store_record|

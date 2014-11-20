@@ -1,11 +1,12 @@
 require 'mechanize'
 
-module Grazer
+module GrazerBase
 
   VARIATIONS = {
       deluxe: 'Deluxe Edition',
       limited: 'Limited Edition',
-      collector: "Collector's Edition"
+      collector: "Collector's Edition",
+      bluray3d:  'Blu-Ray 3D'
   }
 
   MUSIC_PLATFORMS = {
@@ -13,10 +14,9 @@ module Grazer
       mp3_download:     'MP3 Download',
   }
 
-  VIDEO_PLATFORMS = {
-      dvd:              'DVD',
-      bluray:           'Blu-Ray',
-  }
+  VIDEO_PLATFORMS = [
+      'DVD', 'Blu-Ray', 'Blu Ray'
+  ]
 
   GAME_PLATFORMS = [
       'Nintendo 3DS', 'Nintendo 2DS', 'Nintendo DS', 'Nintendo Wii', 'Nintendo Wii U',
@@ -43,21 +43,25 @@ module Grazer
     text.gsub('£', '').to_d
   end
 
-  def extract_title(text)
+  def extract_title(text, platform=nil)
     # Remove [DVD], (XBox) etc
     title = text.gsub(/\[.+\]|\(.+\)/, '').gsub(': ', ' - ').strip
-
     GAME_PLATFORMS.each         { |p| title.gsub!(/#{p}(?! console)/i, '') }
-    MUSIC_PLATFORMS.values.each { |p| title.gsub!(p, '') }
-    VIDEO_PLATFORMS.values.each { |p| title.gsub!(p, '') }
-    VARIATIONS.values.each      { |p| title.gsub!(p, '') }
-
+    VIDEO_PLATFORMS.each        { |p| title.gsub!(/#{p}/i, '') }
+    MUSIC_PLATFORMS.values.each { |p| title.gsub!(/#{p}/i, '') }
+    VARIATIONS.values.each      { |p| title.gsub!(/#{p}/i, '') }
+    if platform == 'Blu-Ray'
+      title.gsub!(/ 3D$/, '')
+    end
     title
   end
 
-  def extract_variation(text)
-    return VARIATIONS[:deluxe]  if text =~ /delux/i
-    return VARIATIONS[:limited] if text =~ /limited ed/i
+  def extract_variation(text, platform=nil)
+    return VARIATIONS[:deluxe]   if text =~ /delux/i
+    return VARIATIONS[:limited]  if text =~ /limited ed/i
+    if platform == 'Blu-Ray'
+      VARIATIONS[:bluray3d] if text =~ /blu-ray 3d|blu ?ray 3d| 3D$/i
+    end
   end
 
   def extract_platform(platform)
