@@ -71,6 +71,7 @@ class Item < ActiveRecord::Base
     includes(:department)
     .includes(:products)
     .includes(:platform)
+    .select('DISTINCT ON(items.title, items.release_date) *')
     .where(department_id: dept_id)
     .where('items.release_date > now() OR items.release_date IS NULL')
     .order('items.release_date, items.title')

@@ -29,9 +29,9 @@ var ItemSlider = React.createClass({
   },
 
   componentWillUpdate: function() {
-    $(this.refs.content.getDOMNode())
-        .css('opacity', 0.45)
-        .animate({opacity: 1.0}, 250);
+    //$(this.refs.content.getDOMNode())
+    //    .css('opacity', 0.45)
+    //    .animate({opacity: 1.0}, 250);
   },
 
   setHeight: function() {
@@ -68,7 +68,7 @@ var ItemSlider = React.createClass({
 
   loadData: function(nextPage, backDisabled) {
     var self = this;
-    $(self.refs.content.getDOMNode()).animate({opacity: 0.25}, 250);
+    //$(self.refs.content.getDOMNode()).animate({opacity: 0.25}, 250);
     $.get('departments.json?page=' + nextPage + '&id=' + this.props.id, function(data) {
       if ($(data.content).find('.dept-item-title').length >= 1) {
         self.cache[nextPage-1] = data.content;
