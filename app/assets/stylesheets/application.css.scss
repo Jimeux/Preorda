@@ -5,7 +5,7 @@
 
 $navbar-default-bg:          #f2f2f2;
 $navbar-default-brand-color: #333;
-$navbar-height:              54px;
+$navbar-height:              50px;
 $panel-default-heading-bg:   #fff;
 $panel-default-border:       #d5d5d5;
 $navbar-default-border:      #e5e5e5;
@@ -35,7 +35,7 @@ $container-lg: $container-md;
 
 * { border-radius: 0 !important; } // Setting the sass var above doesn't work
 body {
-  padding:          55px 0 0 0;
+  padding:          51px 0 0 0;
   font-weight:      300;
   background-color: #f2f2f2;
 }
@@ -68,7 +68,7 @@ button.navbar-toggle {
   border-color: $navbar-default-bg !important;
 }
 button.search-toggle {
-  padding: 15px 16px 13px 16px;
+  padding: 13px 16px 11px 16px;
   margin:  2px 0;
 }
 input#q {
@@ -87,7 +87,7 @@ button#search-button:focus {
 .logout-link {
   @extend .navbar-link;
 
-  padding:    17px 25px 17px 15px;
+  padding:    15px 25px 15px 15px;
   font-size:  14px;
   background: none;
   border:     none;
