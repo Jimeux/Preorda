@@ -13,16 +13,20 @@ var ItemSlider = React.createClass({
   },
 
   pageUp: function(e) {
-    e.preventDefault();
+    if (typeof e != 'undefined') e.preventDefault();
     this.handlePageChange(true);
   },
 
   pageDown: function(e) {
-    e.preventDefault();
+    if (typeof e != 'undefined') e.preventDefault();
     this.handlePageChange(false);
   },
 
   componentDidMount: function() {
+    this.hammer = new Hammer(this.getDOMNode());
+    this.hammer.on('swipeleft', this.pageDown);
+    this.hammer.on('swiperight', this.pageUp);
+
     window.addEventListener("resize", this.setHeight);
     this.setHeight();
     this.cache = [this.props.initialContent];
