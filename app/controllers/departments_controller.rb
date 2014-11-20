@@ -4,8 +4,6 @@ class DepartmentsController < ApplicationController
     # @departments is currently set in ApplicationController
     # Leave this blank to avoid hitting the DB again.
 
-    sleep 0.2
-
     respond_to do |format|
       format.html
       format.json { render json: { content: get_items_page } }
