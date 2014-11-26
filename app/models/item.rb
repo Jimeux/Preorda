@@ -35,15 +35,18 @@ class Item < ActiveRecord::Base
                           { show: '450x',
                         thumb: attachment.instance.set_image_styles }
                     },
+                    convert_options: {
+                        thumb: '-strip -interlace Plane -quality 90%'
+                    },
                     default_url: '/images/:style/missing.png' #,
                     #use_timestamp: false
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   def set_image_styles
     case department.name.downcase
-      when 'music' then '150x150#'   # 1    ratio
-      when 'games' then '150x190#'   # 1.25 ratio
-      else '150x210#'                # 1.4  ratio
+      when 'music' then '135x135#'   # 1    ratio
+      when 'games' then '135x170#'   # 1.25 ratio
+      else '135x190#'                # 1.4  ratio
     end
   end
 

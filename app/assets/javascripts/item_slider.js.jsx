@@ -129,4 +129,4 @@ function attachSliders() {
   });
 }
 
-$(document).on('page:change', attachSliders);
+//$(document).on('page:change', attachSliders);
