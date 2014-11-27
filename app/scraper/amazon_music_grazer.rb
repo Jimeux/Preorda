@@ -8,6 +8,20 @@ class AmazonMusicGrazer < AmazonGrazer
     AmazonMusicSelector
   end
 
+  def self.get_description(page)
+    tracks = page.search('#albumTrackList .titleCol')
+    tracks = page.search('#musicTracksFeature table tr td') if tracks.empty?
+    return if tracks.empty?
+
+    tracks.each_with_object([]) do |col, output|
+      arr = col.text.split(/(\d{1,2})\./).map(&:strip)
+      arr.reject! { |e| e.empty? || e.include?("\u00A0") }
+      arr = arr.join("\t")
+      arr = " \t..." if arr =~ /see all \d{1,2} tracks/i
+      output << arr
+    end.join("\n")
+  end
+
   protected
 
   class AmazonMusicSelector

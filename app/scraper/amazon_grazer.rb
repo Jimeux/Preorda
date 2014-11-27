@@ -16,9 +16,12 @@ class AmazonGrazer
       release_date: get_release_date(page),
       asin:         url[/\/dp\/(\w{10})\//, 1],
       price:        get_price(page),
-      url:          url
+      url:          url,
+      description: get_description(page)
     }
   end
+
+  def self.get_description(page) ; nil end
 
   def self.get_title(page)
     title = page.at('#btAsinTitle') || page.at('#productTitle')
