@@ -29,6 +29,7 @@ namespace :graze do
     store  = Store.where('lower(name) = ?', store_name.downcase).first
     dept   = Department.where('lower(name) = ?', dept_name.downcase).first
     #grazer = get_grazer(store_name, dept_name)
+    pages  = (ENV['p'] || ENV['pages']).to_i
     ItemCreator.new(grazer, store, dept, pages)
   end
 
