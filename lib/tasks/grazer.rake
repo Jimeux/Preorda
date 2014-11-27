@@ -50,19 +50,7 @@ end
 # This class can be put in a new file
 
 class ItemCreator
-  def self.itunes_music
-    graze('itunes', 'music', ItunesMusicGrazer)
-  end
-
-  def graze(store_name, dept_name, grazer, pages=2)
-    store  = Store.where('lower(name) = ?', store_name.downcase).first
-    dept   = Department.where('lower(name) = ?', dept_name.downcase).first
-    #grazer = get_grazer(store_name, dept_name)
-    ItemCreator.new(grazer, store, dept, pages)
-  end
-
   def initialize(grazer, store, dept, pages)
-    #@linker = AffiliateLinker.new
     @grazer = grazer
     @store  = store
     @dept   = dept
@@ -111,8 +99,6 @@ class ItemCreator
     attrs = full_data.slice(:url, :rank, :price, :asin)
     attrs.merge!(scraped_item.slice(:rank))
     attrs[:store_id] = @store.id
-
-    #attrs[:url] = @linker.get_affiliate_link(@store.name, attrs[:url])
 
     item.products.build(attrs)
 
