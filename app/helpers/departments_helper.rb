@@ -7,8 +7,8 @@ module DepartmentsHelper
   end
 
   def print_summary_creator(item)
-    item.creator.size > 20 ?
-      item.creator.first(17) + '…' :
+    item.creator.size > 16 ?
+      item.creator.first(13) + '…' :
       item.creator
   end
 
@@ -24,9 +24,9 @@ module DepartmentsHelper
 
   def thumb_height_for(department)
     case department.name
-      when 'games' then return 114
-      when 'video' then return 126
-      when 'music' then return 90
+      when 'games' then return 105
+      when 'video' then return 120
+      when 'music' then return 85
       else return ''
     end
   end

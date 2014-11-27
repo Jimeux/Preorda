@@ -7,7 +7,7 @@ $navbar-default-bg:          #f4f4f4;
 $navbar-default-brand-color: #333;
 $navbar-height:              50px;
 $panel-default-heading-bg:   #fff;
-$panel-default-border:       #d5d5d5;
+$panel-default-border:       #e5e5e5;
 $navbar-default-border:      #e5e5e5;
 $btn-font-weight:            300;
 $headings-font-weight:       300;
@@ -152,7 +152,7 @@ div#featured div {
 
 .styled-container {
   margin-bottom:    -20px;
-  padding-bottom:   40px;
+  //padding-bottom:   40px;
   background-color: #ffffff;
   border:           1px solid #e5e5e5;
   border-width:     0 1px;
@@ -226,9 +226,9 @@ div#featured div {
 
 // Put these at the bottom to avoid them being overridden
 .dept-panel {
-  margin-bottom:  -15px;
+  margin: 0 -15px;
   border:         0;
-  .panel-body { padding-bottom: 0;}
+  border-bottom: 1px solid $navbar-default-border;
 }
 .music-colour { background-color: $brand-primary; }
 .games-colour { background-color: $brand-danger;  }

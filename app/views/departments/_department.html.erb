@@ -6,15 +6,18 @@
 
   <div class="panel-body">
 
-    <% if index_flag %>
-      <div class="view-all">
-        <%= link_to t('dept.index.view_all'), short_dept_path(department) %>
-      </div>
-    <% end %>
+    <div>
+      <% if index_flag %>
+        <div class="view-all">
+          <%= link_to t('dept.index.view_all'), short_dept_path(department) %>
+        </div>
+      <% end %>
 
-    <h4 class="dept-heading">
-      <%= t('dept.index.coming_soon', dept: t("dept.#{department.name}")) %>
-    </h4>
+
+      <h4 class="dept-heading">
+        <%= t('dept.index.coming_soon', dept: t("dept.#{department.name}")) %>
+      </h4>
+    </div>
 
     <%= render 'items', items: (@items || department.items) if (@items || department.items) %>
 
