@@ -3,7 +3,7 @@
  *= require_self
  */
 
-$navbar-default-bg:          #f2f2f2;
+$navbar-default-bg:          #f4f4f4;
 $navbar-default-brand-color: #333;
 $navbar-height:              50px;
 $panel-default-heading-bg:   #fff;
@@ -37,7 +37,7 @@ $container-lg: $container-md;
 body {
   padding:          51px 0 0 0;
   font-weight:      300;
-  background-color: #f2f2f2;
+  background-color: #f4f4f4;
 }
 input { box-shadow: none !important; }
 .panel {
@@ -138,7 +138,6 @@ div#featured {
   clear:            both;
   padding:          0;
   margin:           0 -15px;
-  height:           145px;
 }
 div#featured div {
   display:      inline;

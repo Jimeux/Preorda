@@ -1,4 +1,5 @@
-/** @jsx React.DOM */
+/** @jsx React.DOM *//*
+
 
 var ItemSlider = React.createClass({
 
@@ -129,4 +130,4 @@ function attachSliders() {
   });
 }
 
-//$(document).on('page:change', attachSliders);
+$(document).on('page:change', attachSliders);*/

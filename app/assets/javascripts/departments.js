@@ -52,7 +52,7 @@ function displayPage(page) {
   var start = parseInt(page * imgLimit, 10);
 
   displayFeatures(start, imgLimit, imgWidth);
-  displayDots(page, pageCount);
+  if (pageCount !== 1) displayDots(page, pageCount);
 }
 
 function displayFeatures(start, limit, width) {
