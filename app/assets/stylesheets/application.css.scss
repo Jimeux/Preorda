@@ -183,7 +183,7 @@ div#featured div {
 .pagination-container {
   width:         100%;
   text-align:    center;
-  margin-bottom: -20px;
+  margin-top:    -20px;
 
   .disabled span {
     padding-right: 7px;
@@ -228,6 +228,8 @@ div#featured div {
 .dept-panel {
   margin: 0 -15px;
   border:         0;
+}
+.dept-preview {
   border-bottom: 1px solid $navbar-default-border;
 }
 .music-colour { background-color: $brand-primary; }

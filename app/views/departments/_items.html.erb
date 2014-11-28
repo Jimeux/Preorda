@@ -23,17 +23,15 @@
       </div>
 
       <% if is_in_music_dept?(item) %>
-
         <div class="dept-item-creator text-muted">
           <%= print_summary_creator(item) %>
         </div>
+      <% end %>
 
-      <% elsif show_flag %>
-
+      <% if show_flag %>
         <div class="dept-item-creator text-muted">
           <%= item.platform.name if item.platform %>
         </div>
-
       <% end %>
 
       <div class="dept-item-date">
