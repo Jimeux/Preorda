@@ -17,7 +17,13 @@ class AmazonGameGrazer < AmazonGrazer
     extract_platform(platform)
   end
 
-  def self.selector
+  def self.get_description(page)
+    target = page.at('.content .productDescriptionWrapper') ||
+             page.at('.apm-sidemodule-textright')
+    target.text.strip if target
+  end
+
+  def self.selector # TODO: These selectors are for summaries; add that to the names
     AmazonGamesSelector
   end
 
