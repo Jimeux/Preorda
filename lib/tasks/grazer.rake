@@ -82,7 +82,7 @@ class ItemCreator
   end
 
   def create_item(scraped_item)
-    sleep 0.8
+    sleep 1.5
     puts "Creating record for '#{scraped_item[:title]}'"
     puts "    #{scraped_item[:url]}"
 

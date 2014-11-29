@@ -51,7 +51,7 @@ function displayPage(page) {
 
   var start = parseInt(page * imgLimit, 10);
 
-  displayFeatures(start, imgLimit, imgWidth);
+  if (features.length >= imgLimit) displayFeatures(start, imgLimit, imgWidth);
   if (pageCount == 1) {
     $('#dots').empty();
   } else {
