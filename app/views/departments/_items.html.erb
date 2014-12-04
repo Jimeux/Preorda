@@ -8,7 +8,7 @@
       <div>
         <a href="<%= item_path(item) %>">
 
-          <% if show_flag && item.variation %>
+          <% if show_flag && item.variation.present? %>
             <div class="variation-caption">
               <%= item.variation %>
             </div>
