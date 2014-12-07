@@ -10,12 +10,13 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require react
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
+
+////=// require react
 
 $(function() { ShareThisTurbolinks.reload(); });
 $(document).on('page:load',    function() { ShareThisTurbolinks.reload();  });

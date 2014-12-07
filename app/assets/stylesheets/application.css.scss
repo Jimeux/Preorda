@@ -3,6 +3,8 @@
  *= require_self
  */
 
+//@import url(http://fonts.googleapis.com/css?family=Orbitron&text=Preorda);
+
 $navbar-default-bg:          #f4f4f4;
 $navbar-default-brand-color: #333;
 $navbar-height:              50px;
@@ -18,16 +20,7 @@ $container-sm: 640px;   // tables, desktop etc
 $container-md: 960px;   // and test more thoroughly
 $container-lg: $container-md;
 
-/*
- * TODO: Follow the steps on the bootstrap-sass GitHub page
- *       to remove unused components when the time comes.
- */
-@import "bootstrap";
-
-/* TODO: Consider serving this font locally (if legal)
- * Brand font
- */
-@import url(http://fonts.googleapis.com/css?family=Orbitron&text=Preorda);
+@import "bootstrap-custom";
 
 /*
  * Changes to Bootstrap defaults
@@ -56,10 +49,11 @@ input { box-shadow: none !important; }
  */
 
 a.navbar-brand {
-  font-family: 'Orbitron', sans-serif;
-  font-size:   180%;
-  padding:     14px;
-  line-height: 32px;
+  padding: 3px 0 0 14px;
+  img {
+    height: 48px;
+    width: 128px;
+  }
 }
 a.navbar-brand:hover {
   color: $brand-primary !important;

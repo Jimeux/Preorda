@@ -12,7 +12,7 @@ gem 'bootstrap-sass', '~> 3.1.1'
 # JavaScript
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
-gem 'react-rails', '~> 0.12.0.0'
+#gem 'react-rails', '~> 0.12.0.0'
 gem 'turbolinks'   # Read about it here: https://github.com/rails/turbolinks
 gem 'jbuilder', '~> 2.0' # For JSON APIs: https://github.com/rails/jbuilder
 
