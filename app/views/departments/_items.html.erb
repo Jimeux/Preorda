@@ -1,19 +1,20 @@
-<div class="row">
+<div class="row preview-items">
 
   <% items.each do |item| %>
     <%# TODO: @items.present? below checks whether we're on the index or show page %>
-    <div class="dept-item col-xs-6 <%= @items.present? ? 'col-sm-3' : 'col-sm-4' %> col-md-2">
+    <% show_flag = @items.present? %>
+    <div class="dept-item col-xs-6 <%= show_flag ? 'col-sm-3' : 'col-sm-4' %> col-md-2">
 
       <div>
         <a href="<%= item_path(item) %>">
 
-          <% if item.variation %>
+          <% if show_flag && item.variation.present? %>
             <div class="variation-caption">
               <%= item.variation %>
             </div>
           <% end %>
 
-          <%= image_tag item.image.url(:thumb), class: 'dept-item-img', width: 95, height: thumb_height_for(item.department) %>
+          <%= image_tag item.image.url(:thumb), class: 'dept-item-img', width: 85, height: thumb_height_for(item.department) %>
         </a>
       </div>
 
@@ -22,17 +23,15 @@
       </div>
 
       <% if is_in_music_dept?(item) %>
-
         <div class="dept-item-creator text-muted">
           <%= print_summary_creator(item) %>
         </div>
+      <% end %>
 
-      <% else %>
-
+      <% if show_flag %>
         <div class="dept-item-creator text-muted">
           <%= item.platform.name if item.platform %>
         </div>
-
       <% end %>
 
       <div class="dept-item-date">

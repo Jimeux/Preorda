@@ -35,23 +35,26 @@ class Item < ActiveRecord::Base
                           { show: '450x',
                         thumb: attachment.instance.set_image_styles }
                     },
+                    convert_options: {
+                        all: '-rotate 270 -strip -interlace Plane -quality 80%'
+                    },
                     default_url: '/images/:style/missing.png' #,
                     #use_timestamp: false
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   def set_image_styles
     case department.name.downcase
-      when 'music' then '170x170#'   # 1    ratio
-      when 'games' then '170x210#'   # 1.25 ratio
-      else '170x240#'                # 1.4  ratio
+      when 'music' then '130x130#'   # 1    ratio
+      when 'games' then '125x155#'   # 1.25 ratio
+      else '125x175#'                # 1.4  ratio
     end
   end
 
   # --- Scopes ---#
 
   scope :latest, -> {
+    #.includes(:platform)
     includes(:products)
-    .includes(:platform)
     .includes(:department)
     .select('DISTINCT ON(items.title, items.release_date) *')
     .where('items.release_date > now() OR items.release_date IS NULL')
@@ -65,6 +68,16 @@ class Item < ActiveRecord::Base
     .includes(:platform)
     .where('items.release_date > now() OR items.release_date IS NULL')
     .order('items.release_date, items.title')
+  }
+
+  scope :latest_page, ->(dept_id, page) {
+    includes(:department)
+    .includes(:products)
+    .select('DISTINCT ON(items.title, items.release_date) *')
+    .where(department_id: dept_id)
+    .where('items.release_date > now() OR items.release_date IS NULL')
+    .order('items.release_date, items.title')
+    .paginate(page: page, per_page: FRONT_PAGE_LIMIT)
   }
 
   # --- Model methods ---#

@@ -3,12 +3,14 @@
  *= require_self
  */
 
-$navbar-default-bg:          #f2f2f2;
+//@import url(http://fonts.googleapis.com/css?family=Orbitron&text=Preorda);
+
+$navbar-default-bg:          #f4f4f4;
 $navbar-default-brand-color: #333;
 $navbar-height:              54px;
 $panel-default-heading-bg:   #fff;
-$panel-default-border:       #d5d5d5;
-$navbar-default-border:      #e5e5e5;
+$panel-default-border:       #e5e5e5;
+$navbar-default-border:      $navbar-default-bg;
 $btn-font-weight:            300;
 $headings-font-weight:       300;
 
@@ -18,26 +20,19 @@ $container-sm: 640px;   // tables, desktop etc
 $container-md: 960px;   // and test more thoroughly
 $container-lg: $container-md;
 
-/*
- * TODO: Follow the steps on the bootstrap-sass GitHub page
- *       to remove unused components when the time comes.
- */
-@import "bootstrap";
-
-/* TODO: Consider serving this font locally (if legal)
- * Brand font
- */
-//@import url(http://fonts.googleapis.com/css?family=Orbitron&text=Preorda);
+@import "bootstrap-custom";
 
 /*
  * Changes to Bootstrap defaults
  */
 
 * { border-radius: 0 !important; } // Setting the sass var above doesn't work
+
+
 body {
-  padding:          55px 0 0 0;
+  padding:          75px 0 0 0;
   font-weight:      300;
-  background-color: #f2f2f2;
+  background-color: #f4f4f4;
 }
 input { box-shadow: none !important; }
 .panel {
@@ -56,10 +51,11 @@ input { box-shadow: none !important; }
  */
 
 a.navbar-brand {
-  font-family: 'Orbitron', sans-serif;
-  font-size:   180%;
-  padding:     14px;
-  line-height: 32px;
+  padding: 5px 0 0 16px;
+  img {
+    height: 48px;
+    width: 128px;
+  }
 }
 a.navbar-brand:hover {
   color: $brand-primary !important;
@@ -68,7 +64,7 @@ button.navbar-toggle {
   border-color: $navbar-default-bg !important;
 }
 button.search-toggle {
-  padding: 15px 16px 13px 16px;
+  padding: 13px 16px 11px 16px;
   margin:  2px 0;
 }
 input#q {
@@ -87,7 +83,7 @@ button#search-button:focus {
 .logout-link {
   @extend .navbar-link;
 
-  padding:    17px 25px 17px 15px;
+  padding:    15px 25px 15px 15px;
   font-size:  14px;
   background: none;
   border:     none;
@@ -98,9 +94,15 @@ button#search-button:focus {
  */
 
 .sections-wrapper {
+  top: 54px;
+  z-index:      110;
+  position:     fixed;
   display:      table;
   table-layout: fixed;
   width:        100%;
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
 }
 .section-heading {
   display:    table-cell;
@@ -110,7 +112,7 @@ button#search-button:focus {
   //padding:    0 !important;
 
   a {
-    padding:         3px;
+    padding:         4px;
     font-size:       90%;
     display:         inline-block;
     width:           100%;
@@ -138,7 +140,6 @@ div#featured {
   clear:            both;
   padding:          0;
   margin:           0 -15px;
-  height:           145px;
 }
 div#featured div {
   display:      inline;
@@ -153,10 +154,11 @@ div#featured div {
 
 .styled-container {
   margin-bottom:    -20px;
-  padding-bottom:   40px;
+  //padding-bottom:   40px;
   background-color: #ffffff;
-  border:           1px solid #e5e5e5;
-  border-width:     0 1px;
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
   //box-shadow: 0 3px 5px #d7d7d7;
 }
 
@@ -184,7 +186,7 @@ div#featured div {
 .pagination-container {
   width:         100%;
   text-align:    center;
-  margin-bottom: -20px;
+  margin-top:    -20px;
 
   .disabled span {
     padding-right: 7px;
@@ -203,7 +205,7 @@ div#featured div {
 
 .footer {
   color:            #c0c0c0;
-  background-color: #404040;
+  background-color: #424242;
   width:            100%;
   padding:          20px 30px 30px;
   margin-top:       20px;
@@ -220,16 +222,18 @@ div#featured div {
   margin-bottom:    8px;
   background-color: #c0c0c0;
 }
-.footer-social {
+.footer-sc {
   border-radius: 25px !important;
   margin-top:    10px;
 }
 
 // Put these at the bottom to avoid them being overridden
 .dept-panel {
-  margin-bottom:  -20px;
+  margin: 0 -15px;
   border:         0;
-  .panel-body { padding-bottom: 0;}
+}
+.dept-preview {
+  border-bottom: 1px solid $navbar-default-border;
 }
 .music-colour { background-color: $brand-primary; }
 .games-colour { background-color: $brand-danger;  }

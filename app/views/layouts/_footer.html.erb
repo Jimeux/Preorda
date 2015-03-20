@@ -8,7 +8,7 @@
       </h4>
       <div class="footer-separator"></div>
       <%= t('site.description') %>
-      <br><br>© <%= t('site.brand') %> 2014
+      <br><br>© <%= t('site.brand') %> 2014<br><br>
     </div>
 
     <div class="col-sm-3">
@@ -41,9 +41,14 @@
     <div class="col-sm-3">
       <h4 class="footer-heading"><%= t('site.follow_us') %></h4>
       <div class="footer-separator"></div>
-      <%= image_tag 'twitter_lg.png',  size: '40x40', class: 'footer-social', style: 'margin-left:5px; margin-right: 10px;' %>
-      <%= image_tag 'facebook_lg.png', size: '40x40', class: 'footer-social', style: 'margin-right: 10px;' %>
-      <%= image_tag 'gplus_lg.png',    size: '40x40', class: 'footer-social' %>
+      <%#= image_tag 'tw_lg.png',  size: '40x40', class: 'footer-sc', style: 'margin-left:5px; margin-right: 10px;' %>
+      <a href="https://twitter.com/PreordaUK">
+        <%= image_tag 'tw_lg.png', size: '40x40', class: 'footer-sc', style: 'margin-right: 10px;' %>
+      </a>
+
+      <a href="https://plus.google.com/113738962287501281526" rel="publisher">
+        <%= image_tag 'gp_lg.png', size: '40x40', class: 'footer-sc' %>
+      </a>
     </div>
 
   </div>

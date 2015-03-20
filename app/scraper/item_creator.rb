@@ -1,25 +1,5 @@
 class ItemCreator
-  def self.itunes_music
-    graze('itunes', 'music', ItunesMusicGrazer)
-  end
-
-  def self.amazon_dvds
-    graze('amazon', 'video', AmazonDVDGrazer)
-  end
-
-  def self.amazon_bluray
-    graze('amazon', 'video', AmazonBlurayGrazer)
-  end
-
-  def self.graze(store_name, dept_name, grazer, pages=2)
-    store  = Store.where('lower(name) = ?', store_name.downcase).first
-    dept   = Department.where('lower(name) = ?', dept_name.downcase).first
-    #grazer = get_grazer(store_name, dept_name)
-    ItemCreator.new(grazer, store, dept, pages)
-  end
-
   def initialize(grazer, store, dept, pages)
-    #@linker = AffiliateLinker.new
     @grazer = grazer
     @store  = store
     @dept   = dept
@@ -33,7 +13,11 @@ class ItemCreator
     puts "Getting summaries from #{@pages} pages..."
     data = @grazer.get_summary_data(@pages)
     puts "Found #{data.size} summaries."
-    data.each { |item| process_item(item) }
+
+    data.each_with_index do |item, index|
+      puts "Processing item ##{index}/#{data.size}"
+      process_item(item)
+    end
   end
 
   def process_item(scraped_item)
@@ -44,15 +28,15 @@ class ItemCreator
   end
 
   def update_item(scraped_item, stored_product)
-    puts "Updating '#{stored_product.item.title}'"
+    puts "\tUpdating '#{stored_product.item.title}'"
     new_values = scraped_item.slice(:price, :rank)
     stored_product.assign_attributes(new_values)
     stored_product.item.release_date = scraped_item.slice(:release_date)
   end
 
   def create_item(scraped_item)
-    sleep 0.4
-    puts "Creating record for '#{scraped_item[:title]}'"
+    sleep 2
+    puts "\tCreating record for '#{scraped_item[:title]}'"
     puts "    #{scraped_item[:url]}"
 
     full_data = @grazer.get_product_data(scraped_item[:url])
@@ -68,8 +52,6 @@ class ItemCreator
     attrs = full_data.slice(:url, :rank, :price, :asin)
     attrs.merge!(scraped_item.slice(:rank))
     attrs[:store_id] = @store.id
-
-    #attrs[:url] = @linker.get_affiliate_link(@store.name, attrs[:url])
 
     item.products.build(attrs)
 

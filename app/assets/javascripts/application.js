@@ -16,6 +16,8 @@
 //= require turbolinks
 //= require_tree .
 
+////=// require react
+
 $(function() { ShareThisTurbolinks.reload(); });
 $(document).on('page:load',    function() { ShareThisTurbolinks.reload();  });
 $(document).on('page:restore', function() { ShareThisTurbolinks.restore(); });

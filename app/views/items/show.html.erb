@@ -2,7 +2,7 @@
    content_for :title, raw(@item.title +
     (@item.creator ? ' - ' + @item.creator : ' | ' + t("dept.#{@item.department.name}"))) %>
 <% content_for :meta_keywords, nil %>
-<% content_for :meta_description, nil %>
+<% content_for :meta_description, "Find the best pre-order prices for #{@item.title}." %>
 
 <div class="container styled-container" style="max-width: 680px;">
   <div class="panel">

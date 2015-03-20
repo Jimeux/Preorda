@@ -18,13 +18,13 @@
 .dept-item {
   text-align:    center;
   float:         left;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   font-size:     95%;
 
   .dept-item-title {
     height:     17px;
     overflow:   hidden;
-    margin-top: 3px;
+    margin-top: 2px;
   }
 
   .dept-item-creator {
@@ -45,15 +45,14 @@
 }
 
 h4.dept-heading {
+  margin-left:   15px;
   margin-bottom: 20px;
-  padding:       0 5px;
-  font-size:     135%;
+  font-size:     125%;
   font-weight:   200;
 }
 
 .view-all {
-  margin-top:   9px;
-  margin-right: 10px;
+  margin-right: 20px;
   float:        right;
 }
 
@@ -64,6 +63,7 @@ h4.dept-heading {
 }
 
 #dots {
+
   display:        block;
   text-align:     center;
   margin-top:     18px;
@@ -88,7 +88,7 @@ div.variation-caption{
   position:  absolute;
   left:      0;
   right:     0;
-  width:     95px;
+  width:     85px;
   margin:    0 auto;
   font-size: 80%;
   padding:   4px;
@@ -104,3 +104,77 @@ div.variation-caption{
   opacity:  0.9;
   //filter:   alpha(opacity=65);
 }
+
+/*
+ * index_slider.js.jsx styles
+ */
+
+.chevron {
+  padding:    0 !important;
+  text-align: center !important;
+  //width:      6% !important;
+
+  a {
+    color:    #ddd;
+    font-size: 110%;
+    display: block;
+    //padding: 0 5px;
+    width: 100%;
+  }
+  a:hover {
+    background: #fafafa;
+    border-right: 0;
+    color:    #cccccc;
+    //color: white;
+  }
+  a.disabled {
+    color: #f2f2f2;
+  }
+  a.disabled:hover {
+    background: none;
+  }
+}
+
+
+
+/*
+.carousel-enter {
+  opacity: 0.1;
+  transition: opacity .4s ease-in;
+  -webkit-transition-property: opacity;
+  -webkit-transition-duration: 0.4s;
+  -webkit-timing-function: ease-in;
+  position: absolute;
+  z-index: 2;
+}
+.carousel-enter.carousel-enter-active {
+  opacity: 1;
+}
+.carousel-leave {
+  opacity: 1;
+  transition: opacity .4s ease-in;
+  -webkit-transition-property: opacity;
+  -webkit-transition-duration: 0.4s;
+  -webkit-timing-function: ease-in;
+}
+.carousel-leave.carousel-leave-active {
+  opacity: 0.01;
+}
+
+
+.carousel-right-enter {
+  position: absolute;
+  -webkit-transition: all .1s ease-in;
+  -webkit-transform:  translate3d(100%,0,0);
+  z-index: 2;
+}
+.carousel-right-enter.carousel-right-enter-active {
+  -webkit-transform: translate3d(0,0,0);
+}
+.carousel-right-leave {
+  -webkit-transform: translate3d(0,0,0);
+  -webkit-transition: all .1s ease-in;
+}
+.carousel-right-leave.carousel-right-leave-active {
+  -webkit-transform: translate3d(-100%,0,0);
+}*/

@@ -16,9 +16,12 @@ class AmazonGrazer
       release_date: get_release_date(page),
       asin:         url[/\/dp\/(\w{10})\//, 1],
       price:        get_price(page),
-      url:          url
+      url:          url,
+      description: get_description(page)
     }
   end
+
+  def self.get_description(page) ; nil end
 
   def self.get_title(page)
     title = page.at('#btAsinTitle') || page.at('#productTitle')
@@ -84,11 +87,10 @@ class AmazonGrazer
   end
 
   def self.get_summary_data(limit)
-    page_url = top_url # Start on the first page
+    page_url = top_url
     summary_data = []
 
-    limit.times do   # Put in a limit for now to avoid too many requests
-      # Get a Mechanize object for the URL
+    limit.times do
       page = get_page(page_url)
 
       # Find all product divs and extract their data
@@ -102,7 +104,6 @@ class AmazonGrazer
       next_link = page.at(selector::SELECTORS[:next_link])
 
       if next_link
-        # Join the relative URL with the Amazon domain
         page_url = URI.join(AMAZON_URL, next_link.attr('href')).to_s
       else
         break

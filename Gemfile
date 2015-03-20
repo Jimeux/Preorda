@@ -9,9 +9,10 @@ gem 'pg' # postgresql DB
 gem 'sass-rails', '~> 4.0.3'
 gem 'bootstrap-sass', '~> 3.1.1'
 
+# JavaScript
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
-
+#gem 'react-rails', '~> 0.12.0.0'
 gem 'turbolinks'   # Read about it here: https://github.com/rails/turbolinks
 gem 'jbuilder', '~> 2.0' # For JSON APIs: https://github.com/rails/jbuilder
 
@@ -45,8 +46,8 @@ gem 'omniauth-facebook'
 gem 'mechanize'
 
 group :development do
-  gem 'spring'
-  gem 'spring-commands-rspec'
+  #gem 'spring'
+  #gem 'spring-commands-rspec'
   # Deployment
 #  gem 'capistrano-rvm'
   gem 'capistrano-rbenv',   github: 'capistrano/rbenv'

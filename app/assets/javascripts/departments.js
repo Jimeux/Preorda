@@ -51,8 +51,12 @@ function displayPage(page) {
 
   var start = parseInt(page * imgLimit, 10);
 
-  displayFeatures(start, imgLimit, imgWidth);
-  displayDots(page, pageCount);
+  if (features.length >= imgLimit) displayFeatures(start, imgLimit, imgWidth);
+  if (pageCount == 1) {
+    $('#dots').empty();
+  } else {
+    displayDots(page, pageCount);
+  }
 }
 
 function displayFeatures(start, limit, width) {
@@ -85,27 +89,3 @@ function displayDots(page, pageCount) {
     dotContainer.append(dot);
   }
 }
-
-// animation = setInterval(function () { }, 7000);
-//page = Math.floor(start / Math.floor(features.length / dotNum));
-
-//if (start + limit >= features.length || features.length - (start + limit) < limit)
-//clearInterval(animation); //
-//start = 0;
-//else
-//start = start + limit;
-
-/*
-if('ontouchstart' in window) {
-  featuredDiv.swipe({
-    swipeLeft: function () {
-      currentPage++;
-      displayPage(currentPage);
-    },
-    swipeRight: function () {
-      if (currentPage < 1) return;
-      currentPage--;
-      displayPage(currentPage)
-    }
-  });
-}*/

@@ -2,6 +2,10 @@ Rails.application.routes.draw do
 
   root 'departments#index'
 
+  #namespace :api do
+  #  resources :items
+  #end
+
   resources :departments, only: [:index, :show]
 
   resources :features, only: [:index, :create]

@@ -44,7 +44,7 @@ class PlayGrazer
     release_date ? release_date.text[/Released on (.*)/, 1].strip : nil
   end
 
-  def self.get_summary_data(limit=0)
+  def self.get_summary_data(limit=2)
     page_url = section_url  # Start on the first page
     summary_data = []
 

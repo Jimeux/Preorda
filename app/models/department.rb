@@ -7,7 +7,7 @@ class Department < ActiveRecord::Base
   has_many :items,         -> { latest }
   has_many :preview_items, -> { latest_in_dept }, class_name: 'Item'
 
-  default_scope -> { includes(:platforms).order('id ASC') }
+  scope :index, -> { includes(:platforms).order('id ASC') }
 
   validates_uniqueness_of :name
 

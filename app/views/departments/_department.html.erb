@@ -2,21 +2,22 @@
 <%# TODO: Make the index and show views more independent to avoid this variable %>
 <% index_flag = @items.nil? %>
 
-<div class="panel dept-panel">
+<div class="panel dept-panel<%= ' dept-preview' if index_flag %>" data-name="<%=department.name%>" data-id="<%=department.id%>">
 
   <div class="panel-body">
 
-    <% if index_flag %>
-      <div class="view-all">
-        <a href="#">
+    <div>
+      <% if index_flag %>
+        <div class="view-all">
           <%= link_to t('dept.index.view_all'), short_dept_path(department) %>
-        </a>
-      </div>
-    <% end %>
+        </div>
+      <% end %>
 
-    <h4 class="dept-heading">
-      <%= t('dept.index.coming_soon', dept: t("dept.#{department.name}")) %>
-    </h4>
+
+      <h4 class="dept-heading">
+        <%= t('dept.index.coming_soon', dept: t("dept.#{department.name}")) %>
+      </h4>
+    </div>
 
     <%= render 'items', items: (@items || department.items) if (@items || department.items) %>
 
