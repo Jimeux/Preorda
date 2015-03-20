@@ -36,7 +36,7 @@ class Item < ActiveRecord::Base
                         thumb: attachment.instance.set_image_styles }
                     },
                     convert_options: {
-                        thumb: '-strip -interlace Plane -quality 80%'
+                        all: '-rotate 270 -strip -interlace Plane -quality 80%'
                     },
                     default_url: '/images/:style/missing.png' #,
                     #use_timestamp: false

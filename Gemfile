@@ -46,8 +46,8 @@ gem 'omniauth-facebook'
 gem 'mechanize'
 
 group :development do
-  gem 'spring'
-  gem 'spring-commands-rspec'
+  #gem 'spring'
+  #gem 'spring-commands-rspec'
   # Deployment
 #  gem 'capistrano-rvm'
   gem 'capistrano-rbenv',   github: 'capistrano/rbenv'

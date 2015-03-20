@@ -7,10 +7,10 @@
 
 $navbar-default-bg:          #f4f4f4;
 $navbar-default-brand-color: #333;
-$navbar-height:              50px;
+$navbar-height:              54px;
 $panel-default-heading-bg:   #fff;
 $panel-default-border:       #e5e5e5;
-$navbar-default-border:      #e5e5e5;
+$navbar-default-border:      $navbar-default-bg;
 $btn-font-weight:            300;
 $headings-font-weight:       300;
 
@@ -27,8 +27,10 @@ $container-lg: $container-md;
  */
 
 * { border-radius: 0 !important; } // Setting the sass var above doesn't work
+
+
 body {
-  padding:          51px 0 0 0;
+  padding:          75px 0 0 0;
   font-weight:      300;
   background-color: #f4f4f4;
 }
@@ -49,7 +51,7 @@ input { box-shadow: none !important; }
  */
 
 a.navbar-brand {
-  padding: 3px 0 0 14px;
+  padding: 5px 0 0 16px;
   img {
     height: 48px;
     width: 128px;
@@ -92,9 +94,15 @@ button#search-button:focus {
  */
 
 .sections-wrapper {
+  top: 54px;
+  z-index:      110;
+  position:     fixed;
   display:      table;
   table-layout: fixed;
   width:        100%;
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
 }
 .section-heading {
   display:    table-cell;
@@ -104,7 +112,7 @@ button#search-button:focus {
   //padding:    0 !important;
 
   a {
-    padding:         3px;
+    padding:         4px;
     font-size:       90%;
     display:         inline-block;
     width:           100%;
@@ -148,8 +156,9 @@ div#featured div {
   margin-bottom:    -20px;
   //padding-bottom:   40px;
   background-color: #ffffff;
-  border:           1px solid #e5e5e5;
-  border-width:     0 1px;
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
   //box-shadow: 0 3px 5px #d7d7d7;
 }
 
@@ -196,7 +205,7 @@ div#featured div {
 
 .footer {
   color:            #c0c0c0;
-  background-color: #404040;
+  background-color: #424242;
   width:            100%;
   padding:          20px 30px 30px;
   margin-top:       20px;
