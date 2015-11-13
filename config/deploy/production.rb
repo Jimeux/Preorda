@@ -9,6 +9,8 @@ set :branch, 'master'
 set :stage, :production
 set :rails_env, 'production'
 
+server '210.140.80.113', user: 'deploy', roles: %w{web app db}
+
 # Extended Server Syntax
 # ======================
 # This can be used to drop a more detailed server

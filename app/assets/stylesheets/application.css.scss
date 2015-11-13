@@ -51,10 +51,10 @@ input { box-shadow: none !important; }
  */
 
 a.navbar-brand {
-  padding: 5px 0 0 16px;
+  padding: 11px 0 0 16px;
   img {
-    height: 48px;
-    width: 128px;
+    height: 35px;
+    width: 96px;
   }
 }
 a.navbar-brand:hover {
@@ -100,9 +100,9 @@ button#search-button:focus {
   display:      table;
   table-layout: fixed;
   width:        100%;
-  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
-  -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.26);
+  -moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.26);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.26);
 }
 .section-heading {
   display:    table-cell;

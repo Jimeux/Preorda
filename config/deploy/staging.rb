@@ -8,7 +8,7 @@ set :branch, 'staging'
 set :stage, :production
 set :rails_env, 'production'
 
-server '178.62.81.197', user: 'deploy', roles: %w{web app db}
+server '210.140.80.113', user: 'deploy', roles: %w{web app db}
 
 # Extended Server Syntax
 # ======================

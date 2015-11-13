@@ -5,7 +5,7 @@ set :repo_url, 'git@bitbucket.org:jimeux/launchbro.git'
 set :deploy_to, "/var/www/#{fetch(:application)}"
 
 set :rbenv_type, :user
-set :rbenv_ruby, '2.1.3'
+set :rbenv_ruby, '2.2.3'
 
 #set :rvm_type, :user                     # Defaults to: :auto
 #set :rvm_ruby_version, '2.1.3p242'      # Defaults to: 'default'
