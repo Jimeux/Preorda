@@ -65,8 +65,9 @@ class AmazonGameGrazer < AmazonGrazer
 
   # Extract the platform/format from a simple div
   def self.look_for_format(page)
-    found = page.at('#platform-information')
-    found.text[/Platform: ([\w ]+\w)/, 1] if found
+    found = page.at('#platformInformation_feature_div')
+    found = found.text.strip if found
+    found[/\APlatform ?:\W*([\w ]+\w)\z/, 1] if found
   end
 
   # Scan for section URLs (3DS, PS4 etc) and return in an array

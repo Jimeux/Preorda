@@ -20,7 +20,7 @@ class AmazonDVDGrazer < AmazonGrazer
         item:         '.s-item-container',
         next_link:    'a#pagnNextLink',
         url:          'a.a-link-normal.a-text-normal',
-        price:        'span.s-price',
+        price:        'span.priceblock_ourprice',
         release_date: 'span.a-size-small.a-color-secondary',
         title:        'h2.s-access-title',
         image:        'img.s-access-image'
