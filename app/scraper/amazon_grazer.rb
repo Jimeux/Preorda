@@ -7,6 +7,7 @@ class AmazonGrazer
 
   def self.get_product_data(url)
     page = get_page(url)
+    puts "Platform: #{get_platform(page)}"
     {
       title:        extract_title(get_title(page)),
       platform:     get_platform(page),
@@ -30,7 +31,11 @@ class AmazonGrazer
 
   def self.get_platform(page)
     found = page.search('div#byline')
-    return found.text[/Format: ([\w ]+\w)/, 1] if found
+    return found.text[/Format: ([\w ]+\w)/, 1] if found.present?
+    found = page.search('#variation_platform_for_display span.selection')
+    return found.text.strip if found.present?
+    found = page.search('#platformInformation_feature_div')
+    return found.text.strip.delete("\n")[/Platform ?: (.*)/, 1].strip if found.present?
   end
 
   def self.get_creator(page)

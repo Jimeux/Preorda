@@ -12,6 +12,7 @@ class AmazonGameGrazer < AmazonGrazer
     summary_data
   end
 
+  # FIXME: Platform not working
   def self.get_platform(page)
     platform = look_for_format(page) || look_for_selectable_format(page)
     extract_platform(platform)
