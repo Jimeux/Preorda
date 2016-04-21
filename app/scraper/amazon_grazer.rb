@@ -79,7 +79,7 @@ class AmazonGrazer
   end
 
   def self.get_price(page)
-    price = page.at('b.priceLarge') || page.at('#priceblock_ourprice')
+    price = page.at('#priceblock_ourprice') || page.at('b.priceLarge')
     price ? price.text[/\d+\.+\d+/].to_d : 0
   end
 
